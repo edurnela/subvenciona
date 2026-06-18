@@ -1,0 +1,10 @@
+{
+  "generado": "2026-06-15T09:00:00",
+  "fuente": "Muestra de demostración (estructura idéntica a la salida de fetch_data.py)",
+  "total": 3,
+  "convocatorias": [
+    {"codigo_bdns":"781234","titulo":"Ayudas a la digitalización de pymes y autónomos (Kit Digital)","organo":"Red.es","region":"Toda España","importe":3000,"fecha_fin":"2026-09-30","abierta":true,"sector":"Digitalización","beneficiarios":"Autónomos y pymes","url_oficial":"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/781234"},
+    {"codigo_bdns":"784002","titulo":"Subvenciones para la eficiencia energética en empresas","organo":"IDAE · Min. Transición Ecológica","region":"Toda España","importe":90000,"fecha_fin":"2026-11-15","abierta":true,"sector":"Energía","beneficiarios":"Empresas y autónomos","url_oficial":"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/784002"},
+    {"codigo_bdns":"779001","titulo":"Subvenciones para el fomento del empleo autónomo","organo":"Lanbide · Gobierno Vasco","region":"País Vasco","importe":12000,"fecha_fin":"2026-07-15","abierta":true,"sector":"Empleo","beneficiarios":"Personas desempleadas","url_oficial":"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/779001"}
+  ]
+}

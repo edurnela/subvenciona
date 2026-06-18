@@ -1,0 +1,14 @@
+# Ajustes locales de Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Volcado crudo de la API (solo para depurar el mapeo de campos; no se publica)
+data/raw_sample.json
+
+# macOS
+.DS_Store

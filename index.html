@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subvenciona · Subvenciones abiertas para autónomos y pymes en España</title>
+<style>
+  :root{
+    --ink:#10221b;          /* deep institutional green-black */
+    --paper:#f3efe4;        /* warm document paper */
+    --paper-2:#e9e3d2;
+    --line:#cdc6b2;
+    --sello:#b4351f;        /* official stamp vermilion */
+    --sello-soft:#d6643f;
+    --gold:#9a7b18;
+    --ok:#2f6b4f;
+    --muted:#5d6258;
+    --card:#fbf9f2;
+    --shadow:0 1px 0 var(--line), 0 14px 30px -22px rgba(16,34,27,.55);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ---- Masthead: the signature. A stamped, gazette-style header ---- */
+  header.masthead{
+    border-bottom:2px solid var(--ink);
+    background:
+      repeating-linear-gradient(90deg,transparent 0 9px,rgba(16,34,27,.03) 9px 10px),
+      var(--paper);
+  }
+  .top-rule{height:6px;background:var(--ink)}
+  .mast-inner{display:flex;align-items:flex-end;justify-content:space-between;
+    gap:20px;padding:26px 0 18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:16px}
+  .sello{
+    width:74px;height:74px;flex:0 0 auto;border:2px solid var(--sello);
+    border-radius:50%;display:grid;place-items:center;text-align:center;
+    color:var(--sello);transform:rotate(-7deg);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;
+    letter-spacing:.04em;line-height:1;position:relative;
+  }
+  .sello::after{content:"";position:absolute;inset:5px;border:1px solid var(--sello);border-radius:50%}
+  .sello b{font-size:11px}.sello span{font-size:8px;display:block;margin-top:3px;font-weight:600}
+  h1{font-size:clamp(34px,6vw,58px);margin:0;letter-spacing:-.015em;font-weight:800}
+  h1 .b{color:var(--sello)}
+  .kicker{font-family:"Helvetica Neue",Arial,sans-serif;text-transform:uppercase;
+    letter-spacing:.22em;font-size:11px;color:var(--muted);margin:0 0 4px}
+  .mast-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    color:var(--muted);text-align:right;line-height:1.7}
+  .mast-meta b{color:var(--ink)}
+  .lede{padding:14px 0 0;max-width:60ch;color:var(--muted);font-size:17px}
+
+  /* ---- Controls ---- */
+  .console{position:sticky;top:0;z-index:20;background:var(--paper);
+    border-bottom:1px solid var(--line);padding:14px 0;margin-top:18px;
+    box-shadow:0 10px 18px -18px rgba(16,34,27,.6)}
+  .searchbar{display:flex;gap:10px;align-items:center}
+  .searchbar input[type=search]{
+    flex:1;font-family:inherit;font-size:18px;padding:13px 16px;
+    border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:2px}
+  .searchbar input:focus{outline:3px solid var(--sello-soft);outline-offset:1px}
+  .count-pill{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    white-space:nowrap;color:#fff;background:var(--ink);padding:9px 13px;border-radius:2px}
+  .count-pill b{color:#ffd9a0}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  select,.chip{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+  select{padding:9px 11px;border:1px solid var(--line);background:var(--card);
+    color:var(--ink);border-radius:2px}
+  .chip{cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    padding:8px 13px;border-radius:999px;transition:.15s}
+  .chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+  .reset{margin-left:auto;background:none;border:none;color:var(--sello);cursor:pointer;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;text-decoration:underline}
+
+  /* ---- Results ---- */
+  main{padding:24px 0 70px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--ink);
+    border-radius:3px;padding:0 18px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+  .card.is-open{border-top-color:var(--ok)}
+
+  /* ---- Countdown hero: lo más destacado de cada tarjeta ---- */
+  .count-strip{display:flex;align-items:baseline;gap:8px;margin:0 -18px 2px;padding:11px 18px;
+    font-family:"Helvetica Neue",Arial,sans-serif;border-bottom:1px solid var(--line)}
+  .count-strip .num{font-size:27px;font-weight:800;line-height:1}
+  .count-strip .lbl{font-size:12px;letter-spacing:.02em}
+  .count-strip.urgent{background:#fbeae6;color:var(--sello)}
+  .count-strip.soon{background:#fbf3e1;color:#9a6b0f}
+  .count-strip.ok{background:#e9f2ec;color:var(--ok)}
+  .count-strip.none{background:var(--paper-2);color:var(--muted)}
+  .count-strip.closed{background:var(--paper-2);color:var(--muted)}
+  .count-strip.closed .num,.count-strip.none .num{font-size:15px;font-weight:700}
+
+  .card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-top:4px}
+  .badge{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;padding:4px 8px;border-radius:2px;white-space:nowrap}
+  .badge.open{background:#e2efe7;color:var(--ok);border:1px solid #b9d8c7}
+  .badge.closed{background:#efe6e3;color:var(--sello);border:1px solid #e2c4bb}
+  .org{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted)}
+  .card h3{margin:0;font-size:18px;line-height:1.3;font-weight:700}
+  .meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:var(--muted);
+    display:flex;flex-direction:column;gap:5px;margin-top:2px}
+  .meta span{display:flex;gap:7px}
+  .meta b{color:var(--ink);font-weight:600}
+  .importe{font-size:22px;font-weight:800;color:var(--gold);font-family:"Helvetica Neue",Arial,sans-serif}
+  .importe small{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+  .card-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding-top:10px;border-top:1px dashed var(--line)}
+  .closes{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;color:var(--muted)}
+  .go{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:600;
+    text-decoration:none;color:var(--paper);background:var(--ink);padding:9px 14px;border-radius:2px;
+    border:1px solid var(--ink);transition:.15s;white-space:nowrap}
+  .go:hover{background:var(--sello);border-color:var(--sello)}
+
+  .empty{text-align:center;padding:70px 20px;color:var(--muted)}
+  .empty b{display:block;font-size:20px;color:var(--ink);margin-bottom:6px}
+
+  footer{border-top:2px solid var(--ink);padding:24px 0 40px;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:var(--muted)}
+  footer a{color:var(--sello)}
+  .src{margin-top:6px}
+
+  @media(max-width:640px){
+    .wrap{padding:0 15px}
+    .grid{grid-template-columns:1fr;gap:13px}
+    .searchbar input[type=search]{font-size:16px;padding:14px 14px}
+    .filters{gap:7px}
+    .filters select,.filters .chip{flex:1 1 44%;text-align:center}
+    .reset{flex-basis:100%;margin-left:0;text-align:right}
+    .mast-meta{text-align:left;width:100%}
+    .count-pill{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top-rule"></div>
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <div class="brand">
+      <div class="sello" aria-hidden="true"><div><b>BDNS</b><span>OFICIAL</span></div></div>
+      <div>
+        <p class="kicker">Directorio de financiación pública · España</p>
+        <h1>Subvenci<span class="b">ona</span></h1>
+      </div>
+    </div>
+    <div class="mast-meta">
+      Fuente: <b>Base de Datos Nacional de Subvenciones</b><br>
+      IGAE · Ministerio de Hacienda<br>
+      Actualizado: <b id="updated">—</b>
+    </div>
+  </div>
+  <div class="wrap"><p class="lede">
+    Solo convocatorias <b>solicitables</b> por autónomos y pymes: concurrencia competitiva, sin
+    nominativas ni concesiones directas. Filtra por comunidad, sector e importe y mira qué puedes
+    pedir <b>hoy</b> — sin pelearte con el portal oficial.
+  </p></div>
+</header>
+
+<section class="console">
+  <div class="wrap">
+    <div class="searchbar">
+      <input id="q" type="search" placeholder="Busca: digitalización, autónomos, agricultura, I+D…"
+             aria-label="Buscar convocatorias">
+      <span class="count-pill"><b id="count">0</b> convocatorias</span>
+    </div>
+    <div class="filters">
+      <button class="chip" id="onlyOpen" aria-pressed="true">● Solo abiertas</button>
+      <select id="region" aria-label="Comunidad autónoma"><option value="">Toda España</option></select>
+      <select id="sector" aria-label="Sector"><option value="">Cualquier sector</option></select>
+      <select id="minImporte" aria-label="Importe mínimo">
+        <option value="0">Cualquier importe</option>
+        <option value="3000" selected>Desde 3.000 €</option>
+        <option value="10000">Desde 10.000 €</option>
+        <option value="50000">Desde 50.000 €</option>
+        <option value="100000">Desde 100.000 €</option>
+      </select>
+      <select id="sort" aria-label="Orden">
+        <option value="deadline">Cierre más próximo</option>
+        <option value="amount">Mayor importe</option>
+        <option value="recent">Más recientes</option>
+      </select>
+      <button class="reset" id="reset">Limpiar filtros</button>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>
+    <b>Sin resultados para esa búsqueda</b>
+    Prueba otra palabra o quita algún filtro.
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Datos abiertos reutilizados de la <a href="https://www.infosubvenciones.es" target="_blank" rel="noopener">BDNS</a>
+    (Ley 38/2003 · RD 130/2019). Verifica siempre cada convocatoria en la fuente oficial antes de solicitar.
+    <div class="src">Subvensiona es un directorio de descubrimiento, no asesoramiento. Hecho con datos públicos.</div>
+  </div>
+</footer>
+
+<script>
+const FMT = new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const grid=document.getElementById('grid'), empty=document.getElementById('empty');
+const state={q:'',region:'',sector:'',sort:'deadline',onlyOpen:true,minImporte:3000};
+let DATA=[];
+
+const SAMPLE = {
+  generado:new Date().toISOString(),
+  convocatorias:[
+    {codigo_bdns:"781234",titulo:"Ayudas a la digitalización de pymes y autónomos (Kit Digital)",organo:"Red.es",region:"Toda España",importe:3000,fecha_fin:"2026-09-30",abierta:true,sector:"Digitalización",beneficiarios:"Autónomos y pymes",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/781234"},
+    {codigo_bdns:"779001",titulo:"Subvenciones para el fomento del empleo autónomo",organo:"Lanbide · Gobierno Vasco",region:"País Vasco",importe:12000,fecha_fin:"2026-07-15",abierta:true,sector:"Empleo",beneficiarios:"Personas desempleadas",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/779001"},
+    {codigo_bdns:"780500",titulo:"Ayudas a la internacionalización de empresas",organo:"ICEX · Min. Economía",region:"Toda España",importe:50000,fecha_fin:"2026-06-28",abierta:true,sector:"Comercio exterior",beneficiarios:"Pymes exportadoras",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/780500"},
+    {codigo_bdns:"778210",titulo:"Subvenciones para proyectos de I+D+i empresarial",organo:"CDTI",region:"Toda España",importe:175000,fecha_fin:"2026-10-10",abierta:true,sector:"I+D+i",beneficiarios:"Empresas innovadoras",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/778210"},
+    {codigo_bdns:"782900",titulo:"Ayudas a la modernización del comercio minorista",organo:"Junta de Andalucía",region:"Andalucía",importe:8000,fecha_fin:"2026-06-20",abierta:true,sector:"Comercio",beneficiarios:"Comercios locales",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/782900"},
+    {codigo_bdns:"776655",titulo:"Subvenciones a la producción agroalimentaria sostenible",organo:"Generalitat de Catalunya",region:"Cataluña",importe:22000,fecha_fin:"2026-05-30",abierta:false,sector:"Agricultura",beneficiarios:"Explotaciones agrarias",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/776655"},
+    {codigo_bdns:"783411",titulo:"Ayudas a proyectos culturales y creativos",organo:"Comunidad de Madrid",region:"Madrid",importe:15000,fecha_fin:"2026-08-05",abierta:true,sector:"Cultura",beneficiarios:"Industrias culturales",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/783411"},
+    {codigo_bdns:"784002",titulo:"Subvenciones para la eficiencia energética en empresas",organo:"IDAE · Min. Transición Ecológica",region:"Toda España",importe:90000,fecha_fin:"2026-11-15",abierta:true,sector:"Energía",beneficiarios:"Empresas y autónomos",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/784002"},
+    {codigo_bdns:"777120",titulo:"Ayudas al emprendimiento rural femenino",organo:"Gobierno de Aragón",region:"Aragón",importe:18000,fecha_fin:"2026-07-31",abierta:true,sector:"Emprendimiento",beneficiarios:"Mujeres emprendedoras",url_oficial:"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/777120"}
+  ]
+};
+
+const HOY = new Date().toISOString().slice(0,10);
+function isOpen(c){
+  // Abierta = dentro del plazo de solicitud hoy.
+  const fin=c.fecha_fin?String(c.fecha_fin).slice(0,10):null;
+  const ini=c.fecha_inicio?String(c.fecha_inicio).slice(0,10):null;
+  if(ini && ini>HOY) return false;          // el plazo aún no ha empezado
+  if(fin) return fin>=HOY;                   // hay fecha de cierre: manda ella
+  return c.abierta===true;                   // sin fecha: nos fiamos del flag
+}
+function daysLeft(c){
+  if(!c.fecha_fin) return null;
+  const d=Math.ceil((new Date(String(c.fecha_fin).slice(0,10))-new Date(HOY))/864e5);
+  return isNaN(d)?null:d;
+}
+
+function buildFilters(){
+  const regions=[...new Set(DATA.map(c=>c.region).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+  const sectors=[...new Set(DATA.map(c=>c.sector).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+  const rSel=document.getElementById('region'), sSel=document.getElementById('sector');
+  regions.forEach(r=>rSel.add(new Option(r,r)));
+  sectors.forEach(s=>sSel.add(new Option(s,s)));
+}
+
+function apply(){
+  let rows=DATA.filter(c=>{
+    if(state.onlyOpen && !isOpen(c)) return false;
+    if(state.minImporte && (c.importe||0) < state.minImporte) return false;
+    if(state.region && c.region!==state.region) return false;
+    if(state.sector && c.sector!==state.sector) return false;
+    if(state.q){
+      const hay=(c.titulo+' '+c.organo+' '+c.sector+' '+(c.beneficiarios||'')).toLowerCase();
+      if(!hay.includes(state.q.toLowerCase())) return false;
+    }
+    return true;
+  });
+  rows = collapsaGrupos(rows);
+  rows.sort((a,b)=>{
+    if(state.sort==='amount') return (b.importe||0)-(a.importe||0);
+    if(state.sort==='recent') return String(b.codigo_bdns).localeCompare(String(a.codigo_bdns));
+    const da=daysLeft(a), db=daysLeft(b);          // deadline: soonest first, nulls last
+    if(da==null) return 1; if(db==null) return -1;
+    return da-db;
+  });
+  render(rows);
+}
+
+// Colapsa las líneas de una misma convocatoria (mismo 'grupo') en una tarjeta
+// representante (la de mayor importe), anotando cuántas líneas más hay.
+function collapsaGrupos(rows){
+  const grupos=new Map();
+  for(const c of rows){
+    const k=c.grupo||('c'+c.codigo_bdns);
+    if(!grupos.has(k)) grupos.set(k,[]);
+    grupos.get(k).push(c);
+  }
+  const out=[];
+  for(const miembros of grupos.values()){
+    if(miembros.length===1){ out.push(miembros[0]); continue; }
+    const rep={...miembros.slice().sort((a,b)=>(b.importe||0)-(a.importe||0))[0]};
+    rep._extra=miembros.length-1;                  // nº de líneas adicionales colapsadas
+    out.push(rep);
+  }
+  return out;
+}
+
+function fechaCorta(s){
+  if(!s) return '';
+  const d=new Date(String(s).slice(0,10));
+  return isNaN(d)?'':d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});
+}
+function countdown(c){
+  // Devuelve {cls, num, lbl} para la franja destacada de la tarjeta.
+  const open=isOpen(c), dl=daysLeft(c);
+  if(!open){
+    if(dl!=null && dl<0) return {cls:'closed', num:'Cerrada', lbl:'plazo finalizado'};
+    if(c.fecha_inicio && String(c.fecha_inicio).slice(0,10)>HOY)
+      return {cls:'none', num:'Próximamente', lbl:'abre el '+fechaCorta(c.fecha_inicio)};
+    return {cls:'closed', num:'Cerrada', lbl:'no admite solicitudes'};
+  }
+  if(dl==null) return {cls:'ok', num:'Abierta', lbl:'sin fecha de cierre'};
+  if(dl===0) return {cls:'urgent', num:'¡Hoy!', lbl:'último día para solicitar'};
+  const cls = dl<=7?'urgent' : dl<=30?'soon' : 'ok';
+  return {cls, num:dl, lbl:'día'+(dl===1?'':'s')+' para solicitar'};
+}
+
+function render(rows){
+  document.getElementById('count').textContent=rows.length;
+  empty.hidden=rows.length>0;
+  grid.innerHTML=rows.map(c=>{
+    const open=isOpen(c), cd=countdown(c);
+    return `<article class="card ${open?'is-open':''}">
+      <div class="count-strip ${cd.cls}">
+        <span class="num">${esc(cd.num)}</span>
+        <span class="lbl">${esc(cd.lbl)}</span>
+      </div>
+      <div class="card-top">
+        <span class="org">${esc(c.organo||'Administración pública')}</span>
+        <span class="badge ${open?'open':'closed'}">${open?'Abierta':'Cerrada'}</span>
+      </div>
+      <h3>${esc(c.titulo)}</h3>
+      <div class="meta">
+        ${c.region?`<span>📍 <b>${esc(c.region)}</b></span>`:''}
+        ${c.beneficiarios?`<span>👥 ${esc(c.beneficiarios)}</span>`:''}
+        ${c.sector?`<span>🏷 ${esc(c.sector)}</span>`:''}
+        ${c._extra?`<span>🗂 <b>+${c._extra} línea${c._extra===1?'':'s'}</b> más de esta convocatoria</span>`:''}
+      </div>
+      ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>presupuesto total</small></div>`:''}
+      <div class="card-foot">
+        <span class="closes">${c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||'')}</span>
+        <a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver ficha →</a>
+      </div>
+    </article>`;
+  }).join('');
+}
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+// wiring
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value;apply()});
+document.getElementById('region').addEventListener('change',e=>{state.region=e.target.value;apply()});
+document.getElementById('sector').addEventListener('change',e=>{state.sector=e.target.value;apply()});
+document.getElementById('minImporte').addEventListener('change',e=>{state.minImporte=+e.target.value;apply()});
+document.getElementById('sort').addEventListener('change',e=>{state.sort=e.target.value;apply()});
+document.getElementById('onlyOpen').addEventListener('click',e=>{
+  state.onlyOpen=!state.onlyOpen;e.target.setAttribute('aria-pressed',state.onlyOpen);apply();
+});
+document.getElementById('reset').addEventListener('click',()=>{
+  Object.assign(state,{q:'',region:'',sector:'',sort:'deadline',onlyOpen:true,minImporte:3000});
+  document.getElementById('q').value='';document.getElementById('region').value='';
+  document.getElementById('sector').value='';document.getElementById('sort').value='deadline';
+  document.getElementById('minImporte').value='3000';
+  document.getElementById('onlyOpen').setAttribute('aria-pressed','true');apply();
+});
+
+async function load(){
+  let payload=SAMPLE;
+  try{
+    const r=await fetch('data/convocatorias.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json(); if(j.convocatorias?.length) payload=j;}
+  }catch(_){/* usa SAMPLE */}
+  DATA=payload.convocatorias||[];
+  document.getElementById('updated').textContent =
+    payload.generado ? new Date(payload.generado).toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}) : 'datos de muestra';
+  buildFilters();
+  apply();
+}
+load();
+</script>
+</body>
+</html>
