@@ -389,8 +389,30 @@
                autocomplete="email" inputmode="email">
       </div>
       <div class="field">
-        <label for="subRegion">Comunidad autónoma</label>
-        <select id="subRegion" data-sub-region><option value="">Toda España</option></select>
+        <label>Comunidades autónomas <span class="hint">(marca al menos una; si quieres todas, marca Toda España)</span></label>
+        <div class="sector-checks" id="subRegion" data-sub-region>
+          <label><input type="checkbox" value="Andalucía"> Andalucía</label>
+          <label><input type="checkbox" value="Aragón"> Aragón</label>
+          <label><input type="checkbox" value="Asturias"> Asturias</label>
+          <label><input type="checkbox" value="Canarias"> Canarias</label>
+          <label><input type="checkbox" value="Cantabria"> Cantabria</label>
+          <label><input type="checkbox" value="Castilla y León"> Castilla y León</label>
+          <label><input type="checkbox" value="Castilla-La Mancha"> Castilla-La Mancha</label>
+          <label><input type="checkbox" value="Cataluña"> Cataluña</label>
+          <label><input type="checkbox" value="Ceuta"> Ceuta</label>
+          <label><input type="checkbox" value="Comunidad Valenciana"> Comunidad Valenciana</label>
+          <label><input type="checkbox" value="Extremadura"> Extremadura</label>
+          <label><input type="checkbox" value="Galicia"> Galicia</label>
+          <label><input type="checkbox" value="Islas Baleares"> Islas Baleares</label>
+          <label><input type="checkbox" value="La Rioja"> La Rioja</label>
+          <label><input type="checkbox" value="Madrid"> Madrid</label>
+          <label><input type="checkbox" value="Melilla"> Melilla</label>
+          <label><input type="checkbox" value="Murcia"> Murcia</label>
+          <label><input type="checkbox" value="Navarra"> Navarra</label>
+          <label><input type="checkbox" value="País Vasco"> País Vasco</label>
+          <label><input type="checkbox" value="Toda España"> Toda España</label>
+          <label><input type="checkbox" value="Varias comunidades"> Varias comunidades</label>
+        </div>
       </div>
       <div class="field">
         <label for="subImporte">Importe mínimo <span class="hint">(opcional)</span></label>
@@ -508,9 +530,8 @@ function buildFilters(){
   const rSel=document.getElementById('region'), sSel=document.getElementById('sector');
   regions.forEach(r=>rSel.add(new Option(r,r)));
   sectors.forEach(s=>sSel.add(new Option(s,s)));
-  // El formulario de alertas reutiliza exactamente las mismas listas.
-  const subR=document.getElementById('subRegion');
-  regions.forEach(r=>subR.add(new Option(r,r)));
+  // El formulario de alertas reutiliza la lista de sectores; las comunidades
+  // son una lista fija de casillas (ver #subRegion en el HTML).
   const subS=document.getElementById('subSectores');
   subS.innerHTML=sectors.map(s=>
     `<label><input type="checkbox" value="${esc(s)}"> ${esc(s)}</label>`).join('');
@@ -793,12 +814,20 @@ function initSubForm(form){
       muestra('El envío aún no está configurado (falta el webhook). Tus datos no se han enviado.','err');
       return;
     }
-    const regionEl=form.querySelector('[data-sub-region]');
     const impEl=form.querySelector('[data-sub-importe]');
     const sectores=[...form.querySelectorAll('[data-sub-sectores] input:checked')].map(i=>i.value);
+    // n8n espera 'ccaa' como UN texto separado por comas: "Madrid, Cataluña".
+    const ccaaSel=[...form.querySelectorAll('[data-sub-region] input:checked')].map(i=>i.value);
+    // La comunidad es obligatoria en el formulario completo (#subForm tiene el campo).
+    // La barra compacta (cabecera) no lo tiene, así que sigue enviando sin CCAA.
+    const tieneCampoCcaa=!!form.querySelector('[data-sub-region]');
+    if(tieneCampoCcaa && ccaaSel.length===0){
+      muestra('Marca al menos una comunidad autónoma para recibir avisos relevantes.','err');
+      return;
+    }
     const payload={
       email: email.value.trim(),
-      ccaa: regionEl ? (regionEl.value || null) : null,
+      ccaa: ccaaSel.length ? ccaaSel.join(', ') : null,
       sectores,
       importe_minimo: (impEl && impEl.value) ? Number(impEl.value) : null,
       consentimiento: true,
@@ -841,7 +870,10 @@ document.getElementById('alertPromptClose').addEventListener('click',()=>{
 });
 document.getElementById('alertPromptGo').addEventListener('click',()=>{
   // Preselecciona en el formulario completo los valores del filtro activo y baja a él.
-  if(state.region) document.getElementById('subRegion').value=state.region;
+  if(state.region){
+    const cbR=[...document.querySelectorAll('#subRegion input')].find(i=>i.value===state.region);
+    if(cbR) cbR.checked=true;
+  }
   if(state.sector){
     const cb=[...document.querySelectorAll('#subSectores input')].find(i=>i.value===state.sector);
     if(cb) cb.checked=true;
