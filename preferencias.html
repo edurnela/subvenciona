@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestionar preferencias · Ayudas Abiertas</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  :root{
+    --ink:#10221b;
+    --paper:#f3efe4;
+    --paper-2:#e9e3d2;
+    --line:#cdc6b2;
+    --sello:#b4351f;
+    --sello-soft:#d6643f;
+    --gold:#9a7b18;
+    --ok:#2f6b4f;
+    --muted:#5d6258;
+    --card:#fbf9f2;
+    --shadow:0 1px 0 var(--line), 0 14px 30px -22px rgba(16,34,27,.55);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+
+  /* Cabecera estilo gaceta */
+  .top-rule{height:6px;background:var(--ink)}
+  header.masthead{
+    border-bottom:2px solid var(--ink);
+    background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(16,34,27,.03) 9px 10px),var(--paper);
+  }
+  .mast-inner{padding:24px 0 18px}
+  .kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--sello);font-weight:700;margin:0}
+  .brand-name{font-size:clamp(24px,4vw,32px);font-weight:800;margin:4px 0 0;line-height:1.1}
+
+  main{padding:34px 0 60px}
+  .intro{color:var(--muted);font-size:15px;margin:0 0 22px;max-width:52ch}
+  .intro b{color:var(--ink)}
+
+  /* Tarjeta formulario (mismo lenguaje que el alta) */
+  .pref-form{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--sello);
+    border-radius:3px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px}
+  .pref-form .field{display:flex;flex-direction:column;gap:6px}
+  .pref-form label.field-label{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted);font-weight:600}
+  .pref-form label.field-label .hint{text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted)}
+  .pref-form select{font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:15px;padding:11px 12px;border:1.5px solid var(--ink);background:var(--paper);
+    border-radius:2px;color:var(--ink);width:100%}
+  .pref-form select:focus{outline:3px solid var(--sello-soft);outline-offset:1px}
+
+  .email-line{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);
+    background:var(--paper-2);border:1px solid var(--line);border-radius:2px;padding:9px 12px}
+  .email-line b{color:var(--ink)}
+
+  .checks{display:flex;flex-wrap:wrap;gap:6px}
+  .checks label{display:inline-flex;align-items:center;gap:6px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;color:var(--ink);font-weight:500;border:1px solid var(--line);border-radius:999px;
+    padding:6px 11px;cursor:pointer;background:var(--paper);transition:.15s}
+  .checks input{accent-color:var(--sello);margin:0}
+  .checks label:has(input:checked){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+  .btn{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:15px;
+    color:var(--paper);background:var(--sello);border:1px solid var(--sello);padding:13px 18px;
+    border-radius:2px;cursor:pointer;transition:.15s}
+  .btn:hover:not(:disabled){background:var(--ink);border-color:var(--ink)}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+
+  .form-msg{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;margin:4px 0 0;min-height:1.1em}
+  .form-msg.ok{color:var(--ok);font-weight:600}
+  .form-msg.err{color:var(--sello);font-weight:600}
+
+  /* Estados de carga / error de la página entera */
+  .state{font-family:"Helvetica Neue",Arial,sans-serif;font-size:15px;color:var(--muted);
+    background:var(--card);border:1px solid var(--line);border-radius:3px;padding:26px 22px;text-align:center}
+  .state.err{border-top:3px solid var(--sello);color:var(--ink)}
+  .state a{color:var(--sello)}
+  .hidden{display:none}
+
+  .baja-link{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;margin:18px 0 0;color:var(--muted)}
+  .baja-link a{color:var(--sello)}
+
+  footer{border-top:2px solid var(--ink);background:var(--paper-2);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--muted)}
+  footer .wrap{padding:18px 22px}
+  footer a{color:var(--sello)}
+
+  @media(max-width:640px){ .wrap{padding:0 15px} }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top-rule"></div>
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <p class="kicker">Ayudas Abiertas · Alertas por email</p>
+    <h1 class="brand-name">Gestionar tus preferencias</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- Estado: cargando -->
+    <div id="loading" class="state">Cargando tus preferencias…</div>
+
+    <!-- Estado: error (token inválido o no encontrado) -->
+    <div id="error" class="state err hidden">
+      <p>No hemos podido cargar tus preferencias. Es posible que el enlace haya caducado o no sea válido.</p>
+      <p>Si el problema continúa, escríbenos a <a href="mailto:hola@ayudasabiertas.com">hola@ayudasabiertas.com</a>.</p>
+    </div>
+
+    <!-- Formulario (oculto hasta que cargan los datos) -->
+    <div id="formWrap" class="hidden">
+      <p class="intro">Estás ajustando los avisos de <b id="emailLabel"></b>.
+        Cambia tus comunidades, sectores e importe mínimo y guarda. No se crea ninguna suscripción nueva:
+        se actualiza la que ya tienes.</p>
+
+      <form class="pref-form" id="prefForm" novalidate>
+        <div class="field">
+          <label class="field-label">Comunidades autónomas
+            <span class="hint">(marca al menos una; las ayudas estatales de toda España se incluyen siempre)</span></label>
+          <div class="checks" id="ccaaChecks">
+            <label><input type="checkbox" value="Andalucía"> Andalucía</label>
+            <label><input type="checkbox" value="Aragón"> Aragón</label>
+            <label><input type="checkbox" value="Asturias"> Asturias</label>
+            <label><input type="checkbox" value="Canarias"> Canarias</label>
+            <label><input type="checkbox" value="Cantabria"> Cantabria</label>
+            <label><input type="checkbox" value="Castilla y León"> Castilla y León</label>
+            <label><input type="checkbox" value="Castilla-La Mancha"> Castilla-La Mancha</label>
+            <label><input type="checkbox" value="Cataluña"> Cataluña</label>
+            <label><input type="checkbox" value="Ceuta"> Ceuta</label>
+            <label><input type="checkbox" value="Comunidad Valenciana"> Comunidad Valenciana</label>
+            <label><input type="checkbox" value="Extremadura"> Extremadura</label>
+            <label><input type="checkbox" value="Galicia"> Galicia</label>
+            <label><input type="checkbox" value="Islas Baleares"> Islas Baleares</label>
+            <label><input type="checkbox" value="La Rioja"> La Rioja</label>
+            <label><input type="checkbox" value="Madrid"> Madrid</label>
+            <label><input type="checkbox" value="Melilla"> Melilla</label>
+            <label><input type="checkbox" value="Murcia"> Murcia</label>
+            <label><input type="checkbox" value="Navarra"> Navarra</label>
+            <label><input type="checkbox" value="País Vasco"> País Vasco</label>
+            <label><input type="checkbox" value="Varias comunidades"> Varias comunidades</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="importe">Importe mínimo <span class="hint">(opcional)</span></label>
+          <select id="importe">
+            <option value="">Cualquier importe</option>
+            <option value="3000">Desde 3.000 €</option>
+            <option value="10000">Desde 10.000 €</option>
+            <option value="50000">Desde 50.000 €</option>
+            <option value="100000">Desde 100.000 €</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Sectores que te interesan
+            <span class="hint">(si no marcas ninguno, recibirás avisos de <b>todos</b> los sectores)</span></label>
+          <div class="checks" id="sectorChecks"></div>
+        </div>
+
+        <div>
+          <button type="submit" id="saveBtn" class="btn">Guardar cambios</button>
+          <p class="form-msg" id="msg" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <p class="baja-link">¿Ya no quieres recibir avisos?
+        <a id="bajaLink" href="#">Darme de baja</a>.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Ayudas Abiertas · <a href="https://ayudasabiertas.com">ayudasabiertas.com</a>
+    · <a href="/privacidad.html">Política de privacidad</a>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Configuración
+   ============================================================ */
+const READ_URL   = "https://n8n.indigitalia.com/webhook/gestionar-preferencias"; // GET ?token=
+const UPDATE_URL = "https://n8n.indigitalia.com/webhook/actualizar-preferencias"; // POST
+const BAJA_URL   = "https://n8n.indigitalia.com/webhook/baja";                    // GET ?token=
+
+/* Lista de sectores fija (extraída de las convocatorias actuales, orden ES).
+   Si añades sectores nuevos en index.html, replícalos aquí. */
+const SECTORES = [
+  "Agricultura","Comercio","Comercio exterior","Cultura",
+  "Digitalización","Empleo","Emprendimiento","Energía","I+D+i"
+];
+
+/* ============================================================
+   Utilidades
+   ============================================================ */
+const $ = sel => document.querySelector(sel);
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function getToken(){
+  return new URLSearchParams(location.search).get("token") || "";
+}
+
+/* Convierte "Madrid, Cataluña" → ["Madrid","Cataluña"] de forma robusta */
+function splitLista(txt){
+  if(!txt) return [];
+  return String(txt).split(",").map(s=>s.trim()).filter(Boolean);
+}
+
+function mostrarEstado(cual){ // 'loading' | 'error' | 'form'
+  $("#loading").classList.toggle("hidden", cual!=="loading");
+  $("#error").classList.toggle("hidden",   cual!=="error");
+  $("#formWrap").classList.toggle("hidden", cual!=="form");
+}
+
+/* ============================================================
+   Construcción de las casillas de sectores
+   ============================================================ */
+function pintaSectores(){
+  $("#sectorChecks").innerHTML = SECTORES.map(s=>
+    `<label><input type="checkbox" value="${esc(s)}"> ${esc(s)}</label>`).join("");
+}
+
+/* Marca las casillas (comunidades o sectores) según una lista de valores */
+function marcaChecks(containerSel, valores){
+  const set = new Set(valores);
+  document.querySelectorAll(`${containerSel} input[type=checkbox]`).forEach(cb=>{
+    cb.checked = set.has(cb.value);
+  });
+}
+
+/* ============================================================
+   Carga inicial: lee preferencias actuales y pre-rellena
+   ============================================================ */
+async function cargar(){
+  const token = getToken();
+  if(!token){ mostrarEstado("error"); return; }
+
+  try{
+    const r = await fetch(`${READ_URL}?token=${encodeURIComponent(token)}`);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const data = await r.json();
+
+    // Si no hay fila o no está confirmada, tratamos como enlace inválido.
+    if(!data || !data.token || data.estado === "baja"){
+      mostrarEstado("error"); return;
+    }
+
+    // Email (solo informativo)
+    $("#emailLabel").textContent = data.email || "tu correo";
+
+    // Pre-marcar comunidades y sectores
+    marcaChecks("#ccaaChecks",   splitLista(data.ccaa));
+    marcaChecks("#sectorChecks", splitLista(data.sectores));
+
+    // Importe: el select tiene valores fijos; si el guardado coincide, lo selecciona
+    const imp = (data.importe_minimo===null || data.importe_minimo===undefined)
+      ? "" : String(data.importe_minimo);
+    const sel = $("#importe");
+    sel.value = [...sel.options].some(o=>o.value===imp) ? imp : "";
+
+    // Enlace de baja con el token
+    $("#bajaLink").href = `${BAJA_URL}?token=${encodeURIComponent(token)}`;
+
+    mostrarEstado("form");
+  }catch(err){
+    mostrarEstado("error");
+  }
+}
+
+/* ============================================================
+   Guardar cambios: POST a actualizar-preferencias
+   ============================================================ */
+function initForm(){
+  const form   = $("#prefForm");
+  const btn    = $("#saveBtn");
+  const msg    = $("#msg");
+  const limpia = ()=>{ msg.textContent=""; msg.className="form-msg"; };
+  const di     = (t,tipo)=>{ msg.textContent=t; msg.className="form-msg "+tipo; };
+
+  form.addEventListener("submit", async e=>{
+    e.preventDefault();
+    const token = getToken();
+    if(!token){ di("Enlace no válido.","err"); return; }
+
+    const ccaaSel = [...document.querySelectorAll("#ccaaChecks input:checked")].map(i=>i.value);
+    const sectSel = [...document.querySelectorAll("#sectorChecks input:checked")].map(i=>i.value);
+
+    // Misma regla que el alta: al menos una comunidad.
+    if(ccaaSel.length === 0){
+      di("Marca al menos una comunidad autónoma.","err"); return;
+    }
+
+    const payload = {
+      token,
+      ccaa: ccaaSel.join(", "),          // texto con comas, como en el Sheet
+      sectores: sectSel.join(", "),      // texto con comas (vacío = todos)
+      importe_minimo: $("#importe").value // string; vacío = cualquiera
+    };
+
+    const txt = btn.textContent;
+    btn.disabled = true; btn.textContent = "Guardando…"; limpia();
+    try{
+      const r = await fetch(UPDATE_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(payload)
+      });
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      di("¡Listo! Tus preferencias se han actualizado.","ok");
+    }catch(err){
+      di("No hemos podido guardar los cambios. Revisa tu conexión e inténtalo de nuevo.","err");
+    }finally{
+      btn.textContent = txt; btn.disabled = false;
+    }
+  });
+}
+
+/* ============================================================
+   Arranque
+   ============================================================ */
+pintaSectores();
+initForm();
+cargar();
+</script>
+</body>
+</html>
