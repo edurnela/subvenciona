@@ -117,6 +117,9 @@ CSS = """  :root{
   .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
     color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
   .conv-meta b{color:var(--ink);font-weight:600}
+  /* Destacado de "N abiertas" en los listados de sector (páginas madre) */
+  .conv-meta .abierta-n{background:#e3f0e8;color:var(--ok);font-weight:700;
+    padding:1px 9px;border-radius:20px}
 
   /* FAQ */
   details.faq{border-bottom:1px solid var(--line);padding:14px 0}
@@ -560,27 +563,31 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
              "<b>Se actualiza a diario.</b> Elige un sector para ver sus convocatorias "
              "abiertas y cerradas.")
 
-    # Tarjetas-sector
+    # Tarjetas-sector: primero los sectores con alguna convocatoria abierta y,
+    # debajo, los que solo tienen cerradas. Dentro de cada grupo, orden alfabético.
     tarjetas = ['    <h2 class="sec">Sectores con convocatorias</h2>',
-                '    <p class="sec-note">Elige un sector para ver el detalle.</p>']
+                '    <p class="sec-note">Primero los sectores con convocatorias abiertas. '
+                'Elige uno para ver el detalle.</p>']
     items_ld = []
-    for s in sorted(sectores):
+    abiertas_de = lambda s: sum(1 for c in convs_por_sector[(comunidad, s)] if es_abierta(c))
+    orden = sorted(sectores, key=lambda s: (abiertas_de(s) == 0, s))
+    for s in orden:
         cs = convs_por_sector[(comunidad, s)]
-        ab = sum(1 for c in cs if es_abierta(c))
+        ab = abiertas_de(s)
         tot = sum(c.get("importe") or 0 for c in cs)
         href = f"/subvenciones/{com_slug}/{slugify(s)}/"
         items_ld.append({"@type": "ListItem", "position": len(items_ld) + 1,
                          "name": f"{s} en {comunidad}", "url": DOMAIN + href})
-        sub = f"{len(cs)} convocatoria{'s' if len(cs) != 1 else ''}"
+        meta = [f'<span>{len(cs)} convocatoria{"s" if len(cs) != 1 else ""}</span>']
         if ab:
-            sub += f" · {ab} abierta{'s' if ab != 1 else ''}"
+            meta.append(f'<span class="abierta-n">{ab} abierta{"s" if ab != 1 else ""}</span>')
         if tot:
-            sub += f" · {euros(tot)}"
+            meta.append(f'<span>{euros(tot)}</span>')
         tarjetas.append(f"""    <article class="conv">
       <div class="conv-top">
         <h3><a href="{esc(href)}">{esc(s)} en {esc(comunidad)}</a></h3>
       </div>
-      <div class="conv-meta"><span>{esc(sub)}</span></div>
+      <div class="conv-meta">{"".join(meta)}</div>
     </article>""")
 
     # Relacionadas: otras comunidades (madre) que existen
