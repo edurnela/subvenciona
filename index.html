@@ -315,18 +315,8 @@
 <section class="subscribe-bar">
   <div class="wrap subscribe-bar-inner">
     <p class="sb-text">📬 <b>Recibe por email las nuevas subvenciones que encajen contigo.</b>
-      Te avisamos en cuanto se publiquen.</p>
-    <form class="sb-form" id="subFormMini" data-origen="cabecera" novalidate>
-      <input type="email" data-sub-email required placeholder="tucorreo@ejemplo.com"
-             aria-label="Tu email" autocomplete="email" inputmode="email">
-      <label class="sb-consent">
-        <input type="checkbox" data-sub-consent>
-        <span>Acepto recibir avisos por email. Puedo darme de baja cuando quiera.
-          <a href="#alertas">+ info</a></span>
-      </label>
-      <button type="submit" class="btn-suscribir" data-sub-submit disabled>Avisarme</button>
-      <p class="form-msg" data-sub-msg role="status" aria-live="polite"></p>
-    </form>
+      Elige tu comunidad y tus sectores, y te avisamos en cuanto se publiquen.</p>
+    <a href="#alertas" class="btn-suscribir" data-scroll-alertas>Crear mi alerta</a>
   </div>
 </section>
 
@@ -424,7 +414,7 @@
         </select>
       </div>
       <div class="field">
-        <label>Sectores que te interesan <span class="hint">(marca los que quieras; ninguno = todos)</span></label>
+        <label>Sectores que te interesan <span class="hint">(si no marcas ninguno, recibirás avisos de <b>todos</b> los sectores)</span></label>
         <div class="sector-checks" id="subSectores" data-sub-sectores></div>
       </div>
 
@@ -793,6 +783,7 @@ document.getElementById('reset').addEventListener('click',()=>{
 const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function initSubForm(form){
+  if(!form) return;
   const email=form.querySelector('[data-sub-email]');
   const consent=form.querySelector('[data-sub-consent]');
   const submit=form.querySelector('[data-sub-submit]');
@@ -849,7 +840,6 @@ function initSubForm(form){
     }
   });
 }
-initSubForm(document.getElementById('subFormMini'));
 initSubForm(document.getElementById('subForm'));
 
 // ---- Aviso contextual: aparece al filtrar por comunidad o sector ----
