@@ -196,12 +196,44 @@ const READ_URL   = "https://n8n.indigitalia.com/webhook/gestionar-preferencias";
 const UPDATE_URL = "https://n8n.indigitalia.com/webhook/actualizar-preferencias"; // POST
 const BAJA_URL   = "https://n8n.indigitalia.com/webhook/baja";                    // GET ?token=
 
-/* Lista de sectores fija (extraída de las convocatorias actuales, orden ES).
-   Si añades sectores nuevos en index.html, replícalos aquí. */
-const SECTORES = [
-  "Agricultura","Comercio","Comercio exterior","Cultura",
-  "Digitalización","Empleo","Emprendimiento","Energía","I+D+i"
+/* Sectores: se cargan dinámicamente desde el mismo feed que usa el alta
+   (data/convocatorias.json), extrayendo los valores únicos del campo `sector`.
+   Así alta y preferencias quedan siempre sincronizadas sin mantenimiento.
+   La lista fija de abajo es solo un fallback por si el feed no carga. */
+const SECTORES_FALLBACK = [
+  "Acceso a la vivienda y fomento de la edificación",
+  "Agricultura, Pesca y Alimentación",
+  "Comercio, Turismo y Pymes",
+  "Cultura",
+  "Desempleo",
+  "Educación",
+  "Fomento del Empleo",
+  "Industria y Energía",
+  "Investigación, desarrollo e innovación",
+  "Otras Prestaciones económicas",
+  "Otras actuaciones de carácter económico",
+  "Servicios Sociales y Promoción Social",
+  "Subvenciones al transporte"
 ];
+
+const FEED_URL = "data/convocatorias.json";
+
+/* Devuelve la lista de sectores únicos del feed (orden ES).
+   Si el feed falla, usa SECTORES_FALLBACK. */
+async function cargarSectores(){
+  try{
+    const r = await fetch(FEED_URL, {cache:"no-store"});
+    if(r.ok){
+      const j = await r.json();
+      const convs = j.convocatorias || [];
+      const secs = [...new Set(
+        convs.map(c => (c.sector || "").trim()).filter(Boolean)
+      )].sort((a,b) => a.localeCompare(b,"es"));
+      if(secs.length) return secs;
+    }
+  }catch(_){ /* usa fallback */ }
+  return SECTORES_FALLBACK;
+}
 
 /* ============================================================
    Utilidades
@@ -229,8 +261,8 @@ function mostrarEstado(cual){ // 'loading' | 'error' | 'form'
 /* ============================================================
    Construcción de las casillas de sectores
    ============================================================ */
-function pintaSectores(){
-  $("#sectorChecks").innerHTML = SECTORES.map(s=>
+function pintaSectores(lista){
+  $("#sectorChecks").innerHTML = lista.map(s=>
     `<label><input type="checkbox" value="${esc(s)}"> ${esc(s)}</label>`).join("");
 }
 
@@ -250,7 +282,15 @@ async function cargar(){
   if(!token){ mostrarEstado("error"); return; }
 
   try{
-    const r = await fetch(`${READ_URL}?token=${encodeURIComponent(token)}`);
+    // Lanzamos en paralelo: sectores del feed + preferencias del suscriptor.
+    const [sectores, r] = await Promise.all([
+      cargarSectores(),
+      fetch(`${READ_URL}?token=${encodeURIComponent(token)}`)
+    ]);
+
+    // Pintamos las casillas de sectores ANTES de marcarlas.
+    pintaSectores(sectores);
+
     if(!r.ok) throw new Error("HTTP "+r.status);
     const data = await r.json();
 
@@ -332,9 +372,8 @@ function initForm(){
 /* ============================================================
    Arranque
    ============================================================ */
-pintaSectores();
 initForm();
-cargar();
+cargar();   // carga sectores + preferencias y pinta todo en orden
 </script>
 </body>
 </html>
