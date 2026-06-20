@@ -20,6 +20,7 @@ import re
 import shutil
 import unicodedata
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 from urllib.parse import quote
 
@@ -31,7 +32,7 @@ SITEMAP = BASE / "sitemap.xml"
 ROBOTS = BASE / "robots.txt"
 
 DOMAIN = "https://ayudasabiertas.com"
-ANYO = 2026                       # año mostrado en titles/H1
+ANYO = date.today().year          # año mostrado en titles/H1 (se actualiza solo)
 MIN_CONV = 3                      # mínimo de convocatorias para generar una página
 # Valores de `region` que NO son una comunidad autónoma real (se excluyen de las
 # páginas de comunidad; sí cuentan para las páginas de sector nacionales).
@@ -199,6 +200,16 @@ def ld(obj):
             + "\n</script>")
 
 
+ORGANIZATION_LD = ld({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ayudas Abiertas",
+    "url": DOMAIN + "/",
+    "description": "Subvenciones para autónomos y pymes en España",
+    # "logo": DOMAIN + "/logo.png",   # descomentar SOLO cuando exista el archivo en el repo
+})
+
+
 def breadcrumb_ld(items):
     """items = [(nombre, url), ...] en orden."""
     return {
@@ -319,6 +330,7 @@ def page(*, title, description, canonical, og_title, og_desc,
 <link rel="canonical" href="{esc(canonical)}">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ayudas Abiertas">
 <meta property="og:title" content="{esc(og_title)}">
 <meta property="og:description" content="{esc(og_desc)}">
 <meta property="og:url" content="{esc(canonical)}">
@@ -327,6 +339,7 @@ def page(*, title, description, canonical, og_title, og_desc,
 {CSS}
 </style>
 
+{ORGANIZATION_LD}
 {chr(10).join(ld_blocks)}
 </head>
 <body>
