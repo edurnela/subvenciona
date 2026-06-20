@@ -216,10 +216,8 @@
     font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:var(--ink);
     text-transform:none;letter-spacing:0;line-height:1.45;cursor:pointer}
   .consent input{margin:2px 0 0;flex:0 0 auto;width:16px;height:16px;accent-color:var(--sello)}
-  .privacy{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--muted)}
-  .privacy summary{cursor:pointer;color:var(--sello);text-decoration:underline}
-  .privacy p{margin:8px 0 0;line-height:1.5}
-  .privacy a{color:var(--sello)}
+  .privacy-link{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;margin:2px 0 0}
+  .privacy-link a{color:var(--sello);text-decoration:underline}
   .btn-suscribir{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:15px;
     color:var(--paper);background:var(--sello);border:1px solid var(--sello);padding:13px 18px;
     border-radius:2px;cursor:pointer;transition:.15s}
@@ -424,28 +422,7 @@
           Puedo darme de baja en cualquier momento.</span>
       </label>
 
-      <details class="privacy">
-        <summary>Cómo tratamos tus datos</summary>
-        <p><b>Responsable.</b> Edurne Labaka Arrondo (NIF 72464665Z). Puedes contactarnos en
-          <a href="mailto:hola@ayudasabiertas.com">hola@ayudasabiertas.com</a>.</p>
-        <p><b>Qué datos recogemos.</b> Tu dirección de email y las preferencias que indiques
-          (comunidad autónoma, sectores e importe mínimo). No recogemos ningún otro dato personal.</p>
-        <p><b>Para qué los usamos.</b> Únicamente para enviarte avisos por email cuando se publiquen
-          convocatorias de subvenciones que coincidan con las preferencias que has elegido.</p>
-        <p><b>Base legal.</b> Tu consentimiento, que nos das al marcar la casilla y confirmar tu
-          suscripción. Puedes retirarlo en cualquier momento.</p>
-        <p><b>Durante cuánto tiempo.</b> Conservamos tus datos mientras sigas suscrito. Si te das de
-          baja, los eliminamos en un plazo máximo de 30 días.</p>
-        <p><b>Con quién los compartimos.</b> No vendemos ni cedemos tus datos a terceros. Para el envío
-          de los emails utilizamos Mailgun (Sinch), que actúa como encargado del tratamiento; parte del
-          tratamiento puede realizarse en servidores fuera del Espacio Económico Europeo, con las
-          garantías previstas por la normativa de protección de datos.</p>
-        <p><b>Tus derechos.</b> Puedes acceder, rectificar o eliminar tus datos, así como darte de baja,
-          en cualquier momento, escribiendo a <a href="mailto:hola@ayudasabiertas.com">hola@ayudasabiertas.com</a>
-          o pulsando el enlace de baja que incluimos en cada email. También puedes presentar una
-          reclamación ante la Agencia Española de Protección de Datos
-          (<a href="https://www.aepd.es" target="_blank" rel="noopener">aepd.es</a>).</p>
-      </details>
+      <p class="privacy-link"><a href="/privacidad.html" target="_blank" rel="noopener">Cómo tratamos tus datos</a></p>
 
       <div class="boletin-actions">
         <button type="submit" id="subSubmit" data-sub-submit class="btn-suscribir" disabled>
@@ -461,7 +438,8 @@
   <div class="wrap">
     Datos abiertos reutilizados de la <a href="https://www.infosubvenciones.es" target="_blank" rel="noopener">BDNS</a>
     (Ley 38/2003 · RD 130/2019). Verifica siempre cada convocatoria en la fuente oficial antes de solicitar.
-    <div class="src">Ayudas Abiertas es un directorio de descubrimiento, no asesoramiento. Hecho con datos públicos.</div>
+    <div class="src">Ayudas Abiertas es un directorio de descubrimiento, no asesoramiento. Hecho con datos públicos.
+      · <a href="/privacidad.html">Política de privacidad</a></div>
   </div>
 </footer>
 
