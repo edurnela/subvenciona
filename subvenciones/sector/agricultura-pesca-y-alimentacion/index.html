@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Subvenciones de Agricultura, Pesca y Alimentación en España 2026 · Ayudas Abiertas</title>
+<meta name="description" content="Todas las subvenciones y ayudas de Agricultura, Pesca y Alimentación en España en 2026. Convocatorias estatales y autonómicas actualizadas a diario desde la BDNS. Recibe avisos por email cuando se publiquen nuevas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ayudasabiertas.com/subvenciones/sector/agricultura-pesca-y-alimentacion/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Subvenciones de Agricultura, Pesca y Alimentación en España 2026">
+<meta property="og:description" content="Convocatorias de Agricultura, Pesca y Alimentación en España, actualizadas a diario desde la BDNS.">
+<meta property="og:url" content="https://ayudasabiertas.com/subvenciones/sector/agricultura-pesca-y-alimentacion/">
+
+<style>
+  :root{
+    --ink:#10221b; --paper:#f3efe4; --paper-2:#e9e3d2; --line:#cdc6b2;
+    --sello:#b4351f; --sello-soft:#d6643f; --gold:#9a7b18; --ok:#2f6b4f;
+    --muted:#5d6258; --card:#fbf9f2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  a{color:var(--sello)}
+
+  /* Cabecera de marca */
+  header.cat-head{border-bottom:2px solid var(--ink);background:var(--paper)}
+  .cat-head-inner{padding:22px 0 18px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .cat-brand{font-size:24px;font-weight:800;letter-spacing:-.01em;
+    text-decoration:none;color:var(--ink)}
+  .cat-brand .sello{color:var(--sello)}
+  .cat-nav{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+  .cat-nav a{text-decoration:none;font-weight:600;margin-left:18px}
+
+  /* Migas de pan */
+  .breadcrumb{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);padding:16px 0 0}
+  .breadcrumb a{color:var(--muted);text-decoration:none}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb .sep{margin:0 7px;color:var(--line)}
+
+  main{padding:0 0 64px}
+  .doc-kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--sello);
+    font-weight:700;margin:24px 0 8px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 14px;font-weight:800}
+  .intro{font-size:17px;color:var(--ink);max-width:62ch}
+  .intro b{color:var(--ink)}
+
+  /* Barra de stats */
+  .stats{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 8px;
+    padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat .n{font-size:26px;font-weight:800;color:var(--sello)}
+  .stat .l{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+  /* CTA de suscripción */
+  .cta-box{background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--sello);border-radius:3px;padding:20px 22px;margin:28px 0}
+  .cta-box h2{font-size:18px;margin:0 0 6px;font-weight:800}
+  .cta-box p{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .cta-btn{display:inline-block;background:var(--sello);color:#fff;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:14px;
+    text-decoration:none;padding:11px 20px;border-radius:3px}
+  .cta-btn:hover{background:#9a2c18}
+
+  /* Secciones */
+  h2.sec{font-size:21px;margin:38px 0 4px;font-weight:800;
+    padding-top:20px;border-top:1px solid var(--line)}
+  .sec-note{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:0 0 16px}
+
+  /* Tarjeta de convocatoria */
+  .conv{border:1px solid var(--line);border-radius:6px;padding:16px 18px;
+    margin:0 0 14px;background:var(--card)}
+  .conv.cerrada{opacity:.66;background:transparent}
+  .conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .conv h3{font-size:16.5px;line-height:1.3;margin:0;font-weight:700}
+  .conv h3 a{color:var(--sello);text-decoration:none}
+  .conv h3 a:hover{text-decoration:underline}
+  .badge{flex-shrink:0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .badge.abierta{background:#e3f0e8;color:var(--ok)}
+  .badge.cerrada{background:#efe8e6;color:#8a5a4e}
+  .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
+  .conv-meta b{color:var(--ink);font-weight:600}
+
+  /* FAQ */
+  details.faq{border-bottom:1px solid var(--line);padding:14px 0}
+  details.faq summary{font-size:16px;font-weight:700;cursor:pointer;
+    list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--sello);font-size:22px;
+    font-weight:400;margin-left:12px}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{font-size:15px;color:var(--muted);margin:12px 0 4px;max-width:64ch}
+
+  /* Enlaces internos a categorías relacionadas */
+  .related{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+  .related a{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    text-decoration:none;background:var(--paper-2);color:var(--ink);
+    padding:7px 13px;border-radius:20px;border:1px solid var(--line)}
+  .related a:hover{border-color:var(--sello);color:var(--sello)}
+
+  footer{border-top:2px solid var(--ink);background:var(--paper);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
+  .footer-inner{padding:22px 0 30px}
+  .footer-inner a{color:var(--sello);text-decoration:none}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://ayudasabiertas.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Agricultura, Pesca y Alimentación",
+      "item": "https://ayudasabiertas.com/subvenciones/sector/agricultura-pesca-y-alimentacion/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Subvenciones de Agricultura, Pesca y Alimentación en España 2026",
+  "description": "Convocatorias de subvenciones de Agricultura, Pesca y Alimentación en España, actualizadas a diario desde la BDNS.",
+  "url": "https://ayudasabiertas.com/subvenciones/sector/agricultura-pesca-y-alimentacion/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Ayudas Abiertas",
+    "url": "https://ayudasabiertas.com/"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Convocatoria de ayudas (EJERCICIO 2026) a ENTIDADES PRIVADAS para la aplicación de las Estrategias de Desarrollo Local Participativo de los GALP- FEMPA",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914093"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Resolución de 15 de junio de 2026, del vicepresidente tercero y conseller de Medio Ambiente, Infraestructuras, Territorio y de la Recuperación, por la que se establecen las bases reguladoras de las ayudas al control de vegetación en PIF (PASTPIF 2026)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913949"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Convocatoria de ayudas a los titulares de explotaciones ganaderas que realicen pruebas diagnósticas, vacunaciones y/o medidas sanitarias en el marco de los programas de sanidad animal de prevención, control y erradicación para el año 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913203"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "SEGURIDAD RURAL. SUBVENCION PARA FINANCIAR ACTIVIDADES DDE MEJORA DE LAS CONDICIONES DE SEGURIDAD Y SALUD RURAL EN MUNICIPIOS DE MENOS DE 2000 HABITANTES",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912942"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Resolución de 11 de junio de 2026, por la que se aprueba la convocatoria de subvenciones para el fomento de razas autóctonas españolas",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912822"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Ajuts a armadors per compensar la paralització temporal d'activitats pesqueres (FEMPA)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912790"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "Ayudas a entidades asociativas",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912789"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Ajuts per compensar la paralització temporal d'activitats pesqueres, 1a convocatòria 2025 (FEMPA)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912767"
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "GC CONVOCATORIA DE SUBVENCIONES A LOS PRODUCTORES DEL SECTOR ORNAMENTAL DE GRAN CANARIA PARA EL AÑO 2026 DE LA CONSEJERÍA DE SECTOR PRIMARIO, SOBERANÍA ALIMENTARIA Y SEGURIDAD HÍDRICA DEL CABILDO DE GRAN CANARIA.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912734"
+      },
+      {
+        "@type": "ListItem",
+        "position": 10,
+        "name": "Resolución de la Viceconsejería de Medio Ambiente de la Consejería de Desarrollo Sostenible, por la que se convocan ayudas para el fomento de la acuicultura en la Comunidad Autónoma de Castilla-La Mancha, financiadas por el Fondo Europeo Marítimo de Pesca",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912457"
+      },
+      {
+        "@type": "ListItem",
+        "position": 11,
+        "name": "AYUDA ESTADO POSEI ACC. I.9 CAMPAÑA 2025",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912381"
+      },
+      {
+        "@type": "ListItem",
+        "position": 12,
+        "name": "Convocatoria de Ayudas a Trabajadores Autónomos del sector Resina, 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912264"
+      },
+      {
+        "@type": "ListItem",
+        "position": 13,
+        "name": "CONVOCATORIA PARA  EL OTORGAMIENTO DE LAS SUBVENCIONES A LA DEFENSA DEL PRODUCTOR AGRARIO HACIA LA AMENAZA DE LA PLAGA DEL JABALÍ EN RÉGIMEN DE CONCURRENCIA COMPETITIVA (2026)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912084"
+      },
+      {
+        "@type": "ListItem",
+        "position": 14,
+        "name": "CONVOCATORIA PARA  EL OTORGAMIENTO DE SUBVENCIONES A LA RECUPERACIÓN Y COMERCIALIZACIÓN DEL PRODUCTO AGRARIO, GANADERO Y FORESTAL EN RÉGIMEN DE CONCURRENCIA COMPETITIVA (2026)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912076"
+      },
+      {
+        "@type": "ListItem",
+        "position": 15,
+        "name": "Ayudas destinadas a la aplicación del desarrollo local participativo Leader en el marco del Programa de desarrollo rural de Cataluña PEPAC 2023-2027",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911751"
+      },
+      {
+        "@type": "ListItem",
+        "position": 16,
+        "name": "RESOLUCIÓN de 5 de junio de 2026 por la que se aprueba la convocatoria de subv. para serv. de asesoría en las pequeñas y medianas explot. agrícolas prestados por ATRIAS.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911690"
+      },
+      {
+        "@type": "ListItem",
+        "position": 17,
+        "name": "Resolució ARP/4832/2025, de 19 de desembre, per la qual es convoquen per a l'any 2026 ajuts de minimis per a mesures de control de la població cinegètica",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911498"
+      },
+      {
+        "@type": "ListItem",
+        "position": 18,
+        "name": "Resolución de la Conselleria de Agricultura, Agua, Ganadería y Pesca, por la que se convocan para el ejercicio 2026, ayudas a la ganadería ecológica en prácticas extensivas en la Comunitat Valenciana",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911463"
+      },
+      {
+        "@type": "ListItem",
+        "position": 19,
+        "name": "SUBVENCIONES PARA EL FOMENTO DE PROYECTOS DEL SECTOR PRIMARIO DE ASTIGARRAGA",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911456"
+      },
+      {
+        "@type": "ListItem",
+        "position": 20,
+        "name": "CONVOCATORIA SUBVENCIONES PARA EL XXXV CERTAMEN DE LA CASTAÑA Y PRODUCTOS DE LA HUERTA, EJERCICIO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911455"
+      },
+      {
+        "@type": "ListItem",
+        "position": 21,
+        "name": "Convocatoria para las ayudas a la mejora de la producción y comercialización de los productos de la apicultura en el marco de la Intervención Sectorial Apícola, recogida en el PEPAC, para la campaña del año 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911453"
+      },
+      {
+        "@type": "ListItem",
+        "position": 22,
+        "name": "AYUDAS FOMENTO DE FORESTACIÓN TIERRAS AGRÍCOLAS COM. MADRID 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911335"
+      },
+      {
+        "@type": "ListItem",
+        "position": 23,
+        "name": "Bases Reguladoras y convocatoria de ayudas a inversiones productirvas en empresas dedicadas a la acuicultura",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911312"
+      },
+      {
+        "@type": "ListItem",
+        "position": 24,
+        "name": "Ayudas a la formación en el sector agrario",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911205"
+      },
+      {
+        "@type": "ListItem",
+        "position": 25,
+        "name": "CONVOCATORIA AYUDAS A LAS AGRUPACIONES DE DEFENSA SANITARIA GANADERAS RECONOCIDAS EN CANTABRIA PARA EL AÑO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911012"
+      },
+      {
+        "@type": "ListItem",
+        "position": 26,
+        "name": "Intervención Sectorial Apícola 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910744"
+      },
+      {
+        "@type": "ListItem",
+        "position": 27,
+        "name": "VALLADO VIRTUAL. Subvención destinada a la adquisición de collares con función Â«Vallado VirtualÂ» para ganaderos de bovino, equino y caprino en extensivo de la provincia de Zamora",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910705"
+      },
+      {
+        "@type": "ListItem",
+        "position": 28,
+        "name": "DECRETO FORAL 56/2026, de 4 de junio, de la Diputación Foral de Bizkaia por el que se establecen las bases reguladoras y la convocatoria para el 2026 de las ayudas para el fomento de la apicultura en el Territorio Histórico de Bizkaia.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910606"
+      },
+      {
+        "@type": "ListItem",
+        "position": 29,
+        "name": "Orden de la Dirección General de Pesca, Acuicultura y Economía Azul, por la que se convocan ayudas a proyectos acogidos a las Estrategias de Desarrollo Local Participativo de los Grupos de Acción Local del sector pesquero y acuícola andaluz",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910447"
+      },
+      {
+        "@type": "ListItem",
+        "position": 30,
+        "name": "ORDEN de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria por la que se convocan para la campaña 2026, las ayudas de la acción III.4 ayuda a la producción láctea de vacuno de origen local, subacciones III.4.1",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910238"
+      },
+      {
+        "@type": "ListItem",
+        "position": 31,
+        "name": "RESOLUCIÓN, de la directora general de Producción Agrícola y Ganadera, por la que se efectúa la convocatoria, para el ejercicio 2026, las ayudas de mínimis destinadas a la replantación de parcelas frutícolas cuyo cultivo sea o haya sido destruido como con",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909993"
+      },
+      {
+        "@type": "ListItem",
+        "position": 32,
+        "name": "Orden de 29 de mayo de 2026, de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria  por la que se convocan para la campaña 2026, las ayudas de la Acción III.2, Apoyo al Sector Vacuno",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909960"
+      },
+      {
+        "@type": "ListItem",
+        "position": 33,
+        "name": "RESOLUCIÓN del director de la Agencia Valenciana de Fomento y Garantía Agraria, por la que se convocan ayudas a inversiones en explotaciones agrarias de la Comunitat Valenciana en el marco del Plan Estratégico de la Política Agraria Común de España 2023-2",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909712"
+      },
+      {
+        "@type": "ListItem",
+        "position": 34,
+        "name": "CONVOCATORIA DE LAS AYUDAS PARA EL FOMENTO DEL GENOTIPADO DE TERNERAS EN CONTROL OFICIAL DE RENDIMIENTO LECHERO DEL AÑO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909453"
+      },
+      {
+        "@type": "ListItem",
+        "position": 35,
+        "name": "RESOLUCIÓN de la DGPAG por la que se convocan para el ejercicio 2026, las ayudas para la evaluación genética de las hembras de la especie bovina, ovina y caprina mediante el control oficial del rendimiento lechero",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909369"
+      },
+      {
+        "@type": "ListItem",
+        "position": 36,
+        "name": "Bases y convocatoria que rigen la concesión de ayudas a los titulares de explotaciones ganaderas de ganado ovino y caprino (año 2026)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909315"
+      },
+      {
+        "@type": "ListItem",
+        "position": 37,
+        "name": "CONVOCATORIA DE AYUDAS PARA TRABAJOS AGRICOLAS Y GANADEROS 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909146"
+      },
+      {
+        "@type": "ListItem",
+        "position": 38,
+        "name": "ORDEN de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria por la que se convocan para la campaña 2026, las ayudas de la acción III.6 ayuda a la producción láctea de caprino y ovino de origen local",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908915"
+      },
+      {
+        "@type": "ListItem",
+        "position": 39,
+        "name": "Ayudas dirigidas a fomentar la generación de empleo en el sector de la producción y distribución del producto ecológico agrario en el término municipal de Vitoria-Gasteiz 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908844"
+      },
+      {
+        "@type": "ListItem",
+        "position": 40,
+        "name": "Resolución de la Viceconsejería de Medio Ambiente, por la que se realiza la convocatoria para el año 2026 de las ayudas para plantaciones de chopos en Castilla-La Mancha a través del Fondo Europeo Agrícola de Desarrollo Rural (FEADER)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908556"
+      },
+      {
+        "@type": "ListItem",
+        "position": 41,
+        "name": "GC  CONVOCATORIA DE SUBVENCIÓN EXTRAORDINARIA DESTINADA A COMPENSARLAS PÉRDIDAS DE PRODUCCIÓN DE ACEITE EN LAS ALMAZARAS DE GRAN CANARIA, DERIVADAS DE LA FALTA DE ACEITUNA DE ORIGEN LOCAL DURANTE LAS CAMPAÑAS 2021/2022 A 2024/2025.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908538"
+      },
+      {
+        "@type": "ListItem",
+        "position": 42,
+        "name": "Orden de 25 de mayo de 2026 de la Consejería de Agua, Agricultura, Ganadería y Pesca, por la que se aprueba la convocatoria para el año 2026 de las ayudas de intervención en el sector apícola de la Comunidad Autónoma de la Región de Murcia",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908040"
+      }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Quién puede solicitar subvenciones de Agricultura, Pesca y Alimentación en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cada cuánto se publican nuevas ayudas de Agricultura, Pesca y Alimentación en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde se presenta la solicitud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es gratis recibir avisos de nuevas convocatorias?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Agricultura, Pesca y Alimentación en España, y darte de baja cuando quieras."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="cat-head">
+  <div class="wrap cat-head-inner">
+    <a href="/" class="cat-brand">Ayudas <span class="sello">Abiertas</span></a>
+    <nav class="cat-nav">
+      <a href="/">Directorio</a>
+      <a href="/#suscribirse">Recibir avisos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a><span class="sep">›</span>
+      <span>Agricultura, Pesca y Alimentación</span>
+    </nav>
+
+    <p class="doc-kicker">Agricultura, Pesca y Alimentación · España</p>
+    <h1>Subvenciones de Agricultura, Pesca y Alimentación en España</h1>
+
+    <p class="intro">Esta página reúne todas las <b>subvenciones y ayudas de Agricultura, Pesca y Alimentación en España</b> recogidas en la Base de Datos Nacional de Subvenciones (BDNS): estatales, autonómicas y locales. <b>Se actualiza a diario</b>: primero verás las convocatorias abiertas y, más abajo, las ya cerradas como referencia.</p>
+
+    <div class="stats"><div class="stat"><div class="n">42</div><div class="l">Convocatorias</div></div><div class="stat"><div class="n">0</div><div class="l">Abiertas ahora</div></div><div class="stat"><div class="n">66.062.456 €</div><div class="l">Importe acumulado</div></div></div>
+
+    <div class="cta-box">
+      <h2>Recibe nuevas ayudas de Agricultura, Pesca y Alimentación</h2>
+      <p>Te avisamos por email en cuanto se publique una convocatoria nueva de este sector. Gratis y sin spam.</p>
+      <a class="cta-btn" href="/?sector=Agricultura%2C%20Pesca%20y%20Alimentaci%C3%B3n#suscribirse">Avísame de nuevas ayudas →</a>
+    </div>
+
+    <h2 class="sec">Convocatorias abiertas</h2>
+    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>
+    <p class="sec-note" style="background:var(--card);border:1px dashed var(--line);border-radius:6px;padding:16px 18px">Ahora mismo no hay convocatorias de Agricultura, Pesca y Alimentación abiertas en España. Suscríbete arriba y te avisamos en cuanto se publique una nueva.</p>
+    <h2 class="sec">Convocatorias cerradas</h2>
+    <p class="sec-note">Plazo finalizado. Se mantienen como referencia y para consultar las bases de cara a próximas ediciones.</p>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908915" rel="nofollow noopener" target="_blank">ORDEN de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria por la que se convocan para la campaña 2026, las ayudas de la acción III.6 ayuda a la producción láctea de caprino y ovino de origen local</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Pesca y Aguas</span><span><b>Importe:</b> 15.726.000 €</span><span><b>Ámbito:</b> Autonomica</span><span style="color:var(--gold)">+3 líneas más de esta convocatoria</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910238" rel="nofollow noopener" target="_blank">ORDEN de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria por la que se convocan para la campaña 2026, las ayudas de la acción III.4 ayuda a la producción láctea de vacuno de origen local, subacciones III.4.1</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria</span><span><b>Importe:</b> 13.420.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911751" rel="nofollow noopener" target="_blank">Ayudas destinadas a la aplicación del desarrollo local participativo Leader en el marco del Programa de desarrollo rural de Cataluña PEPAC 2023-2027</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departament D&#x27;agricultura, Ramaderia, Pesca I Alimentació</span><span><b>Importe:</b> 7.000.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912790" rel="nofollow noopener" target="_blank">Ajuts a armadors per compensar la paralització temporal d&#x27;activitats pesqueres (FEMPA)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departament D&#x27;agricultura, Ramaderia, Pesca I Alimentació</span><span><b>Importe:</b> 5.672.665 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912789" rel="nofollow noopener" target="_blank">Ayudas a entidades asociativas</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Mundo Rural y Medio Ambiente</span><span><b>Importe:</b> 5.400.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909960" rel="nofollow noopener" target="_blank">Orden de 29 de mayo de 2026, de la Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria  por la que se convocan para la campaña 2026, las ayudas de la Acción III.2, Apoyo al Sector Vacuno</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria</span><span><b>Importe:</b> 4.880.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912381" rel="nofollow noopener" target="_blank">AYUDA ESTADO POSEI ACC. I.9 CAMPAÑA 2025</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Pesca y Soberanía Alimentaria</span><span><b>Importe:</b> 2.967.787 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912767" rel="nofollow noopener" target="_blank">Ajuts per compensar la paralització temporal d&#x27;activitats pesqueres, 1a convocatòria 2025 (FEMPA)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departament D&#x27;agricultura, Ramaderia, Pesca I Alimentació</span><span><b>Importe:</b> 2.423.800 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910447" rel="nofollow noopener" target="_blank">Orden de la Dirección General de Pesca, Acuicultura y Economía Azul, por la que se convocan ayudas a proyectos acogidos a las Estrategias de Desarrollo Local Participativo de los Grupos de Acción Local del sector pesquero y acuícola andaluz</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Pesca, Agua y Desarrollo Rural</span><span><b>Importe:</b> 2.100.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908040" rel="nofollow noopener" target="_blank">Orden de 25 de mayo de 2026 de la Consejería de Agua, Agricultura, Ganadería y Pesca, por la que se aprueba la convocatoria para el año 2026 de las ayudas de intervención en el sector apícola de la Comunidad Autónoma de la Región de Murcia</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agua, Agricultura, Ganadería y Pesca</span><span><b>Importe:</b> 717.856 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912942" rel="nofollow noopener" target="_blank">SEGURIDAD RURAL. SUBVENCION PARA FINANCIAR ACTIVIDADES DDE MEJORA DE LAS CONDICIONES DE SEGURIDAD Y SALUD RURAL EN MUNICIPIOS DE MENOS DE 2000 HABITANTES</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Zamora</span><span><b>Importe:</b> 662.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913203" rel="nofollow noopener" target="_blank">Convocatoria de ayudas a los titulares de explotaciones ganaderas que realicen pruebas diagnósticas, vacunaciones y/o medidas sanitarias en el marco de los programas de sanidad animal de prevención, control y erradicación para el año 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Desarrollo Rural, Ganadería, Pesca y Alimentación</span><span><b>Importe:</b> 639.389 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910705" rel="nofollow noopener" target="_blank">VALLADO VIRTUAL. Subvención destinada a la adquisición de collares con función Â«Vallado VirtualÂ» para ganaderos de bovino, equino y caprino en extensivo de la provincia de Zamora</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Zamora</span><span><b>Importe:</b> 600.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911498" rel="nofollow noopener" target="_blank">Resolució ARP/4832/2025, de 19 de desembre, per la qual es convoquen per a l&#x27;any 2026 ajuts de minimis per a mesures de control de la població cinegètica</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departament D&#x27;agricultura, Ramaderia, Pesca I Alimentació</span><span><b>Importe:</b> 535.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913949" rel="nofollow noopener" target="_blank">Resolución de 15 de junio de 2026, del vicepresidente tercero y conseller de Medio Ambiente, Infraestructuras, Territorio y de la Recuperación, por la que se establecen las bases reguladoras de las ayudas al control de vegetación en PIF (PASTPIF 2026)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Secretaría Autonómica de Medio Ambiente y Territorio</span><span><b>Importe:</b> 500.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911312" rel="nofollow noopener" target="_blank">Bases Reguladoras y convocatoria de ayudas a inversiones productirvas en empresas dedicadas a la acuicultura</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departamento de Desarrollo Rural y Medio Ambiente</span><span><b>Importe:</b> 500.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911205" rel="nofollow noopener" target="_blank">Ayudas a la formación en el sector agrario</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Mundo Rural y Medio Ambiente</span><span><b>Importe:</b> 425.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909993" rel="nofollow noopener" target="_blank">RESOLUCIÓN, de la directora general de Producción Agrícola y Ganadera, por la que se efectúa la convocatoria, para el ejercicio 2026, las ayudas de mínimis destinadas a la replantación de parcelas frutícolas cuyo cultivo sea o haya sido destruido como con</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Secretaría Autonómica de Agricultura, Ganadería y Pesca</span><span><b>Importe:</b> 321.965 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914093" rel="nofollow noopener" target="_blank">Convocatoria de ayudas (EJERCICIO 2026) a ENTIDADES PRIVADAS para la aplicación de las Estrategias de Desarrollo Local Participativo de los GALP- FEMPA</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Medio Rural y Política Agraria</span><span><b>Importe:</b> 185.643 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911012" rel="nofollow noopener" target="_blank">CONVOCATORIA AYUDAS A LAS AGRUPACIONES DE DEFENSA SANITARIA GANADERAS RECONOCIDAS EN CANTABRIA PARA EL AÑO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Desarrollo Rural, Ganadería, Pesca y Alimentación</span><span><b>Importe:</b> 180.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908556" rel="nofollow noopener" target="_blank">Resolución de la Viceconsejería de Medio Ambiente, por la que se realiza la convocatoria para el año 2026 de las ayudas para plantaciones de chopos en Castilla-La Mancha a través del Fondo Europeo Agrícola de Desarrollo Rural (FEADER)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Viceconsejería de Medio Ambiente</span><span><b>Importe:</b> 140.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911453" rel="nofollow noopener" target="_blank">Convocatoria para las ayudas a la mejora de la producción y comercialización de los productos de la apicultura en el marco de la Intervención Sectorial Apícola, recogida en el PEPAC, para la campaña del año 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departamento de Desarrollo Rural y Medio Ambiente</span><span><b>Importe:</b> 134.053 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912734" rel="nofollow noopener" target="_blank">GC CONVOCATORIA DE SUBVENCIONES A LOS PRODUCTORES DEL SECTOR ORNAMENTAL DE GRAN CANARIA PARA EL AÑO 2026 DE LA CONSEJERÍA DE SECTOR PRIMARIO, SOBERANÍA ALIMENTARIA Y SEGURIDAD HÍDRICA DEL CABILDO DE GRAN CANARIA.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Cabildo Insular de Gran Canaria</span><span><b>Importe:</b> 130.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912457" rel="nofollow noopener" target="_blank">Resolución de la Viceconsejería de Medio Ambiente de la Consejería de Desarrollo Sostenible, por la que se convocan ayudas para el fomento de la acuicultura en la Comunidad Autónoma de Castilla-La Mancha, financiadas por el Fondo Europeo Marítimo de Pesca</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Viceconsejería de Medio Ambiente</span><span><b>Importe:</b> 100.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911463" rel="nofollow noopener" target="_blank">Resolución de la Conselleria de Agricultura, Agua, Ganadería y Pesca, por la que se convocan para el ejercicio 2026, ayudas a la ganadería ecológica en prácticas extensivas en la Comunitat Valenciana</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Secretaría Autonómica de Agricultura, Ganadería y Pesca</span><span><b>Importe:</b> 80.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910606" rel="nofollow noopener" target="_blank">DECRETO FORAL 56/2026, de 4 de junio, de la Diputación Foral de Bizkaia por el que se establecen las bases reguladoras y la convocatoria para el 2026 de las ayudas para el fomento de la apicultura en el Territorio Histórico de Bizkaia.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Foral de Bizkaia</span><span><b>Importe:</b> 80.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908844" rel="nofollow noopener" target="_blank">Ayudas dirigidas a fomentar la generación de empleo en el sector de la producción y distribución del producto ecológico agrario en el término municipal de Vitoria-Gasteiz 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Vitoria-gasteiz</span><span><b>Importe:</b> 75.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909369" rel="nofollow noopener" target="_blank">RESOLUCIÓN de la DGPAG por la que se convocan para el ejercicio 2026, las ayudas para la evaluación genética de las hembras de la especie bovina, ovina y caprina mediante el control oficial del rendimiento lechero</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Secretaría Autonómica de Agricultura, Ganadería y Pesca</span><span><b>Importe:</b> 54.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911335" rel="nofollow noopener" target="_blank">AYUDAS FOMENTO DE FORESTACIÓN TIERRAS AGRÍCOLAS COM. MADRID 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Medio Ambiente, Agricultura e Interior</span><span><b>Importe:</b> 50.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909712" rel="nofollow noopener" target="_blank">RESOLUCIÓN del director de la Agencia Valenciana de Fomento y Garantía Agraria, por la que se convocan ayudas a inversiones en explotaciones agrarias de la Comunitat Valenciana en el marco del Plan Estratégico de la Política Agraria Común de España 2023-2</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Agencia Valenciana de Fomento y Garantía Agraria</span><span><b>Importe:</b> 50.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908538" rel="nofollow noopener" target="_blank">GC  CONVOCATORIA DE SUBVENCIÓN EXTRAORDINARIA DESTINADA A COMPENSARLAS PÉRDIDAS DE PRODUCCIÓN DE ACEITE EN LAS ALMAZARAS DE GRAN CANARIA, DERIVADAS DE LA FALTA DE ACEITUNA DE ORIGEN LOCAL DURANTE LAS CAMPAÑAS 2021/2022 A 2024/2025.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Cabildo Insular de Gran Canaria</span><span><b>Importe:</b> 50.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910744" rel="nofollow noopener" target="_blank">Intervención Sectorial Apícola 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Agricultura, Ganadería, Mundo Rural y Medio Ambiente</span><span><b>Importe:</b> 47.798 €</span><span><b>Ámbito:</b> Autonomica</span><span style="color:var(--gold)">+1 línea más de esta convocatoria</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912264" rel="nofollow noopener" target="_blank">Convocatoria de Ayudas a Trabajadores Autónomos del sector Resina, 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Cuenca</span><span><b>Importe:</b> 40.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911690" rel="nofollow noopener" target="_blank">RESOLUCIÓN de 5 de junio de 2026 por la que se aprueba la convocatoria de subv. para serv. de asesoría en las pequeñas y medianas explot. agrícolas prestados por ATRIAS.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Medio Rural y Política Agraria</span><span><b>Importe:</b> 36.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912822" rel="nofollow noopener" target="_blank">Resolución de 11 de junio de 2026, por la que se aprueba la convocatoria de subvenciones para el fomento de razas autóctonas españolas</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Medio Rural y Política Agraria</span><span><b>Importe:</b> 30.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911456" rel="nofollow noopener" target="_blank">SUBVENCIONES PARA EL FOMENTO DE PROYECTOS DEL SECTOR PRIMARIO DE ASTIGARRAGA</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Astigarraga</span><span><b>Importe:</b> 30.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909453" rel="nofollow noopener" target="_blank">CONVOCATORIA DE LAS AYUDAS PARA EL FOMENTO DEL GENOTIPADO DE TERNERAS EN CONTROL OFICIAL DE RENDIMIENTO LECHERO DEL AÑO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Desarrollo Rural, Ganadería, Pesca y Alimentación</span><span><b>Importe:</b> 30.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909315" rel="nofollow noopener" target="_blank">Bases y convocatoria que rigen la concesión de ayudas a los titulares de explotaciones ganaderas de ganado ovino y caprino (año 2026)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Santanyí</span><span><b>Importe:</b> 19.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912076" rel="nofollow noopener" target="_blank">CONVOCATORIA PARA  EL OTORGAMIENTO DE SUBVENCIONES A LA RECUPERACIÓN Y COMERCIALIZACIÓN DEL PRODUCTO AGRARIO, GANADERO Y FORESTAL EN RÉGIMEN DE CONCURRENCIA COMPETITIVA (2026)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Vandellòs I L&#x27;hospitalet de I&#x27;infant</span><span><b>Importe:</b> 16.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909146" rel="nofollow noopener" target="_blank">CONVOCATORIA DE AYUDAS PARA TRABAJOS AGRICOLAS Y GANADEROS 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Vila de Cruces</span><span><b>Importe:</b> 8.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912084" rel="nofollow noopener" target="_blank">CONVOCATORIA PARA  EL OTORGAMIENTO DE LAS SUBVENCIONES A LA DEFENSA DEL PRODUCTOR AGRARIO HACIA LA AMENAZA DE LA PLAGA DEL JABALÍ EN RÉGIMEN DE CONCURRENCIA COMPETITIVA (2026)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Vandellòs I L&#x27;hospitalet de I&#x27;infant</span><span><b>Importe:</b> 2.900 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911455" rel="nofollow noopener" target="_blank">CONVOCATORIA SUBVENCIONES PARA EL XXXV CERTAMEN DE LA CASTAÑA Y PRODUCTOS DE LA HUERTA, EJERCICIO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Parres</span><span><b>Importe:</b> 2.100 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+
+    <h2 class="sec">Preguntas frecuentes</h2>
+    <details class="faq">
+      <summary>¿Quién puede solicitar subvenciones de Agricultura, Pesca y Alimentación en España?</summary>
+      <p>Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Cada cuánto se publican nuevas ayudas de Agricultura, Pesca y Alimentación en España?</summary>
+      <p>Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Dónde se presenta la solicitud?</summary>
+      <p>Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Es gratis recibir avisos de nuevas convocatorias?</summary>
+      <p>Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Agricultura, Pesca y Alimentación en España, y darte de baja cuando quieras.</p>
+    </details>
+
+    <h2 class="sec">Otras categorías</h2>
+    <p class="sec-note">Explora subvenciones relacionadas.</p>
+    <div class="related">
+      <a href="/subvenciones/asturias/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Asturias</a>
+      <a href="/subvenciones/canarias/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Canarias</a>
+      <a href="/subvenciones/cantabria/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Cantabria</a>
+      <a href="/subvenciones/castilla-la-mancha/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Castilla-La Mancha</a>
+      <a href="/subvenciones/cataluna/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Cataluña</a>
+      <a href="/subvenciones/comunidad-valenciana/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Comunidad Valenciana</a>
+      <a href="/subvenciones/sector/acceso-a-la-vivienda-y-fomento-de-la-edificacion/">Acceso a la vivienda y fomento de la edificación en España</a>
+      <a href="/subvenciones/sector/comercio-turismo-y-pymes/">Comercio, Turismo y Pymes en España</a>
+      <a href="/subvenciones/sector/cultura/">Cultura en España</a>
+      <a href="/subvenciones/sector/desempleo/">Desempleo en España</a>
+      <a href="/subvenciones/sector/educacion/">Educación en España</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>Ayudas Abiertas · Datos abiertos reutilizados de la BDNS (IGAE, Ministerio de Hacienda) ·
+      sitio independiente, España. <a href="/">Volver al directorio</a> ·
+      <a href="/privacidad.html">Privacidad</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

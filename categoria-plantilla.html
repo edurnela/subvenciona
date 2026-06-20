@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===================================================================
+     PLANTILLA DE PÁGINA DE CATEGORÍA · Ayudas Abiertas
+     Ejemplo rellenado con: País Vasco × Cultura (datos reales)
+     URL de destino: /subvenciones/pais-vasco/cultura/
+     Los marcadores {{...}} indican lo que el script debe sustituir
+     para cada combinación comunidad×sector.
+     =================================================================== -->
+
+<!-- SEO básico: title y description con las palabras clave reales -->
+<title>Subvenciones de Cultura en el País Vasco 2026 · Ayudas Abiertas</title>
+<meta name="description" content="Todas las subvenciones y ayudas de Cultura abiertas en el País Vasco en 2026. Convocatorias actualizadas a diario desde la BDNS. Recibe avisos por email cuando se publiquen nuevas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ayudasabiertas.com/subvenciones/pais-vasco/cultura/">
+
+<!-- Open Graph para cuando se comparte el enlace -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Subvenciones de Cultura en el País Vasco 2026">
+<meta property="og:description" content="Convocatorias de Cultura abiertas en el País Vasco, actualizadas a diario desde la BDNS.">
+<meta property="og:url" content="https://ayudasabiertas.com/subvenciones/pais-vasco/cultura/">
+
+<style>
+  :root{
+    --ink:#10221b; --paper:#f3efe4; --paper-2:#e9e3d2; --line:#cdc6b2;
+    --sello:#b4351f; --sello-soft:#d6643f; --gold:#9a7b18; --ok:#2f6b4f;
+    --muted:#5d6258; --card:#fbf9f2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  a{color:var(--sello)}
+
+  /* Cabecera de marca */
+  header.cat-head{border-bottom:2px solid var(--ink);background:var(--paper)}
+  .cat-head-inner{padding:22px 0 18px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .cat-brand{font-size:24px;font-weight:800;letter-spacing:-.01em;
+    text-decoration:none;color:var(--ink)}
+  .cat-brand .sello{color:var(--sello)}
+  .cat-nav{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+  .cat-nav a{text-decoration:none;font-weight:600;margin-left:18px}
+
+  /* Migas de pan */
+  .breadcrumb{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);padding:16px 0 0}
+  .breadcrumb a{color:var(--muted);text-decoration:none}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb .sep{margin:0 7px;color:var(--line)}
+
+  main{padding:0 0 64px}
+  .doc-kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--sello);
+    font-weight:700;margin:24px 0 8px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 14px;font-weight:800}
+  .intro{font-size:17px;color:var(--ink);max-width:62ch}
+  .intro b{color:var(--ink)}
+
+  /* Barra de stats */
+  .stats{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 8px;
+    padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat .n{font-size:26px;font-weight:800;color:var(--sello)}
+  .stat .l{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+  /* CTA de suscripción */
+  .cta-box{background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--sello);border-radius:3px;padding:20px 22px;margin:28px 0}
+  .cta-box h2{font-size:18px;margin:0 0 6px;font-weight:800}
+  .cta-box p{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .cta-btn{display:inline-block;background:var(--sello);color:#fff;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:14px;
+    text-decoration:none;padding:11px 20px;border-radius:3px}
+  .cta-btn:hover{background:#9a2c18}
+
+  /* Secciones */
+  h2.sec{font-size:21px;margin:38px 0 4px;font-weight:800;
+    padding-top:20px;border-top:1px solid var(--line)}
+  .sec-note{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:0 0 16px}
+
+  /* Tarjeta de convocatoria */
+  .conv{border:1px solid var(--line);border-radius:6px;padding:16px 18px;
+    margin:0 0 14px;background:var(--card)}
+  .conv.cerrada{opacity:.66;background:transparent}
+  .conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .conv h3{font-size:16.5px;line-height:1.3;margin:0;font-weight:700}
+  .conv h3 a{color:var(--sello);text-decoration:none}
+  .conv h3 a:hover{text-decoration:underline}
+  .badge{flex-shrink:0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .badge.abierta{background:#e3f0e8;color:var(--ok)}
+  .badge.cerrada{background:#efe8e6;color:#8a5a4e}
+  .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
+  .conv-meta b{color:var(--ink);font-weight:600}
+
+  /* FAQ */
+  details.faq{border-bottom:1px solid var(--line);padding:14px 0}
+  details.faq summary{font-size:16px;font-weight:700;cursor:pointer;
+    list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--sello);font-size:22px;
+    font-weight:400;margin-left:12px}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{font-size:15px;color:var(--muted);margin:12px 0 4px;max-width:64ch}
+
+  /* Enlaces internos a categorías relacionadas */
+  .related{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+  .related a{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    text-decoration:none;background:var(--paper-2);color:var(--ink);
+    padding:7px 13px;border-radius:20px;border:1px solid var(--line)}
+  .related a:hover{border-color:var(--sello);color:var(--sello)}
+
+  footer{border-top:2px solid var(--ink);background:var(--paper);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
+  .footer-inner{padding:22px 0 30px}
+  .footer-inner a{color:var(--sello);text-decoration:none}
+</style>
+
+<!-- ===================================================================
+     DATOS ESTRUCTURADOS (Schema.org / JSON-LD)
+     Cuatro bloques: BreadcrumbList, CollectionPage, ItemList, FAQPage.
+     Google los usa para entender la página y mostrar resultados enriquecidos.
+     =================================================================== -->
+
+<!-- 1) Migas de pan -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Inicio","item":"https://ayudasabiertas.com/"},
+    {"@type":"ListItem","position":2,"name":"País Vasco","item":"https://ayudasabiertas.com/subvenciones/pais-vasco/"},
+    {"@type":"ListItem","position":3,"name":"Cultura","item":"https://ayudasabiertas.com/subvenciones/pais-vasco/cultura/"}
+  ]
+}
+</script>
+
+<!-- 2) Página de colección + 3) Listado de convocatorias (ItemList anidado) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Subvenciones de Cultura en el País Vasco 2026",
+  "description":"Convocatorias de subvenciones de Cultura abiertas en el País Vasco, actualizadas a diario desde la BDNS.",
+  "url":"https://ayudasabiertas.com/subvenciones/pais-vasco/cultura/",
+  "isPartOf":{"@type":"WebSite","name":"Ayudas Abiertas","url":"https://ayudasabiertas.com/"},
+  "mainEntity":{
+    "@type":"ItemList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"CONVOCATORIA DEL AÑO 2026 DE AYUDAS PARA APRENDER EUSKARA","url":"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913504"},
+      {"@type":"ListItem","position":2,"name":"Bases reguladoras de la 38 edición del Premio de Periodismo Rikardo Arregi","url":"https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912272"}
+    ]
+  }
+}
+</script>
+
+<!-- 4) Preguntas frecuentes -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"¿Quién puede solicitar subvenciones de Cultura en el País Vasco?",
+      "acceptedAnswer":{"@type":"Answer","text":"Depende de cada convocatoria. En el ámbito cultural del País Vasco suelen poder solicitarlas personas físicas, asociaciones y entidades sin ánimo de lucro, pymes y autónomos del sector cultural y creativo. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha."}
+    },
+    {
+      "@type":"Question",
+      "name":"¿Cada cuánto se publican nuevas ayudas de Cultura en el País Vasco?",
+      "acceptedAnswer":{"@type":"Answer","text":"Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas."}
+    },
+    {
+      "@type":"Question",
+      "name":"¿Dónde se presenta la solicitud?",
+      "acceptedAnswer":{"@type":"Answer","text":"Cada convocatoria se tramita ante el organismo que la convoca (ayuntamiento, diputación foral o el Gobierno Vasco), normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto."}
+    },
+    {
+      "@type":"Question",
+      "name":"¿Es gratis recibir avisos de nuevas convocatorias?",
+      "acceptedAnswer":{"@type":"Answer","text":"Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Cultura en el País Vasco, y darte de baja cuando quieras."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="cat-head">
+  <div class="wrap cat-head-inner">
+    <a href="/" class="cat-brand">Ayudas <span class="sello">Abiertas</span></a>
+    <nav class="cat-nav">
+      <a href="/">Directorio</a>
+      <a href="/#suscribirse">Recibir avisos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- Migas de pan -->
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a><span class="sep">›</span>
+      <a href="/subvenciones/pais-vasco/">País Vasco</a><span class="sep">›</span>
+      <span>Cultura</span>
+    </nav>
+
+    <p class="doc-kicker">Cultura · País Vasco</p>
+    <h1>Subvenciones de Cultura en el País Vasco</h1>
+
+    <p class="intro">Esta página reúne todas las <b>subvenciones y ayudas de Cultura
+      en el País Vasco</b> recogidas en la Base de Datos Nacional de Subvenciones (BDNS).
+      Incluye ayudas de ayuntamientos, diputaciones forales y el Gobierno Vasco para
+      proyectos culturales, premios, festivales, producción audiovisual y promoción del
+      euskera. <b>Se actualiza a diario</b>: primero verás las convocatorias abiertas y,
+      más abajo, las ya cerradas como referencia.</p>
+
+    <!-- Stats — el script rellena los números reales -->
+    <div class="stats">
+      <div class="stat"><div class="n">2</div><div class="l">Convocatorias</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Abiertas ahora</div></div>
+      <div class="stat"><div class="n">22.500 €</div><div class="l">Importe acumulado</div></div>
+    </div>
+
+    <!-- CTA de suscripción preconfigurado a esta categoría -->
+    <div class="cta-box">
+      <h2>Recibe nuevas ayudas de Cultura del País Vasco</h2>
+      <p>Te avisamos por email en cuanto se publique una convocatoria nueva de esta categoría. Gratis y sin spam.</p>
+      <a class="cta-btn" href="/?ccaa=Pa%C3%ADs%20Vasco&sector=Cultura#suscribirse">Avísame de nuevas ayudas →</a>
+    </div>
+
+    <!-- ABIERTAS (protagonismo).
+         Formato de tarjeta abierta, para referencia del script:
+         <article class="conv">
+           <div class="conv-top">
+             <h3><a href="URL_OFICIAL" rel="nofollow noopener" target="_blank">TÍTULO</a></h3>
+             <span class="badge abierta">Abierta</span>
+           </div>
+           <div class="conv-meta">
+             <span><b>Órgano:</b> ORGANO</span>
+             <span><b>Importe:</b> IMPORTE €</span>
+             <span><b>Plazo:</b> hasta FECHA_FIN</span>
+             <span><b>Ámbito:</b> NIVEL_ADMIN</span>
+           </div>
+         </article>
+    -->
+    <h2 class="sec">Convocatorias abiertas</h2>
+    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>
+
+    <!-- Estado vacío honesto: cuando no haya abiertas en la categoría. -->
+    <p class="sec-note" style="background:var(--card);border:1px dashed var(--line);
+        border-radius:6px;padding:16px 18px">
+      Ahora mismo no hay convocatorias de Cultura abiertas en el País Vasco.
+      Suscríbete arriba y te avisamos en cuanto se publique una nueva.
+    </p>
+
+    <!-- CERRADAS (relegadas) -->
+    <h2 class="sec">Convocatorias cerradas</h2>
+    <p class="sec-note">Plazo finalizado. Se mantienen como referencia y para consultar las bases de cara a próximas ediciones.</p>
+
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913504" rel="nofollow noopener" target="_blank">Convocatoria del año 2026 de ayudas para aprender euskara</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Getaria</span>
+        <span><b>Importe:</b> 4.500 €</span>
+        <span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912272" rel="nofollow noopener" target="_blank">Bases reguladoras de la 38 edición del Premio de Periodismo Rikardo Arregi</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Andoain</span>
+        <span><b>Importe:</b> 18.000 €</span>
+        <span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+
+    <!-- FAQ visible (debe coincidir con el Schema FAQPage de arriba) -->
+    <h2 class="sec">Preguntas frecuentes</h2>
+
+    <details class="faq">
+      <summary>¿Quién puede solicitar subvenciones de Cultura en el País Vasco?</summary>
+      <p>Depende de cada convocatoria. En el ámbito cultural del País Vasco suelen poder
+        solicitarlas personas físicas, asociaciones y entidades sin ánimo de lucro, pymes
+        y autónomos del sector cultural y creativo. Cada convocatoria detalla sus
+        beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Cada cuánto se publican nuevas ayudas de Cultura en el País Vasco?</summary>
+      <p>Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas
+        revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta
+        página se actualiza automáticamente cada día con las convocatorias nuevas.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Dónde se presenta la solicitud?</summary>
+      <p>Cada convocatoria se tramita ante el organismo que la convoca (ayuntamiento,
+        diputación foral o el Gobierno Vasco), normalmente a través de su sede electrónica.
+        En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases
+        reguladoras, donde se indica el procedimiento exacto.</p>
+    </details>
+
+    <details class="faq">
+      <summary>¿Es gratis recibir avisos de nuevas convocatorias?</summary>
+      <p>Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para
+        recibir un aviso cuando se publique una nueva subvención de Cultura en el País
+        Vasco, y darte de baja cuando quieras.</p>
+    </details>
+
+    <!-- Enlaces internos: otras categorías relacionadas (ayuda a Google a descubrir e indexar) -->
+    <h2 class="sec">Otras categorías</h2>
+    <p class="sec-note">Explora subvenciones relacionadas.</p>
+    <div class="related">
+      <a href="/subvenciones/pais-vasco/fomento-del-empleo/">Empleo en País Vasco</a>
+      <a href="/subvenciones/pais-vasco/comercio-turismo-y-pymes/">Comercio y Pymes en País Vasco</a>
+      <a href="/subvenciones/pais-vasco/agricultura-pesca-y-alimentacion/">Agricultura en País Vasco</a>
+      <a href="/subvenciones/pais-vasco/">Todas las de País Vasco</a>
+      <a href="/subvenciones/navarra/cultura/">Cultura en Navarra</a>
+      <a href="/subvenciones/cataluna/cultura/">Cultura en Cataluña</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>Ayudas Abiertas · Datos abiertos reutilizados de la BDNS (IGAE, Ministerio de Hacienda) ·
+      sitio independiente, España. <a href="/">Volver al directorio</a> ·
+      <a href="/privacidad.html">Privacidad</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

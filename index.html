@@ -360,6 +360,7 @@
   <nav class="pager" id="pager" aria-label="Paginación de resultados" hidden></nav>
 </main>
 
+<a id="suscribirse" aria-hidden="true"></a>
 <section class="boletin" id="alertas" aria-labelledby="boletin-h">
   <div class="wrap boletin-inner">
     <div class="boletin-intro">
@@ -820,6 +821,26 @@ function initSubForm(form){
 }
 initSubForm(document.getElementById('subForm'));
 
+// Prerrellena el formulario de alertas desde la query string (?ccaa=...&sector=...).
+// Lo usan las páginas de categoría SEO (el CTA "Avísame de nuevas ayudas"). Debe
+// llamarse DESPUÉS de pintar las casillas dinámicas de sector (ver load → buildFilters).
+function premarcaDesdeQuery(){
+  const params=new URLSearchParams(location.search);
+  if(!params.has('ccaa') && !params.has('sector')) return;   // entrada normal: no tocar nada
+  // URLSearchParams ya decodifica (ccaa=Pa%C3%ADs%20Vasco → "País Vasco").
+  // Admite ?ccaa=A&ccaa=B y también ?ccaa=A,B.
+  const valores=k=>params.getAll(k).flatMap(v=>v.split(','));
+  const marca=(containerSel,lista)=>{
+    const set=new Set(lista.map(v=>v.trim()).filter(Boolean));
+    if(!set.size) return;
+    document.querySelectorAll(`${containerSel} input[type=checkbox]`).forEach(cb=>{
+      if(set.has(cb.value)) cb.checked=true;   // comparación exacta; valor sin casilla = se ignora
+    });
+  };
+  marca('[data-sub-region]', valores('ccaa'));
+  marca('[data-sub-sectores]', valores('sector'));
+}
+
 // ---- Aviso contextual: aparece al filtrar por comunidad o sector ----
 const alertPrompt=document.getElementById('alertPrompt');
 let promptCerrado=false;
@@ -859,6 +880,7 @@ async function load(){
   document.getElementById('updated').textContent =
     payload.generado ? new Date(payload.generado).toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}) : 'datos de muestra';
   buildFilters();
+  premarcaDesdeQuery();        // tras pintar las casillas: premarca ccaa/sector si vienen en la URL
   renderStats(payload.generado);
   apply();
 }

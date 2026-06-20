@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Subvenciones de Cultura en España 2026 · Ayudas Abiertas</title>
+<meta name="description" content="Todas las subvenciones y ayudas de Cultura en España en 2026. Convocatorias estatales y autonómicas actualizadas a diario desde la BDNS. Recibe avisos por email cuando se publiquen nuevas.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ayudasabiertas.com/subvenciones/sector/cultura/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Subvenciones de Cultura en España 2026">
+<meta property="og:description" content="Convocatorias de Cultura en España, actualizadas a diario desde la BDNS.">
+<meta property="og:url" content="https://ayudasabiertas.com/subvenciones/sector/cultura/">
+
+<style>
+  :root{
+    --ink:#10221b; --paper:#f3efe4; --paper-2:#e9e3d2; --line:#cdc6b2;
+    --sello:#b4351f; --sello-soft:#d6643f; --gold:#9a7b18; --ok:#2f6b4f;
+    --muted:#5d6258; --card:#fbf9f2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  a{color:var(--sello)}
+
+  /* Cabecera de marca */
+  header.cat-head{border-bottom:2px solid var(--ink);background:var(--paper)}
+  .cat-head-inner{padding:22px 0 18px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .cat-brand{font-size:24px;font-weight:800;letter-spacing:-.01em;
+    text-decoration:none;color:var(--ink)}
+  .cat-brand .sello{color:var(--sello)}
+  .cat-nav{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+  .cat-nav a{text-decoration:none;font-weight:600;margin-left:18px}
+
+  /* Migas de pan */
+  .breadcrumb{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);padding:16px 0 0}
+  .breadcrumb a{color:var(--muted);text-decoration:none}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb .sep{margin:0 7px;color:var(--line)}
+
+  main{padding:0 0 64px}
+  .doc-kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--sello);
+    font-weight:700;margin:24px 0 8px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 14px;font-weight:800}
+  .intro{font-size:17px;color:var(--ink);max-width:62ch}
+  .intro b{color:var(--ink)}
+
+  /* Barra de stats */
+  .stats{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 8px;
+    padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat .n{font-size:26px;font-weight:800;color:var(--sello)}
+  .stat .l{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+  /* CTA de suscripción */
+  .cta-box{background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--sello);border-radius:3px;padding:20px 22px;margin:28px 0}
+  .cta-box h2{font-size:18px;margin:0 0 6px;font-weight:800}
+  .cta-box p{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .cta-btn{display:inline-block;background:var(--sello);color:#fff;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:14px;
+    text-decoration:none;padding:11px 20px;border-radius:3px}
+  .cta-btn:hover{background:#9a2c18}
+
+  /* Secciones */
+  h2.sec{font-size:21px;margin:38px 0 4px;font-weight:800;
+    padding-top:20px;border-top:1px solid var(--line)}
+  .sec-note{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:0 0 16px}
+
+  /* Tarjeta de convocatoria */
+  .conv{border:1px solid var(--line);border-radius:6px;padding:16px 18px;
+    margin:0 0 14px;background:var(--card)}
+  .conv.cerrada{opacity:.66;background:transparent}
+  .conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .conv h3{font-size:16.5px;line-height:1.3;margin:0;font-weight:700}
+  .conv h3 a{color:var(--sello);text-decoration:none}
+  .conv h3 a:hover{text-decoration:underline}
+  .badge{flex-shrink:0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .badge.abierta{background:#e3f0e8;color:var(--ok)}
+  .badge.cerrada{background:#efe8e6;color:#8a5a4e}
+  .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
+  .conv-meta b{color:var(--ink);font-weight:600}
+
+  /* FAQ */
+  details.faq{border-bottom:1px solid var(--line);padding:14px 0}
+  details.faq summary{font-size:16px;font-weight:700;cursor:pointer;
+    list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--sello);font-size:22px;
+    font-weight:400;margin-left:12px}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{font-size:15px;color:var(--muted);margin:12px 0 4px;max-width:64ch}
+
+  /* Enlaces internos a categorías relacionadas */
+  .related{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+  .related a{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    text-decoration:none;background:var(--paper-2);color:var(--ink);
+    padding:7px 13px;border-radius:20px;border:1px solid var(--line)}
+  .related a:hover{border-color:var(--sello);color:var(--sello)}
+
+  footer{border-top:2px solid var(--ink);background:var(--paper);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
+  .footer-inner{padding:22px 0 30px}
+  .footer-inner a{color:var(--sello);text-decoration:none}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://ayudasabiertas.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cultura",
+      "item": "https://ayudasabiertas.com/subvenciones/sector/cultura/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Subvenciones de Cultura en España 2026",
+  "description": "Convocatorias de subvenciones de Cultura en España, actualizadas a diario desde la BDNS.",
+  "url": "https://ayudasabiertas.com/subvenciones/sector/cultura/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Ayudas Abiertas",
+    "url": "https://ayudasabiertas.com/"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "CERTAMEN DE TEATRO EMERGENTE ESCENA 11, 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914133"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "CONCURSO DE LA PORTADA DEL PROGRAMA OFICIAL DE LAS FIESTAS PATRONALES DE SEPTIEMBRE DE 2026 (CARIÑENA)",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914046"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "CONVOCATORIA PARA LA CONCESIÓN DE PREMIOS PARA EL CONCURSO DEL CARTEL ANUNCIADOR DE LAS FIESTAS EN HONOR A LA VIRGEN Y SAN ROQUE 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913912"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Resolución de convocatoria para la concesión de ayudas a la distribución y la explotación de espectáculos, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913899"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para la promoción de largometrajes cinematográficos en versión original catalana u occitana, en su variante aranesa",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913616"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "BASES CONCURSO PROYECTOS DE PRODUCCIÓN AUDIOVISUAL ALMERIENSES. FICAL 2026. Ac. número 14 de JG 15/06/2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913536"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "CONVOCATORIA DEL AÑO 2026 DE AYUDAS PARA APRENDER EUSKARA",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913504"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Convocatoria de ayudas a la creación Fet a Mataró – Can Gassol 2027",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913456"
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "CONVOCATORIA CONCURRENCIA COMPETITIVA PER ENTITATS SOCIALS I CULTURALS 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913342"
+      },
+      {
+        "@type": "ListItem",
+        "position": 10,
+        "name": "XXVI CONCURSO NACIONAL DE PINTURA RAPIDA CIUDAD DE ALCAUDETE 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913274"
+      },
+      {
+        "@type": "ListItem",
+        "position": 11,
+        "name": "CONVOCATORIA DE CERTAMEN DE CORTOS DE SAN MARTIN DEL REY AURELIO. CINESAN 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913217"
+      },
+      {
+        "@type": "ListItem",
+        "position": 12,
+        "name": "Ayudas a titulares de licencias privadas de TDT de Navarra para el doblaje al euskera de obra audiovisual dirigida al público infantil y juvenil 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913108"
+      },
+      {
+        "@type": "ListItem",
+        "position": 13,
+        "name": "Convocatoria de subvenciones para proyectos cuatrienales de investigación en materia de arqueología y paleontología",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912952"
+      },
+      {
+        "@type": "ListItem",
+        "position": 14,
+        "name": "Resolución de convocatoria para la concesión de ayudas a festivales o ciclos musicales, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912889"
+      },
+      {
+        "@type": "ListItem",
+        "position": 15,
+        "name": "Resolución de convocatoria para la concesión de ayudas a proyectos y planes editoriales, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912887"
+      },
+      {
+        "@type": "ListItem",
+        "position": 16,
+        "name": "CONVOCATORIA Y BASES PARTICULARES PARA LA CONCESIÓN DE SUBVENCIONES, EN RÉGIMEN DE CONCURRENCIA COMPETITIVA, EN EL ÁMBITO DEL DISTRITO CULTURAL PARA EL EJERCICIO 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912884"
+      },
+      {
+        "@type": "ListItem",
+        "position": 17,
+        "name": "TRADUCCIÓN LITERARIA 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912809"
+      },
+      {
+        "@type": "ListItem",
+        "position": 18,
+        "name": "BOLSAS DE VIAJE PARA INTERNACIONALIZACIÓN CINE Y LITERATURA 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912808"
+      },
+      {
+        "@type": "ListItem",
+        "position": 19,
+        "name": "Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia competitiva, para la programación de música en vivo de carácter profesional",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912536"
+      },
+      {
+        "@type": "ListItem",
+        "position": 20,
+        "name": "Premios de la XXIII Edición del Festival de Cine Europeo de Sevilla 2026, aprobado por Resolución de la Vicepresidencia del Instituto de Cultura y Artes de Sevilla (ICAS) de fecha 10 de junio de 2026, del Servicio de Gestión Administrativa y Subvenciones.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912508"
+      },
+      {
+        "@type": "ListItem",
+        "position": 21,
+        "name": "Convocatoria de subvenciones destinadas a la concesión de becas a deportistas con proyección deportiva.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912428"
+      },
+      {
+        "@type": "ListItem",
+        "position": 22,
+        "name": "Resolución 2864 de 2/06/2026  bases del concurso de la decimoquinta edición del XS festival  de Cortometrajes de Puçol 2026. SECCIÓN CORTOS XPRES 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912355"
+      },
+      {
+        "@type": "ListItem",
+        "position": 23,
+        "name": "Resolución número 2864 de 02/06/2026 aprobación bases XV edición concurso de cortometrajes 2026 (Secciones Nacional y \"Mirades des d'Ací\")",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912336"
+      },
+      {
+        "@type": "ListItem",
+        "position": 24,
+        "name": "Resolución 2979 de 05/06/2026 Aprobación bases concurso de grafitis 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912310"
+      },
+      {
+        "@type": "ListItem",
+        "position": 25,
+        "name": "Bases reguladoras de la 38 edición del Premio de Periodismo Rikardo Arregi",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912272"
+      },
+      {
+        "@type": "ListItem",
+        "position": 26,
+        "name": "SUBVENCIONES DESTINADAS A LA PRODUCCIÓN DE ESPECTÁCULOS DE ARTES ESCÉNICAS: MONTAJE Y/O FORMACIÓN. AÑO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912159"
+      },
+      {
+        "@type": "ListItem",
+        "position": 27,
+        "name": "Resolución 3038 de 05/06/2026 por la que se aprueban bases y convocatoria de la XVI edición del concurso de fotografía taurina Vila de Puçol 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911985"
+      },
+      {
+        "@type": "ListItem",
+        "position": 28,
+        "name": "Acuerdo de la Junta de Gobierno Local de 26 de mayo de 2026, por el que se aprueba la convocatoria del XXI Premio de Investigación Histórica Manuel Cremades 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911919"
+      },
+      {
+        "@type": "ListItem",
+        "position": 29,
+        "name": "BASES DEL CERTAMEN INTERNACIONAL DE CORTOMETRAJES. FICAL 2026. Decreto núm. 1353, de fecha 11 de junio de 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911820"
+      },
+      {
+        "@type": "ListItem",
+        "position": 30,
+        "name": "Convocatoria de subvenciones destinadas a personas jurídicas privadas con y sin ánimo de lucro para el fomento y difusión de publicaciones locales y comarcales o de interés para la demarcación de Tarragona año 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911803"
+      },
+      {
+        "@type": "ListItem",
+        "position": 31,
+        "name": "CONVOCATORIA DEL CONCURSO DEL CARTEL ANUNCIADOR DE LA FIESTA\nMAYOR DE SANT SALVADOR 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911538"
+      },
+      {
+        "@type": "ListItem",
+        "position": 32,
+        "name": "Convocatoria de los VI Premis a l'Ús del Valencià en el Comerç Local de Xàtiva",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911526"
+      },
+      {
+        "@type": "ListItem",
+        "position": 33,
+        "name": "Convocatòria per la subvenció per l¿elaboració de plans municipals de biblioteques, projectes de construcció o adequació (bàsics i executius), i projectes de mobiliari i de senyalització per a biblioteques públiques de l¿any 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911487"
+      },
+      {
+        "@type": "ListItem",
+        "position": 34,
+        "name": "Convocatoria de ayudas a la creación Fet a Mataró – Cafè Nou 2027",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911400"
+      },
+      {
+        "@type": "ListItem",
+        "position": 35,
+        "name": "Convocatoria de ayudas 2026 para espacios de creación artística contemporánea y salas alternativas de exhibición",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910757"
+      },
+      {
+        "@type": "ListItem",
+        "position": 36,
+        "name": "ABRIR CONVOCATORIA DE SUBVENCIONES A ENTIDADES Y PERSONAS FÍSICAS SIN AFÁN DE LUCRO QUE PROGRAMEN ACTIVIDADES CULTURAS O FESTIVAS DE INTERÉS PÚBLICO LOCAL DURANTE EL AÑO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910663"
+      },
+      {
+        "@type": "ListItem",
+        "position": 37,
+        "name": "Convocatòria-Bases Publicacions anualitats 2025 i 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910337"
+      },
+      {
+        "@type": "ListItem",
+        "position": 38,
+        "name": "CONVOCATORIA DE LA XVIII EDICIÓN DEL CERTAMEN “PREMIO MÁLAGA DE ENSAYO JOSÉ MARÍA GONZÁLEZ RUIZ”, AÑO 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910300"
+      },
+      {
+        "@type": "ListItem",
+        "position": 39,
+        "name": "CONVOCATORIA SUBVENCIONES DESTINADAS AL DESARROLO DE PROYECTOS CINEMATOGRÁFICOS EN LA PROVINCIA DE SORIA",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910279"
+      },
+      {
+        "@type": "ListItem",
+        "position": 40,
+        "name": "1ª EDICIÓN DEL PREMIO DE ARTE PÚBLICO DEL AGCTYD",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910252"
+      },
+      {
+        "@type": "ListItem",
+        "position": 41,
+        "name": "CONVOCATORIA DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA A EMPRESAS PRIVADAS Y AUTÓNOMOS DEL SECTOR CULTURAL Y CREATIVO PARA LA REALIZACIÓN DE PROYECTOS CULTURALES PARA EL AÑO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910069"
+      },
+      {
+        "@type": "ListItem",
+        "position": 42,
+        "name": "Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para la rehabilitación y la dotación de equipamiento de teatros de Barcelona",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909883"
+      },
+      {
+        "@type": "ListItem",
+        "position": 43,
+        "name": "Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia competitiva, para la promoción de libros en lengua catalana u occitana",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909869"
+      },
+      {
+        "@type": "ListItem",
+        "position": 44,
+        "name": "Resolución de convocatoria para la concesión de subvenciones para proyectos de internacionalización de empresas del sector del libro",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909865"
+      },
+      {
+        "@type": "ListItem",
+        "position": 45,
+        "name": "Convocatoria de subvenciones para la ejecución de obras de restauración y consolidación de inmuebles de notable valor cultural",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909859"
+      },
+      {
+        "@type": "ListItem",
+        "position": 46,
+        "name": "Bases de Convocatoria para la concesión del III Premio Novela Gráfica Diputación de Cáceres, 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909835"
+      },
+      {
+        "@type": "ListItem",
+        "position": 47,
+        "name": "Convocatoria del procedimiento de subvenciones en régimen de concurrencia competitiva de la Fundación Santander Creativa para el desarrollo de proyectos culturales en la ciudad de Santander 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909607"
+      },
+      {
+        "@type": "ListItem",
+        "position": 48,
+        "name": "TORNEO LOCAL DE TÁNGANA FERIA 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909522"
+      },
+      {
+        "@type": "ListItem",
+        "position": 49,
+        "name": "TORNEO LOCAL DE PETANCA FERIA DE AGOSTO 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909484"
+      },
+      {
+        "@type": "ListItem",
+        "position": 50,
+        "name": "Convocatoria de subvenciones para la programación estable de las salas de exhibición cultural privadas 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908962"
+      },
+      {
+        "@type": "ListItem",
+        "position": 51,
+        "name": "Acuerdo de Junta de Gobierno de 13 de mayo de 2026, punto 6.1.1., de aprobación de la Convocatoria para la concesión del \"Premio a la Cultura Malagueña Antonio Garrido Moraga\", anualidad 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908800"
+      },
+      {
+        "@type": "ListItem",
+        "position": 52,
+        "name": "EF00499- L0130 2aC. Resolución por la que se abre la 2ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la producción editorial de traducciones de obras literarias originales en lengua catalana y occitana (e",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908799"
+      },
+      {
+        "@type": "ListItem",
+        "position": 53,
+        "name": "EF00499- L0127 2aC. Resolución por la que se abre la 2ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la traducción de obras literarias y de pensamiento originales en lengua catalana y occitana (en su vari",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908798"
+      },
+      {
+        "@type": "ListItem",
+        "position": 54,
+        "name": "EF00499- L0125 3aC. Resolución por la que se abre la 3ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la publicación en el extranjero de obras ilustradas.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908797"
+      },
+      {
+        "@type": "ListItem",
+        "position": 55,
+        "name": "EF00499- L0124 2aC. Resolución por la que se abre la 2ª convocatoria del año 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la realización de actividades de promoción exterior de la literatura catalana y aranesa.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908790"
+      },
+      {
+        "@type": "ListItem",
+        "position": 56,
+        "name": "Acuerdo del Consejo Ejecutivo de 11 de mayo de 2026, relativo a la convocatoria de las ayudas para fomentar el uso de la lengua catalana, especialmente del menorquín, en el sector empresarial, deportivo, editorial y asociativo de Menorca para el año 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908586"
+      },
+      {
+        "@type": "ListItem",
+        "position": 57,
+        "name": "La presente convocatoria tiene por objeto regular la concesión de ayudas de la Fundación Municipal de Cultura de Avilés destinadas a la producción de proyectos artísticos durante el ejercicio 2026.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908570"
+      },
+      {
+        "@type": "ListItem",
+        "position": 58,
+        "name": "CONVOCATORIA DE AYUDAS A LA PRODUCCIÓN CULTURAL. 2026",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908481"
+      },
+      {
+        "@type": "ListItem",
+        "position": 59,
+        "name": "Resolución  de  26  de  mayo  de  2026  de  la  Dirección  General  del  Instituto  de  la Cinematografía y de las Artes Audiovisuales, por la que se convocan para el año 2026 ayudas para la escritura de guiones de largometrajes cinematográficos.",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908216"
+      }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Quién puede solicitar subvenciones de Cultura en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cada cuánto se publican nuevas ayudas de Cultura en España?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde se presenta la solicitud?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es gratis recibir avisos de nuevas convocatorias?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Cultura en España, y darte de baja cuando quieras."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="cat-head">
+  <div class="wrap cat-head-inner">
+    <a href="/" class="cat-brand">Ayudas <span class="sello">Abiertas</span></a>
+    <nav class="cat-nav">
+      <a href="/">Directorio</a>
+      <a href="/#suscribirse">Recibir avisos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a><span class="sep">›</span>
+      <span>Cultura</span>
+    </nav>
+
+    <p class="doc-kicker">Cultura · España</p>
+    <h1>Subvenciones de Cultura en España</h1>
+
+    <p class="intro">Esta página reúne todas las <b>subvenciones y ayudas de Cultura en España</b> recogidas en la Base de Datos Nacional de Subvenciones (BDNS): estatales, autonómicas y locales. <b>Se actualiza a diario</b>: primero verás las convocatorias abiertas y, más abajo, las ya cerradas como referencia.</p>
+
+    <div class="stats"><div class="stat"><div class="n">59</div><div class="l">Convocatorias</div></div><div class="stat"><div class="n">0</div><div class="l">Abiertas ahora</div></div><div class="stat"><div class="n">26.026.594 €</div><div class="l">Importe acumulado</div></div></div>
+
+    <div class="cta-box">
+      <h2>Recibe nuevas ayudas de Cultura</h2>
+      <p>Te avisamos por email en cuanto se publique una convocatoria nueva de este sector. Gratis y sin spam.</p>
+      <a class="cta-btn" href="/?sector=Cultura#suscribirse">Avísame de nuevas ayudas →</a>
+    </div>
+
+    <h2 class="sec">Convocatorias abiertas</h2>
+    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>
+    <p class="sec-note" style="background:var(--card);border:1px dashed var(--line);border-radius:6px;padding:16px 18px">Ahora mismo no hay convocatorias de Cultura abiertas en España. Suscríbete arriba y te avisamos en cuanto se publique una nueva.</p>
+    <h2 class="sec">Convocatorias cerradas</h2>
+    <p class="sec-note">Plazo finalizado. Se mantienen como referencia y para consultar las bases de cara a próximas ediciones.</p>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909859" rel="nofollow noopener" target="_blank">Convocatoria de subvenciones para la ejecución de obras de restauración y consolidación de inmuebles de notable valor cultural</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Oficina de Suport a la Iniciativa Cultural</span><span><b>Importe:</b> 7.500.000 €</span><span><b>Ámbito:</b> Autonomica</span><span style="color:var(--gold)">+1 línea más de esta convocatoria</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912952" rel="nofollow noopener" target="_blank">Convocatoria de subvenciones para proyectos cuatrienales de investigación en materia de arqueología y paleontología</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Oficina de Suport a la Iniciativa Cultural</span><span><b>Importe:</b> 5.000.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908216" rel="nofollow noopener" target="_blank">Resolución  de  26  de  mayo  de  2026  de  la  Dirección  General  del  Instituto  de  la Cinematografía y de las Artes Audiovisuales, por la que se convocan para el año 2026 ayudas para la escritura de guiones de largometrajes cinematográficos.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Instituto de la Cinematografía y de las Artes Audiovisuales</span><span><b>Importe:</b> 4.000.000 €</span><span><b>Ámbito:</b> Estado</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912536" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia competitiva, para la programación de música en vivo de carácter profesional</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 1.800.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912887" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de ayudas a proyectos y planes editoriales, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 1.050.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912889" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de ayudas a festivales o ciclos musicales, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 1.000.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909883" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para la rehabilitación y la dotación de equipamiento de teatros de Barcelona</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 625.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913899" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de ayudas a la distribución y la explotación de espectáculos, en régimen de concurrencia competitiva, en las modalidades de aportaciones reintegrables y subvenciones</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 550.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909607" rel="nofollow noopener" target="_blank">Convocatoria del procedimiento de subvenciones en régimen de concurrencia competitiva de la Fundación Santander Creativa para el desarrollo de proyectos culturales en la ciudad de Santander 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Santander</span><span><b>Importe:</b> 522.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909865" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de subvenciones para proyectos de internacionalización de empresas del sector del libro</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 500.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913616" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia no competitiva, para la promoción de largometrajes cinematográficos en versión original catalana u occitana, en su variante aranesa</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 443.401 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911487" rel="nofollow noopener" target="_blank">Convocatòria per la subvenció per l¿elaboració de plans municipals de biblioteques, projectes de construcció o adequació (bàsics i executius), i projectes de mobiliari i de senyalització per a biblioteques públiques de l¿any 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Girona</span><span><b>Importe:</b> 352.263 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910337" rel="nofollow noopener" target="_blank">Convocatòria-Bases Publicacions anualitats 2025 i 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Fundació Pública Institut D&#x27;estudis Ilerdencs</span><span><b>Importe:</b> 330.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911803" rel="nofollow noopener" target="_blank">Convocatoria de subvenciones destinadas a personas jurídicas privadas con y sin ánimo de lucro para el fomento y difusión de publicaciones locales y comarcales o de interés para la demarcación de Tarragona año 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Tarragona</span><span><b>Importe:</b> 300.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909869" rel="nofollow noopener" target="_blank">Resolución de convocatoria para la concesión de subvenciones, en régimen de concurrencia competitiva, para la promoción de libros en lengua catalana u occitana</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Català de Les Empreses Culturals (icec)</span><span><b>Importe:</b> 300.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910279" rel="nofollow noopener" target="_blank">CONVOCATORIA SUBVENCIONES DESTINADAS AL DESARROLO DE PROYECTOS CINEMATOGRÁFICOS EN LA PROVINCIA DE SORIA</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Soria</span><span><b>Importe:</b> 200.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908798" rel="nofollow noopener" target="_blank">EF00499- L0127 2aC. Resolución por la que se abre la 2ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la traducción de obras literarias y de pensamiento originales en lengua catalana y occitana (en su vari</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Ramon Llull</span><span><b>Importe:</b> 200.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912508" rel="nofollow noopener" target="_blank">Premios de la XXIII Edición del Festival de Cine Europeo de Sevilla 2026, aprobado por Resolución de la Vicepresidencia del Instituto de Cultura y Artes de Sevilla (ICAS) de fecha 10 de junio de 2026, del Servicio de Gestión Administrativa y Subvenciones.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Sevilla</span><span><b>Importe:</b> 152.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910757" rel="nofollow noopener" target="_blank">Convocatoria de ayudas 2026 para espacios de creación artística contemporánea y salas alternativas de exhibición</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consell Insular de Mallorca</span><span><b>Importe:</b> 120.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912884" rel="nofollow noopener" target="_blank">CONVOCATORIA Y BASES PARTICULARES PARA LA CONCESIÓN DE SUBVENCIONES, EN RÉGIMEN DE CONCURRENCIA COMPETITIVA, EN EL ÁMBITO DEL DISTRITO CULTURAL PARA EL EJERCICIO 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Hospitalet de Llobregat, L&#x27;</span><span><b>Importe:</b> 100.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908962" rel="nofollow noopener" target="_blank">Convocatoria de subvenciones para la programación estable de las salas de exhibición cultural privadas 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consell Insular de Mallorca</span><span><b>Importe:</b> 100.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908586" rel="nofollow noopener" target="_blank">Acuerdo del Consejo Ejecutivo de 11 de mayo de 2026, relativo a la convocatoria de las ayudas para fomentar el uso de la lengua catalana, especialmente del menorquín, en el sector empresarial, deportivo, editorial y asociativo de Menorca para el año 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consell Insular de Menorca</span><span><b>Importe:</b> 90.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913456" rel="nofollow noopener" target="_blank">Convocatoria de ayudas a la creación Fet a Mataró – Can Gassol 2027</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Mataró</span><span><b>Importe:</b> 71.200 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908797" rel="nofollow noopener" target="_blank">EF00499- L0125 3aC. Resolución por la que se abre la 3ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la publicación en el extranjero de obras ilustradas.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Ramon Llull</span><span><b>Importe:</b> 65.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912809" rel="nofollow noopener" target="_blank">TRADUCCIÓN LITERARIA 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Instituto Vasco Etxepare Euskal Institutua / Basque Institute</span><span><b>Importe:</b> 63.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910252" rel="nofollow noopener" target="_blank">1ª EDICIÓN DEL PREMIO DE ARTE PÚBLICO DEL AGCTYD</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Área de Gobierno de Cultura, Turismo y Deporte</span><span><b>Importe:</b> 60.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911400" rel="nofollow noopener" target="_blank">Convocatoria de ayudas a la creación Fet a Mataró – Cafè Nou 2027</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Mataró</span><span><b>Importe:</b> 57.600 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913108" rel="nofollow noopener" target="_blank">Ayudas a titulares de licencias privadas de TDT de Navarra para el doblaje al euskera de obra audiovisual dirigida al público infantil y juvenil 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Departamento de Presidencia e Igualdad</span><span><b>Importe:</b> 50.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908790" rel="nofollow noopener" target="_blank">EF00499- L0124 2aC. Resolución por la que se abre la 2ª convocatoria del año 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la realización de actividades de promoción exterior de la literatura catalana y aranesa.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Ramon Llull</span><span><b>Importe:</b> 50.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910663" rel="nofollow noopener" target="_blank">ABRIR CONVOCATORIA DE SUBVENCIONES A ENTIDADES Y PERSONAS FÍSICAS SIN AFÁN DE LUCRO QUE PROGRAMEN ACTIVIDADES CULTURAS O FESTIVAS DE INTERÉS PÚBLICO LOCAL DURANTE EL AÑO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Vilafranca del Penedès</span><span><b>Importe:</b> 48.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913536" rel="nofollow noopener" target="_blank">BASES CONCURSO PROYECTOS DE PRODUCCIÓN AUDIOVISUAL ALMERIENSES. FICAL 2026. Ac. número 14 de JG 15/06/2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Almería</span><span><b>Importe:</b> 43.300 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910069" rel="nofollow noopener" target="_blank">CONVOCATORIA DE SUBVENCIONES EN RÉGIMEN DE CONCURRENCIA COMPETITIVA A EMPRESAS PRIVADAS Y AUTÓNOMOS DEL SECTOR CULTURAL Y CREATIVO PARA LA REALIZACIÓN DE PROYECTOS CULTURALES PARA EL AÑO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Málaga</span><span><b>Importe:</b> 40.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912808" rel="nofollow noopener" target="_blank">BOLSAS DE VIAJE PARA INTERNACIONALIZACIÓN CINE Y LITERATURA 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Instituto Vasco Etxepare Euskal Institutua / Basque Institute</span><span><b>Importe:</b> 30.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908481" rel="nofollow noopener" target="_blank">CONVOCATORIA DE AYUDAS A LA PRODUCCIÓN CULTURAL. 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Elche/elx</span><span><b>Importe:</b> 30.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911820" rel="nofollow noopener" target="_blank">BASES DEL CERTAMEN INTERNACIONAL DE CORTOMETRAJES. FICAL 2026. Decreto núm. 1353, de fecha 11 de junio de 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Almería</span><span><b>Importe:</b> 28.600 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912272" rel="nofollow noopener" target="_blank">Bases reguladoras de la 38 edición del Premio de Periodismo Rikardo Arregi</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Andoain</span><span><b>Importe:</b> 18.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908570" rel="nofollow noopener" target="_blank">La presente convocatoria tiene por objeto regular la concesión de ayudas de la Fundación Municipal de Cultura de Avilés destinadas a la producción de proyectos artísticos durante el ejercicio 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Fundación Municipal de Cultura del Ayuntamiento de Avilés</span><span><b>Importe:</b> 16.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908800" rel="nofollow noopener" target="_blank">Acuerdo de Junta de Gobierno de 13 de mayo de 2026, punto 6.1.1., de aprobación de la Convocatoria para la concesión del &quot;Premio a la Cultura Malagueña Antonio Garrido Moraga&quot;, anualidad 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Málaga</span><span><b>Importe:</b> 15.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913342" rel="nofollow noopener" target="_blank">CONVOCATORIA CONCURRENCIA COMPETITIVA PER ENTITATS SOCIALS I CULTURALS 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Sant Andreu de Llavaneres</span><span><b>Importe:</b> 14.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912159" rel="nofollow noopener" target="_blank">SUBVENCIONES DESTINADAS A LA PRODUCCIÓN DE ESPECTÁCULOS DE ARTES ESCÉNICAS: MONTAJE Y/O FORMACIÓN. AÑO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Segovia</span><span><b>Importe:</b> 14.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913274" rel="nofollow noopener" target="_blank">XXVI CONCURSO NACIONAL DE PINTURA RAPIDA CIUDAD DE ALCAUDETE 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Alcaudete</span><span><b>Importe:</b> 13.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914133" rel="nofollow noopener" target="_blank">CERTAMEN DE TEATRO EMERGENTE ESCENA 11, 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Distrito de Carabanchel</span><span><b>Importe:</b> 10.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912428" rel="nofollow noopener" target="_blank">Convocatoria de subvenciones destinadas a la concesión de becas a deportistas con proyección deportiva.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Barbastro</span><span><b>Importe:</b> 10.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/910300" rel="nofollow noopener" target="_blank">CONVOCATORIA DE LA XVIII EDICIÓN DEL CERTAMEN “PREMIO MÁLAGA DE ENSAYO JOSÉ MARÍA GONZÁLEZ RUIZ”, AÑO 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Málaga</span><span><b>Importe:</b> 10.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/908799" rel="nofollow noopener" target="_blank">EF00499- L0130 2aC. Resolución por la que se abre la 2ª convocatoria 2026 para la concesión de subvenciones en régimen de concurrencia competitiva para la producción editorial de traducciones de obras literarias originales en lengua catalana y occitana (e</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Institut Ramon Llull</span><span><b>Importe:</b> 10.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913504" rel="nofollow noopener" target="_blank">CONVOCATORIA DEL AÑO 2026 DE AYUDAS PARA APRENDER EUSKARA</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Getaria</span><span><b>Importe:</b> 4.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909835" rel="nofollow noopener" target="_blank">Bases de Convocatoria para la concesión del III Premio Novela Gráfica Diputación de Cáceres, 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Diputación Provincial de Cáceres</span><span><b>Importe:</b> 4.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911526" rel="nofollow noopener" target="_blank">Convocatoria de los VI Premis a l&#x27;Ús del Valencià en el Comerç Local de Xàtiva</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Xàtiva</span><span><b>Importe:</b> 4.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913217" rel="nofollow noopener" target="_blank">CONVOCATORIA DE CERTAMEN DE CORTOS DE SAN MARTIN DEL REY AURELIO. CINESAN 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de San Martín del Rey Aurelio</span><span><b>Importe:</b> 3.300 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911919" rel="nofollow noopener" target="_blank">Acuerdo de la Junta de Gobierno Local de 26 de mayo de 2026, por el que se aprueba la convocatoria del XXI Premio de Investigación Histórica Manuel Cremades 2026.</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Aspe</span><span><b>Importe:</b> 2.000 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912310" rel="nofollow noopener" target="_blank">Resolución 2979 de 05/06/2026 Aprobación bases concurso de grafitis 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Puçol</span><span><b>Importe:</b> 1.500 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912355" rel="nofollow noopener" target="_blank">Resolución 2864 de 2/06/2026  bases del concurso de la decimoquinta edición del XS festival  de Cortometrajes de Puçol 2026. SECCIÓN CORTOS XPRES 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Puçol</span><span><b>Importe:</b> 1.200 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/912336" rel="nofollow noopener" target="_blank">Resolución número 2864 de 02/06/2026 aprobación bases XV edición concurso de cortometrajes 2026 (Secciones Nacional y &quot;Mirades des d&#x27;Ací&quot;)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Puçol</span><span><b>Importe:</b> 1.200 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911538" rel="nofollow noopener" target="_blank">CONVOCATORIA DEL CONCURSO DEL CARTEL ANUNCIADOR DE LA FIESTA
+MAYOR DE SANT SALVADOR 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Pallaresos, Els</span><span><b>Importe:</b> 700 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911985" rel="nofollow noopener" target="_blank">Resolución 3038 de 05/06/2026 por la que se aprueban bases y convocatoria de la XVI edición del concurso de fotografía taurina Vila de Puçol 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Puçol</span><span><b>Importe:</b> 600 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914046" rel="nofollow noopener" target="_blank">CONCURSO DE LA PORTADA DEL PROGRAMA OFICIAL DE LAS FIESTAS PATRONALES DE SEPTIEMBRE DE 2026 (CARIÑENA)</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Cariñena</span><span><b>Importe:</b> 300 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/913912" rel="nofollow noopener" target="_blank">CONVOCATORIA PARA LA CONCESIÓN DE PREMIOS PARA EL CONCURSO DEL CARTEL ANUNCIADOR DE LAS FIESTAS EN HONOR A LA VIRGEN Y SAN ROQUE 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Navarrete</span><span><b>Importe:</b> 150 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909522" rel="nofollow noopener" target="_blank">TORNEO LOCAL DE TÁNGANA FERIA 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Valdepeñas</span><span><b>Importe:</b> 140 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/909484" rel="nofollow noopener" target="_blank">TORNEO LOCAL DE PETANCA FERIA DE AGOSTO 2026</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Ayuntamiento de Valdepeñas</span><span><b>Importe:</b> 140 €</span><span><b>Ámbito:</b> Local</span>
+      </div>
+    </article>
+
+    <h2 class="sec">Preguntas frecuentes</h2>
+    <details class="faq">
+      <summary>¿Quién puede solicitar subvenciones de Cultura en España?</summary>
+      <p>Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Cada cuánto se publican nuevas ayudas de Cultura en España?</summary>
+      <p>Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Dónde se presenta la solicitud?</summary>
+      <p>Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Es gratis recibir avisos de nuevas convocatorias?</summary>
+      <p>Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Cultura en España, y darte de baja cuando quieras.</p>
+    </details>
+
+    <h2 class="sec">Otras categorías</h2>
+    <p class="sec-note">Explora subvenciones relacionadas.</p>
+    <div class="related">
+      <a href="/subvenciones/andalucia/cultura/">Cultura en Andalucía</a>
+      <a href="/subvenciones/cataluna/cultura/">Cultura en Cataluña</a>
+      <a href="/subvenciones/islas-baleares/cultura/">Cultura en Islas Baleares</a>
+      <a href="/subvenciones/sector/acceso-a-la-vivienda-y-fomento-de-la-edificacion/">Acceso a la vivienda y fomento de la edificación en España</a>
+      <a href="/subvenciones/sector/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en España</a>
+      <a href="/subvenciones/sector/comercio-turismo-y-pymes/">Comercio, Turismo y Pymes en España</a>
+      <a href="/subvenciones/sector/desempleo/">Desempleo en España</a>
+      <a href="/subvenciones/sector/educacion/">Educación en España</a>
+      <a href="/subvenciones/sector/fomento-del-empleo/">Fomento del Empleo en España</a>
+      <a href="/subvenciones/sector/industria-y-energia/">Industria y Energía en España</a>
+      <a href="/subvenciones/sector/investigacion-desarrollo-e-innovacion/">Investigación, desarrollo e innovación en España</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>Ayudas Abiertas · Datos abiertos reutilizados de la BDNS (IGAE, Ministerio de Hacienda) ·
+      sitio independiente, España. <a href="/">Volver al directorio</a> ·
+      <a href="/privacidad.html">Privacidad</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

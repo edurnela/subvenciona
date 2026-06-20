@@ -19,10 +19,12 @@ jobs:
       # se queda solo con lo SOLICITABLE (concurrencia competitiva + actividad económica),
       # que es ~5% del feed; por eso recorremos muchas páginas del índice. ~6000 detalles ≈ 11 min.
       - run: python fetch_data.py --paginas 30 --page-size 200 --workers 2
+      # Genera las páginas de categoría SEO a partir del JSON ya escrito (no toca el fetch).
+      - run: python build_pages.py
       - name: Commit data
         run: |
           git config user.name "subvenciona-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -f data/convocatorias.json
+          git add -f data/convocatorias.json subvenciones sitemap.xml robots.txt
           git commit -m "data: actualización diaria $(date +%F)" || echo "sin cambios"
           git push
