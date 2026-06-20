@@ -25,6 +25,7 @@ from urllib.parse import quote
 
 BASE = Path(__file__).parent
 DATA_FILE = BASE / "data" / "convocatorias.json"
+INDEX_FILE = BASE / "index.html"
 SUBV_DIR = BASE / "subvenciones"
 SITEMAP = BASE / "sitemap.xml"
 ROBOTS = BASE / "robots.txt"
@@ -631,6 +632,47 @@ def escribe_sitemap(urls):
         f"{cuerpo}\n</urlset>\n", encoding="utf-8")
 
 
+def actualiza_footer_index(sectores_nac, combos, comunidades):
+    """Rescribe en index.html (entre marcadores) los enlaces a las páginas de
+    categoría que SÍ se generan: sectores nacionales + comunidades, ambos por
+    volumen de convocatorias (las más importantes primero). Idempotente."""
+    if not INDEX_FILE.exists():
+        return
+    src = INDEX_FILE.read_text(encoding="utf-8")
+
+    sec_items = sorted(sectores_nac.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+    sec_li = "\n".join(
+        f'        <li><a href="/subvenciones/sector/{slugify(s)}/">{esc(s)}</a></li>'
+        for s, _ in sec_items)
+
+    com_total = defaultdict(int)
+    for (com, _sec), cs in combos.items():
+        com_total[com] += len(cs)
+    com_items = sorted(comunidades, key=lambda c: (-com_total[c], c))
+    com_li = "\n".join(
+        f'        <li><a href="/subvenciones/{slugify(c)}/">{esc(c)}</a></li>'
+        for c in com_items)
+
+    bloque = (
+        "<!-- CATEGORIAS:INICIO — bloque generado por build_pages.py; no editar a mano -->\n"
+        '    <nav class="foot-cats" aria-label="Categorías de subvenciones">\n'
+        "      <div>\n        <h3>Subvenciones por sector</h3>\n        <ul>\n"
+        f"{sec_li}\n        </ul>\n      </div>\n"
+        "      <div>\n        <h3>Subvenciones por comunidad</h3>\n        <ul>\n"
+        f"{com_li}\n        </ul>\n      </div>\n"
+        "    </nav>\n    <!-- CATEGORIAS:FIN -->")
+
+    nuevo, n = re.subn(
+        r"<!-- CATEGORIAS:INICIO.*?CATEGORIAS:FIN -->",
+        lambda _m: bloque, src, flags=re.S)
+    if not n:
+        print("[!] index.html: no encuentro los marcadores CATEGORIAS; footer sin tocar")
+        return
+    if nuevo != src:
+        INDEX_FILE.write_text(nuevo, encoding="utf-8")
+    print(f"[ok] Footer de index.html: {len(sec_items)} sectores + {len(com_items)} comunidades")
+
+
 def escribe_robots():
     if ROBOTS.exists():
         return
@@ -687,6 +729,7 @@ def main():
     robots_existia = ROBOTS.exists()
     escribe_sitemap(urls)
     escribe_robots()
+    actualiza_footer_index(sectores_nac, combos, set(comunidades))
 
     print(f"[ok] {len(combos)} páginas comunidad×sector")
     print(f"[ok] {len(comunidades)} páginas madre de comunidad")

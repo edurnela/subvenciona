@@ -172,6 +172,14 @@
     font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:var(--muted)}
   footer a{color:var(--sello)}
   .src{margin-top:6px}
+  /* Navegación a las páginas de categoría (la rellena build_pages.py) */
+  .foot-cats{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px;
+    border-bottom:1px solid var(--line);padding:0 0 20px;margin:0 0 18px}
+  .foot-cats h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);margin:0 0 10px;font-weight:700}
+  .foot-cats ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px}
+  .foot-cats a{color:var(--sello);text-decoration:none}
+  .foot-cats a:hover{text-decoration:underline}
 
   @media(max-width:640px){
     .wrap{padding:0 15px}
@@ -182,6 +190,7 @@
     .reset{flex-basis:100%;margin-left:0;text-align:right}
     .mast-meta{text-align:left;width:100%}
     .count-pill{display:none}
+    .foot-cats{grid-template-columns:1fr;gap:16px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 
@@ -437,6 +446,49 @@
 
 <footer>
   <div class="wrap">
+    <!-- CATEGORIAS:INICIO — bloque generado por build_pages.py; no editar a mano -->
+    <nav class="foot-cats" aria-label="Categorías de subvenciones">
+      <div>
+        <h3>Subvenciones por sector</h3>
+        <ul>
+        <li><a href="/subvenciones/sector/cultura/">Cultura</a></li>
+        <li><a href="/subvenciones/sector/comercio-turismo-y-pymes/">Comercio, Turismo y Pymes</a></li>
+        <li><a href="/subvenciones/sector/otras-actuaciones-de-caracter-economico/">Otras actuaciones de carácter económico</a></li>
+        <li><a href="/subvenciones/sector/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación</a></li>
+        <li><a href="/subvenciones/sector/fomento-del-empleo/">Fomento del Empleo</a></li>
+        <li><a href="/subvenciones/sector/investigacion-desarrollo-e-innovacion/">Investigación, desarrollo e innovación</a></li>
+        <li><a href="/subvenciones/sector/otras-prestaciones-economicas/">Otras Prestaciones económicas</a></li>
+        <li><a href="/subvenciones/sector/servicios-sociales-y-promocion-social/">Servicios Sociales y Promoción Social</a></li>
+        <li><a href="/subvenciones/sector/educacion/">Educación</a></li>
+        <li><a href="/subvenciones/sector/industria-y-energia/">Industria y Energía</a></li>
+        <li><a href="/subvenciones/sector/subvenciones-al-transporte/">Subvenciones al transporte</a></li>
+        <li><a href="/subvenciones/sector/acceso-a-la-vivienda-y-fomento-de-la-edificacion/">Acceso a la vivienda y fomento de la edificación</a></li>
+        <li><a href="/subvenciones/sector/desempleo/">Desempleo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Subvenciones por comunidad</h3>
+        <ul>
+        <li><a href="/subvenciones/cataluna/">Cataluña</a></li>
+        <li><a href="/subvenciones/andalucia/">Andalucía</a></li>
+        <li><a href="/subvenciones/castilla-la-mancha/">Castilla-La Mancha</a></li>
+        <li><a href="/subvenciones/pais-vasco/">País Vasco</a></li>
+        <li><a href="/subvenciones/comunidad-valenciana/">Comunidad Valenciana</a></li>
+        <li><a href="/subvenciones/extremadura/">Extremadura</a></li>
+        <li><a href="/subvenciones/castilla-y-leon/">Castilla y León</a></li>
+        <li><a href="/subvenciones/madrid/">Madrid</a></li>
+        <li><a href="/subvenciones/aragon/">Aragón</a></li>
+        <li><a href="/subvenciones/canarias/">Canarias</a></li>
+        <li><a href="/subvenciones/asturias/">Asturias</a></li>
+        <li><a href="/subvenciones/cantabria/">Cantabria</a></li>
+        <li><a href="/subvenciones/galicia/">Galicia</a></li>
+        <li><a href="/subvenciones/islas-baleares/">Islas Baleares</a></li>
+        <li><a href="/subvenciones/la-rioja/">La Rioja</a></li>
+        <li><a href="/subvenciones/murcia/">Murcia</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- CATEGORIAS:FIN -->
     Datos abiertos reutilizados de la <a href="https://www.infosubvenciones.es" target="_blank" rel="noopener">BDNS</a>
     (Ley 38/2003 · RD 130/2019). Verifica siempre cada convocatoria en la fuente oficial antes de solicitar.
     <div class="src">Ayudas Abiertas es un directorio de descubrimiento, no asesoramiento. Hecho con datos públicos.
