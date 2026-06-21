@@ -121,6 +121,9 @@ CSS = """  :root{
   /* Destacado de "N abiertas" en los listados de sector (páginas madre) */
   .conv-meta .abierta-n{background:#e3f0e8;color:var(--ok);font-weight:700;
     padding:1px 9px;border-radius:20px}
+  /* Aclaración: el importe es la dotación total, no la ayuda por solicitante */
+  .nota-importe{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);margin:18px 0 0;max-width:70ch;line-height:1.5}
 
   /* FAQ */
   details.faq{border-bottom:1px solid var(--line);padding:14px 0}
@@ -279,7 +282,7 @@ def card(c):
     url = esc(c.get("url_oficial") or "#")
     meta = [f'<span><b>Órgano:</b> {esc(c.get("organo") or "—")}</span>']
     if c.get("importe"):
-        meta.append(f'<span><b>Importe:</b> {euros(c["importe"])}</span>')
+        meta.append(f'<span><b>Dotación:</b> {euros(c["importe"])}</span>')
     if abierta and c.get("fecha_fin"):
         meta.append(f'<span><b>Plazo:</b> hasta {fmt_fecha(c["fecha_fin"])}</span>')
     if c.get("nivel_admin"):
@@ -383,6 +386,8 @@ def page(*, title, description, canonical, og_title, og_desc,
     </div>
 
 {body_sections}
+
+    <p class="nota-importe">Los importes indican la dotación total de cada convocatoria, no la ayuda por solicitante (que depende de sus bases).</p>
 
   </div>
 </main>
