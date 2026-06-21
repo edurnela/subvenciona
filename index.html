@@ -37,10 +37,11 @@
       var(--paper);
   }
   .top-rule{height:6px;background:var(--ink)}
-  .mast-inner{display:flex;align-items:flex-end;justify-content:space-between;
-    gap:20px;padding:26px 0 18px;flex-wrap:wrap}
-  .brand{display:flex;align-items:center;gap:16px}
+  .mast-inner{display:flex;align-items:flex-start;justify-content:space-between;
+    gap:20px;padding:40px 0 18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:flex-start;gap:16px}
   .sello{
+    margin-top:18px;
     width:74px;height:74px;flex:0 0 auto;border:2px solid var(--sello);
     border-radius:50%;display:grid;place-items:center;text-align:center;
     color:var(--sello);line-height:1;position:relative;
@@ -49,14 +50,14 @@
   .sello svg{width:40px;height:40px}
   .brand-note{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;color:var(--muted);
     letter-spacing:.02em;margin:5px 0 0}
-  h1{font-size:clamp(34px,6vw,58px);margin:0;letter-spacing:-.015em;font-weight:800}
+  h1{font-size:clamp(34px,6vw,58px);margin:0;letter-spacing:-.015em;font-weight:800;line-height:1.05}
   h1 .b{color:var(--sello)}
   .kicker{font-family:"Helvetica Neue",Arial,sans-serif;text-transform:uppercase;
     letter-spacing:.22em;font-size:11px;color:var(--muted);margin:0 0 4px}
   .mast-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
-    color:var(--muted);text-align:right;line-height:1.7}
+    color:var(--muted);text-align:left;line-height:1.6;margin:14px 0 24px}
   .mast-meta b{color:var(--ink)}
-  .lede{padding:14px 0 0;max-width:60ch;color:var(--muted);font-size:17px}
+  .lede{padding:2px 0 0;max-width:60ch;color:var(--muted);font-size:17px}
 
   /* ---- Panel de cifras (estilo boletín oficial) ---- */
   .stats{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
@@ -303,17 +304,17 @@
         <p class="brand-note">Datos abiertos de la BDNS · sitio independiente · España</p>
       </div>
     </div>
-    <div class="mast-meta">
-      Fuente: <b>Base de Datos Nacional de Subvenciones</b><br>
-      IGAE · Ministerio de Hacienda<br>
-      Actualizado: <b id="updated">—</b>
-    </div>
   </div>
   <div class="wrap"><p class="lede">
     Solo convocatorias <b>solicitables</b> por autónomos y pymes: concurrencia competitiva, sin
     nominativas ni concesiones directas. Filtra por comunidad, sector e importe y mira qué puedes
     pedir <b>hoy</b>, sin complicaciones.
   </p></div>
+  <div class="wrap"><div class="mast-meta">
+    Fuente: <b>Base de Datos Nacional de Subvenciones</b><br>
+    IGAE · Ministerio de Hacienda<br>
+    Actualizado: <b id="updated">—</b>
+  </div></div>
 </header>
 
 <section class="stats" aria-label="Resumen del directorio en cifras">
@@ -706,7 +707,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 function renderStats(generado){
   const rows=collapsaGrupos(DATA.filter(c=>isOpen(c) && (c.importe||0)>=state.minImporte));
   const total=rows.length;
-  const autopymes=rows.filter(c=>(c.beneficiarios||'').includes('Pyme y Personas Físicas Que Desarrollan Actividad Económica')).length;
+  const cierran15=rows.filter(c=>{ const dl=daysLeft(c); return dl!=null && dl>=0 && dl<=15; }).length;
   const NO_CCAA=new Set(['Toda España','Varias comunidades']);
   const comunidades=new Set(rows.map(c=>c.region).filter(r=>r && !NO_CCAA.has(r))).size;
   const cont={};
@@ -715,7 +716,7 @@ function renderStats(generado){
 
   const item=(n,l)=>`<div class="stat"><span class="stat-num">${n}</span><span class="stat-lbl">${esc(l)}</span></div>`;
   let html=`<div class="stat stat-hero"><span class="stat-num">${total}</span><span class="stat-lbl">convocatorias abiertas hoy</span></div>`;
-  if(autopymes) html+=item(autopymes,'para autónomos y pymes');
+  if(cierran15) html+=item(cierran15, cierran15===1?'cierra en 15 días':'cierran en 15 días');
   if(comunidades) html+=item(comunidades, comunidades===1?'comunidad cubierta':'comunidades cubiertas');
   for(const [s,n] of topSec){ if(n) html+=item(n, cap(s)); }
   document.getElementById('statsInner').innerHTML=html;
