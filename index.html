@@ -702,7 +702,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 function renderStats(generado){
   const rows=collapsaGrupos(DATA.filter(c=>isOpen(c) && (c.importe||0)>=state.minImporte));
   const total=rows.length;
-  const autopymes=rows.filter(c=>(c.beneficiarios||'').toLowerCase().includes('desarrollan actividad económica')).length;
+  const autopymes=rows.filter(c=>(c.beneficiarios||'').includes('Pyme y Personas Físicas Que Desarrollan Actividad Económica')).length;
   const NO_CCAA=new Set(['Toda España','Varias comunidades']);
   const comunidades=new Set(rows.map(c=>c.region).filter(r=>r && !NO_CCAA.has(r))).size;
   const cont={};
@@ -931,6 +931,8 @@ async function load(){
     if(r.ok){const j=await r.json(); if(j.convocatorias?.length) payload=j;}
   }catch(_){/* usa SAMPLE */}
   DATA=payload.convocatorias||[];
+  const TOKEN_FOCO = "Pyme y Personas Físicas Que Desarrollan Actividad Económica";
+  DATA = DATA.filter(c => (c.beneficiarios||"").includes(TOKEN_FOCO));
   document.getElementById('updated').textContent =
     payload.generado ? new Date(payload.generado).toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'}) : 'datos de muestra';
   buildFilters();
