@@ -190,7 +190,14 @@ def fmt_fecha(f):
 
 
 def es_abierta(c):
-    return bool(c.get("abierta"))
+    hoy = date.today().isoformat()
+    fin = (c.get("fecha_fin") or "")[:10] or None
+    ini = (c.get("fecha_inicio") or "")[:10] or None
+    if ini and ini > hoy:
+        return False          # el plazo aún no ha empezado
+    if fin:
+        return fin >= hoy     # si hay fecha de cierre, manda ella
+    return bool(c.get("abierta"))  # sin fecha_fin, nos fiamos del flag
 
 
 def ld(obj):
