@@ -137,8 +137,10 @@
     display:flex;flex-direction:column;gap:5px;margin-top:2px}
   .meta span{display:flex;gap:7px}
   .meta b{color:var(--ink);font-weight:600}
-  .importe{font-size:22px;font-weight:800;color:var(--gold);font-family:"Helvetica Neue",Arial,sans-serif}
+  .importe{font-size:17px;font-weight:700;color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif}
   .importe small{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.04em}
+  .nota-importe{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);margin:14px 0 0;max-width:70ch;line-height:1.5}
   .card-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;
     padding-top:10px;border-top:1px dashed var(--line)}
   .closes{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;color:var(--muted)}
@@ -320,6 +322,8 @@
     <p class="stats-foot"><span class="stat-updated"><span class="live-dot" aria-hidden="true"></span>Actualizado a diario · última actualización: <b id="stUpdated">—</b></span></p>
   </div>
 </section>
+
+<div class="wrap"><p class="nota-importe">Los importes indican la dotación total de cada convocatoria, no la ayuda por solicitante (que depende de sus bases).</p></div>
 
 <section class="subscribe-bar">
   <div class="wrap subscribe-bar-inner">
@@ -746,7 +750,7 @@ function renderPage(){
         ${c.sector?`<span>🏷 ${esc(c.sector)}</span>`:''}
         ${c._extra?`<span>🗂 <b>+${c._extra} línea${c._extra===1?'':'s'}</b> más de esta convocatoria</span>`:''}
       </div>
-      ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>presupuesto total</small></div>`:''}
+      ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>dotación total del programa</small></div>`:''}
       <div class="card-foot">
         <span class="closes">${c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||'')}</span>
         <a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver ficha →</a>
