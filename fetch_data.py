@@ -27,6 +27,7 @@ Uso:
 
 import argparse
 import json
+import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -93,6 +94,35 @@ def primero(d, *claves, default=None):
         if isinstance(d, dict) and d.get(k) not in (None, "", []):
             return d[k]
     return default
+
+
+# Mojibake = un char UTF-8 que se decodificó como Latin-1. Sus bytes quedan como
+# un char "líder" (0xC2–0xF4) seguido de 1–3 "continuación" (0x80–0xBF). Casamos
+# solo esos tramos para no tocar acentos válidos (ej. la 'ó' suelta de 'función'),
+# que es justo lo que rompía el round-trip sobre la cadena entera.
+_MOJIBAKE_RE = re.compile('[Â-ô][-¿]{1,3}')
+
+
+def arregla_mojibake(texto):
+    """Corrige texto UTF-8 que fue mal decodificado como Latin-1 (mojibake).
+    Defensiva: solo reescribe los tramos mojibake (no la cadena entera, que
+    puede mezclar acentos sanos) y ante cualquier duda deja el tramo intacto."""
+    if not texto or not isinstance(texto, str):
+        return texto
+    # Marcadores típicos de mojibake (Â líder de símbolos, Ã de tildes rotas).
+    # Si no hay ninguno, el texto está sano: no tocar.
+    if 'Â' not in texto and 'Ã' not in texto:
+        return texto
+
+    def _fix(m):
+        seg = m.group(0)
+        try:
+            # round-trip solo del tramo: revierte la mala decodificación.
+            return seg.encode('latin-1').decode('utf-8')
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            return seg
+
+    return _MOJIBAKE_RE.sub(_fix, texto)
 
 
 def titular(texto):
@@ -190,7 +220,6 @@ def es_para_actividad_economica(detalle):
     return False
 
 
-import re
 import unicodedata
 
 # Marcadores que indican que una convocatoria se ha partido en líneas/lotes/modalidades.
@@ -230,8 +259,8 @@ def normaliza(detalle):
         primero(detalle, "nivel3", "nivel2", "nivel1", default="")
 
     codigo = str(primero(detalle, "codigoBDNS", "numeroConvocatoria", "id", default=""))
-    titulo = primero(detalle, "descripcion", "tituloConvocatoria", default="(sin título)")
-    organo = titular(org_txt)
+    titulo = arregla_mojibake(primero(detalle, "descripcion", "tituloConvocatoria", default="(sin título)"))
+    organo = arregla_mojibake(titular(org_txt))
     fecha_fin = primero(detalle, "fechaFinSolicitud", default=None)
 
     return {
@@ -247,7 +276,7 @@ def normaliza(detalle):
         "abierta": detalle.get("abierto"),
         "sector": titular(primero(detalle, "descripcionFinalidad", default="")) or
                   lista_descripciones(detalle.get("sectores"), maximo=2),
-        "beneficiarios": lista_descripciones(detalle.get("tiposBeneficiarios"), maximo=3),
+        "beneficiarios": arregla_mojibake(lista_descripciones(detalle.get("tiposBeneficiarios"), maximo=3)),
         # Clasificación para distinguir lo realmente solicitable por autónomos/pymes:
         "tipo_convocatoria": detalle.get("tipoConvocatoria") or "",
         "competitiva": es_competitiva(detalle),       # concurrencia competitiva (no nominativa)
