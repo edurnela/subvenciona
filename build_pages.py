@@ -200,6 +200,15 @@ def es_abierta(c):
     return bool(c.get("abierta"))  # sin fecha_fin, nos fiamos del flag
 
 
+# Token BDNS que identifica a autónomos y pymes. Una convocatoria es "del foco"
+# si su campo beneficiarios lo contiene. Las que NO lo contienen (solo Gran Empresa
+# y/o particulares/entidades sin actividad económica) se excluyen de las páginas.
+TOKEN_AUTONOMO_PYME = "Pyme y Personas Físicas Que Desarrollan Actividad Económica"
+
+def es_del_foco(c):
+    return TOKEN_AUTONOMO_PYME in (c.get("beneficiarios") or "")
+
+
 def ld(obj):
     """Bloque <script> con JSON-LD a partir de un dict."""
     return ('<script type="application/ld+json">\n'
@@ -711,6 +720,9 @@ def escribe_robots():
 def main():
     data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
     convs = data["convocatorias"]
+    # Foco: solo convocatorias dirigidas a autónomos y pymes (token BDNS). Se filtra
+    # aquí, en un único punto, para que TODAS las funciones reciban ya la lista reducida.
+    convs = [c for c in convs if es_del_foco(c)]
 
     # Agrupaciones
     por_combo = defaultdict(list)      # (comunidad, sector) -> [conv]
