@@ -28,6 +28,7 @@ BASE = Path(__file__).parent
 DATA_FILE = BASE / "data" / "convocatorias.json"
 INDEX_FILE = BASE / "index.html"
 SUBV_DIR = BASE / "subvenciones"
+AYUDAS_DIR = BASE / "ayudas"
 SITEMAP = BASE / "sitemap.xml"
 ROBOTS = BASE / "robots.txt"
 
@@ -147,6 +148,32 @@ CSS = """  :root{
   .footer-inner{padding:22px 0 30px}
   .footer-inner a{color:var(--sello);text-decoration:none}"""
 
+# --- CSS extra solo para las fichas de convocatoria (misma paleta) -------------
+FICHA_CSS = """  .estado{display:inline-block;font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--ok);background:#e3f0e8;padding:4px 11px;border-radius:20px;margin:0 0 14px}
+  .org{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 6px}
+  .vistazo{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 0}
+  .vistazo .box{flex:1 1 180px;border:1px solid var(--line);border-radius:6px;
+    background:var(--card);padding:14px 16px}
+  .vistazo .k{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 5px}
+  .vistazo .v{font-size:18px;font-weight:700;line-height:1.25}
+  .plazos{width:100%;border-collapse:collapse;margin:14px 0 0;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px}
+  .plazos th,.plazos td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+  .plazos th{color:var(--muted);font-weight:600;width:42%}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+  .chips span{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    background:var(--paper-2);color:var(--ink);padding:7px 13px;border-radius:20px;
+    border:1px solid var(--line)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:24px 0 0}
+  .cta-sec{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:14px;
+    text-decoration:none}
+  .ficha-foot{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);margin:30px 0 0;line-height:1.6;
+    border-top:1px solid var(--line);padding-top:16px}"""
+
 HEADER = """<header class="cat-head">
   <div class="wrap cat-head-inner">
     <a href="/" class="cat-brand">Ayudas <span class="sello">Abiertas</span></a>
@@ -210,6 +237,57 @@ TOKEN_AUTONOMO_PYME = "Pyme y Personas Físicas Que Desarrollan Actividad Econó
 
 def es_del_foco(c):
     return TOKEN_AUTONOMO_PYME in (c.get("beneficiarios") or "")
+
+
+def acorta(texto, n=65):
+    """Recorta a ~n caracteres por palabras completas, con elipsis si sobra."""
+    texto = str(texto or "").strip()
+    if len(texto) <= n:
+        return texto
+    return texto[:n].rsplit(" ", 1)[0].rstrip(" ,.;:") + "…"
+
+
+def slug_ficha(c):
+    """Slug único y estable de una ficha: fragmento del título (≤60, por palabras
+    completas, reutilizando slugify) + '-{codigo_bdns}' para garantizar unicidad.
+    Ej.: 'ayudas-comercio-artesania-consumo-2026-910756'."""
+    base = slugify(c.get("titulo") or "")
+    if len(base) > 60:
+        base = base[:60].rsplit("-", 1)[0]
+    codigo = re.sub(r"[^a-z0-9]", "", str(c.get("codigo_bdns") or "").lower())
+    return "-".join(p for p in (base, codigo) if p) or "ficha"
+
+
+def beneficiario_claro(c):
+    """Beneficiario en lenguaje claro. Todas las fichas son del foco, así que el
+    token de autónomos/pymes se traduce a una etiqueta legible."""
+    b = c.get("beneficiarios") or ""
+    if TOKEN_AUTONOMO_PYME in b:
+        return "Autónomos y pymes"
+    return b or "Consultar en las bases"
+
+
+def dias_restantes(c):
+    """Días hasta fecha_fin (equivalente a daysLeft de la home). None si no hay cierre."""
+    fin = (c.get("fecha_fin") or "")[:10]
+    if not fin:
+        return None
+    try:
+        return (date.fromisoformat(fin) - date.today()).days
+    except ValueError:
+        return None
+
+
+def resumen_ficha(c):
+    """Resumen de 1 frase: sector + ámbito + beneficiario + plazo (para meta/description)."""
+    sector = c.get("sector") or "Subvención"
+    region = c.get("region") or "España"
+    benef = beneficiario_claro(c).lower()
+    if c.get("fecha_fin"):
+        plazo = f"plazo hasta el {fmt_fecha(c['fecha_fin'])}"
+    else:
+        plazo = "sin fecha de cierre publicada"
+    return f"Ayuda de {sector} en {region} para {benef}: {plazo}."
 
 
 def ld(obj):
@@ -662,6 +740,144 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
     return url
 
 
+def render_ficha(c):
+    """Genera /ayudas/{slug}/index.html para UNA convocatoria abierta del foco.
+    Documento autónomo (su propio <style>) con la estética del sitio."""
+    slug = slug_ficha(c)
+    url = f"{DOMAIN}/ayudas/{slug}/"
+    titulo = c.get("titulo") or "Convocatoria"
+    titulo_corto = acorta(titulo, 65)
+    sector = c.get("sector") or "Subvención"
+    region = c.get("region") or "España"
+    organo = c.get("organo") or "—"
+    resumen = resumen_ficha(c)
+    dr = dias_restantes(c)
+
+    # Badge de estado (todas las fichas son abiertas)
+    if dr is None:
+        estado = "Abierta · sin fecha de cierre publicada"
+    elif dr <= 0:
+        estado = f"Abierta · cierra hoy ({fmt_fecha(c.get('fecha_fin'))})"
+    else:
+        estado = (f"Abierta · cierra en {dr} día{'s' if dr != 1 else ''} "
+                  f"({fmt_fecha(c.get('fecha_fin'))})")
+
+    # Tres datos de un vistazo
+    vistazo = [("Dirigida a", esc(beneficiario_claro(c))), ("Ámbito", esc(region))]
+    if c.get("importe"):
+        vistazo.append(("Dotación total del programa", esc(euros(c["importe"]))))
+    boxes = "\n".join(
+        f'        <div class="box"><div class="k">{k}</div><div class="v">{v}</div></div>'
+        for k, v in vistazo)
+
+    # Plazos
+    cierre = fmt_fecha(c["fecha_fin"]) if c.get("fecha_fin") else "Sin fecha de cierre publicada"
+    if dr is None:
+        dias_txt = "—"
+    elif dr <= 0:
+        dias_txt = "Cierra hoy"
+    else:
+        dias_txt = f"{dr} día{'s' if dr != 1 else ''}"
+
+    # CTA secundario: vuelve a la home con sector y comunidad preseleccionados
+    home_q = f"/?ccaa={quote(region)}&sector={quote(sector)}#alertas"
+
+    ld_block = ld({
+        "@context": "https://schema.org",
+        "@type": "GovernmentService",
+        "name": titulo,
+        "description": resumen,
+        "serviceType": sector,
+        "url": url,
+        "provider": {"@type": "GovernmentOrganization", "name": organo},
+        "areaServed": {"@type": "AdministrativeArea", "name": region},
+    })
+
+    doc = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{esc(titulo_corto)} · Ayudas Abiertas</title>
+<meta name="description" content="{esc(resumen)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{esc(url)}">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ayudas Abiertas">
+<meta property="og:title" content="{esc(titulo_corto)}">
+<meta property="og:description" content="{esc(resumen)}">
+<meta property="og:url" content="{esc(url)}">
+
+<style>
+{CSS}
+{FICHA_CSS}
+</style>
+
+{ORGANIZATION_LD}
+{ld_block}
+</head>
+<body>
+
+{HEADER}
+
+<main>
+  <div class="wrap">
+
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a><span class="sep">›</span>
+      <span>{esc(sector)}</span><span class="sep">›</span>
+      <span>{esc(titulo_corto)}</span>
+    </nav>
+
+    <p class="doc-kicker">{esc(sector)} · {esc(region)}</p>
+    <h1>{esc(titulo)}</h1>
+    <p class="org">{esc(organo)}</p>
+    <span class="estado">{esc(estado)}</span>
+
+    <div class="vistazo">
+{boxes}
+    </div>
+
+    <p class="nota-importe">La dotación es el presupuesto total de la convocatoria, no la ayuda que recibe cada solicitante (depende de las bases).</p>
+
+    <h2 class="sec">Plazos</h2>
+    <table class="plazos">
+      <tr><th>Apertura</th><td>{esc(fmt_fecha(c.get("fecha_inicio")) or "—")}</td></tr>
+      <tr><th>Cierre</th><td>{esc(cierre)}</td></tr>
+      <tr><th>Días restantes</th><td>{esc(dias_txt)}</td></tr>
+    </table>
+
+    <h2 class="sec">Qué consultar en las bases oficiales</h2>
+    <p class="sec-note">La BDNS no detalla estos datos. Consúltalos en la convocatoria oficial:</p>
+    <div class="chips">
+      <span>Ayuda máxima por solicitante</span>
+      <span>Gastos financiables</span>
+      <span>Requisitos</span>
+      <span>Documentación</span>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta-btn" href="{esc(c.get("url_oficial") or "#")}" target="_blank" rel="noopener">Ver convocatoria oficial</a>
+      <a class="cta-sec" href="{esc(home_q)}">Avisarme de ayudas similares</a>
+    </div>
+
+    <p class="ficha-foot">Código BDNS: {esc(str(c.get("codigo_bdns") or "—"))} · Datos de la Base de Datos Nacional de Subvenciones · Última comprobación: {fmt_fecha(date.today().isoformat())}<br>
+      Verifica siempre los detalles en la fuente oficial antes de solicitar.</p>
+
+  </div>
+</main>
+
+{FOOTER}
+
+</body>
+</html>
+"""
+    write(AYUDAS_DIR / slug / "index.html", doc)
+    return url, slug
+
+
 def escribe_sitemap(urls):
     hoy = __import__("datetime").date.today().isoformat()
     cuerpo = "\n".join(
@@ -770,6 +986,23 @@ def main():
     for sec, cs in sorted(sectores_nac.items()):
         urls.append(render_sector_nacional(sec, cs, generados))
 
+    # FASE 1 — Fichas individuales por convocatoria ABIERTA del foco, en /ayudas/.
+    # Solo se generan las fichas; conectar los enlaces de las tarjetas y añadirlas al
+    # sitemap es una fase posterior. Regenera desde cero para no dejar fichas obsoletas.
+    if AYUDAS_DIR.exists():
+        shutil.rmtree(AYUDAS_DIR)
+    fichas = sorted((c for c in convs if es_abierta(c)),
+                    key=lambda c: c.get("importe") or 0, reverse=True)
+    slugs_vistos = set()
+    n_fichas = 0
+    for c in fichas:
+        slug = slug_ficha(c)
+        if slug in slugs_vistos:        # unicidad garantizada por codigo_bdns; guard extra
+            continue
+        slugs_vistos.add(slug)
+        render_ficha(c)
+        n_fichas += 1
+
     robots_existia = ROBOTS.exists()
     escribe_sitemap(urls)
     escribe_robots()
@@ -778,6 +1011,7 @@ def main():
     print(f"[ok] {len(combos)} páginas comunidad×sector")
     print(f"[ok] {len(comunidades)} páginas madre de comunidad")
     print(f"[ok] {len(sectores_nac)} páginas de sector nacional")
+    print(f"[ok] {n_fichas} fichas en /ayudas/")
     print(f"[ok] sitemap.xml con {len(urls)} URLs")
     print(f"[ok] robots.txt {'ya existía' if robots_existia else 'creado'}")
 
