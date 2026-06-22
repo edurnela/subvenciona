@@ -146,7 +146,18 @@ CSS = """  :root{
   footer{border-top:2px solid var(--ink);background:var(--paper);
     font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
   .footer-inner{padding:22px 0 30px}
-  .footer-inner a{color:var(--sello);text-decoration:none}"""
+  .footer-inner a{color:var(--sello);text-decoration:none}
+
+  /* Intro dinámica + FAQs de categoría (texto derivado de los datos de la categoría) */
+  .cat-intro{background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px;margin:22px 0 8px}
+  .cat-intro p{margin:0;font-size:17px}
+  .cat-intro .nota{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    color:var(--muted);margin:10px 0 0}
+  .faqs{margin:8px 0 0}
+  .faq-item{border-top:1px solid var(--line);padding:16px 0}
+  .faq-item .q{font-size:17px;font-weight:500;margin:0}
+  .faq-item .a{font-size:16px;line-height:1.6;color:var(--ink);margin:8px 0 0}"""
 
 # --- CSS extra solo para las fichas de convocatoria (misma paleta) -------------
 FICHA_CSS = """  .estado{display:inline-block;font-family:"Helvetica Neue",Arial,sans-serif;
@@ -388,16 +399,6 @@ def card(c):
     </article>"""
 
 
-def faq_html(qas):
-    bloques = []
-    for q, a in qas:
-        bloques.append(f"""    <details class="faq">
-      <summary>{esc(q)}</summary>
-      <p>{esc(a)}</p>
-    </details>""")
-    return "\n".join(bloques)
-
-
 def related_html(links):
     """links = [(label, href), ...] — solo URLs que realmente se generan."""
     if not links:
@@ -420,7 +421,7 @@ def stats_html(stats):
 
 def page(*, title, description, canonical, og_title, og_desc,
          ld_blocks, breadcrumb_visible, kicker, h1, intro, stats,
-         cta_h2, cta_p, cta_href, body_sections):
+         cta_h2, cta_p, cta_href, body_sections, robots="index, follow"):
     """Ensambla un documento HTML completo con el estilo de la plantilla."""
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -430,7 +431,7 @@ def page(*, title, description, canonical, og_title, og_desc,
 
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{esc(canonical)}">
 
 <meta property="og:type" content="website">
@@ -464,7 +465,7 @@ def page(*, title, description, canonical, og_title, og_desc,
 
 {stats_html(stats)}
 
-    <div class="cta-box">
+    <div class="cta-box" id="alertas">
       <h2>{esc(cta_h2)}</h2>
       <p>{esc(cta_p)}</p>
       <a class="cta-btn" href="{esc(cta_href)}">Avísame de nuevas ayudas →</a>
@@ -490,28 +491,87 @@ def write(path: Path, contenido: str):
 
 
 # --------------------------------------------------------------- generadores ----
-def faqs_categoria(sector, ambito):
-    """ambito = 'el País Vasco' / 'España'. FAQ genérica parametrizada."""
-    return [
-        (f"¿Quién puede solicitar subvenciones de {sector} en {ambito}?",
-         "Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y "
-         "empresas, además de otras entidades, según las bases de cada ayuda. Este "
-         "directorio prioriza convocatorias en concurrencia competitiva dirigidas a "
-         "quienes desarrollan actividad económica. Cada convocatoria detalla sus "
-         "beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha."),
-        (f"¿Cada cuánto se publican nuevas ayudas de {sector} en {ambito}?",
-         "Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas "
-         "revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que "
-         "esta página se actualiza automáticamente cada día con las convocatorias nuevas."),
-        ("¿Dónde se presenta la solicitud?",
-         "Cada convocatoria se tramita ante el organismo que la convoca, normalmente a "
-         "través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial "
-         "en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto."),
-        ("¿Es gratis recibir avisos de nuevas convocatorias?",
-         "Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email "
-         f"para recibir un aviso cuando se publique una nueva subvención de {sector} en "
-         f"{ambito}, y darte de baja cuando quieras."),
+def _txt_cierre(d):
+    """Días hasta el cierre → texto natural (evita 'en 0/1 días')."""
+    if d == 0:
+        return "hoy"
+    if d == 1:
+        return "mañana"
+    return f"en {d} días"
+
+
+def intro_faqs(sector, ambito, abiertas):
+    """Bloque dinámico (intro + FAQs) derivado SOLO de las convocatorias ABIERTAS de la
+    categoría. sector=None en páginas madre (sin sector concreto).
+
+    Devuelve (intro_html, faqs_html, faqpage_ld | None, noindex):
+      - 0 abiertas → intro de espera, sin FAQs, noindex=True (se reindexa solo cuando
+        vuelva a haber alguna abierta, porque se decide en cada build según el conteo).
+      - sin ninguna fecha_fin → se omite la FAQ de cierre y la frase de cierre en la intro.
+      - sin dotación (ninguna trae importe) → se omite la FAQ de dotación y su frase.
+    HTML visible y JSON-LD se construyen de la MISMA lista de FAQs (coherencia garantizada)."""
+    n = len(abiertas)
+    dot = sum(c.get("importe") or 0 for c in abiertas)
+    dias = [d for d in (dias_restantes(c) for c in abiertas) if d is not None and d >= 0]
+    dmin = min(dias) if dias else None
+
+    # --- 0 abiertas: noindex + intro de espera, sin FAQs ---
+    if n == 0:
+        quien = f"de {esc(sector)} en {esc(ambito)}" if sector else f"en {esc(ambito)}"
+        intro = (f'    <div class="cat-intro"><p>Ahora mismo no hay subvenciones abiertas '
+                 f'{quien} dirigidas a autónomos y pymes. Activa una '
+                 f'<a href="#alertas">alerta</a> y te avisamos en cuanto se publique alguna.'
+                 f'</p></div>')
+        return intro, "", None, True
+
+    # --- Intro (caso normal) ---
+    sub = "subvención abierta" if n == 1 else "subvenciones abiertas"
+    materia = f"del sector <strong>{esc(sector)}</strong> " if sector else ""
+    partes = [f"Ahora mismo hay <strong>{n} {sub}</strong> para autónomos y pymes "
+              f"{materia}en <strong>{esc(ambito)}</strong>"]
+    if dot > 0:
+        partes.append(f", con una dotación conjunta de <strong>{euros(dot)}</strong> "
+                      "repartida entre los distintos programas")
+    partes.append(".")
+    if dmin is not None:
+        partes.append(f" La convocatoria más próxima a cerrar lo hace "
+                      f"<strong>{_txt_cierre(dmin)}</strong>.")
+    nota = (("La dotación es el total del programa, no la ayuda por solicitante. "
+             if dot > 0 else "") + "Datos de la BDNS, actualizados a diario.")
+    intro = (f'    <div class="cat-intro">\n      <p>{"".join(partes)}</p>\n'
+             f'      <p class="nota">{nota}</p>\n    </div>')
+
+    # --- FAQs (texto plano; una sola lista alimenta HTML y JSON-LD) ---
+    quien1 = f"del sector {sector} en {ambito}" if sector else f"en {ambito}"
+    quien3 = f"de {sector} en {ambito}" if sector else f"en {ambito}"
+    pregunta1 = (f"¿Cuántas ayudas hay abiertas ahora para {sector} en {ambito}?" if sector
+                 else f"¿Cuántas ayudas hay abiertas ahora en {ambito}?")
+    faqs = [
+        (pregunta1,
+         f"Actualmente hay {n} convocatoria{'s' if n != 1 else ''} "
+         f"abierta{'s' if n != 1 else ''} dirigidas a autónomos y pymes {quien1}. "
+         "El listado se actualiza cada día con los datos de la BDNS."),
     ]
+    if dot > 0:
+        faqs.append((
+            "¿Cuál es la dotación total disponible?",
+            f"La dotación conjunta de los programas abiertos suma {euros(dot)}. Es el "
+            "presupuesto total de cada convocatoria; la ayuda concreta por solicitante se "
+            "fija en las bases oficiales de cada una."))
+    if dmin is not None:
+        faqs.append((
+            "¿Cuál cierra antes?",
+            f"La convocatoria con el plazo más próximo cierra {_txt_cierre(dmin)}. Puedes "
+            f"activar una alerta por email para avisarte de nuevas ayudas {quien3} antes de "
+            "que cierren."))
+
+    items = "\n".join(
+        f'      <div class="faq-item">\n        <p class="q">{esc(q)}</p>\n'
+        f'        <p class="a">{esc(a)}</p>\n      </div>'
+        for q, a in faqs)
+    faqs_html = ('    <h2 class="sec">Preguntas frecuentes</h2>\n'
+                 f'    <div class="faqs">\n{items}\n    </div>')
+    return intro, faqs_html, faq_ld(faqs), False
 
 
 def secciones_convocatorias(convs, sector, ambito, empty_text):
@@ -551,7 +611,8 @@ def render_comunidad_sector(comunidad, sector, convs, generados):
              f"{esc(comunidad)}</b> recogidas en la Base de Datos Nacional de Subvenciones "
              "(BDNS). <b>Se actualiza a diario</b>: primero verás las convocatorias abiertas "
              "y, más abajo, las ya cerradas como referencia.")
-    qas = faqs_categoria(sector, f"{comunidad}")
+    abiertas = [c for c in convs if es_abierta(c)]
+    intro_box, faqs_block, faqpage, noindex = intro_faqs(sector, comunidad, abiertas)
     empty = (f"Ahora mismo no hay convocatorias de {sector} abiertas en {comunidad}. "
              "Suscríbete arriba y te avisamos en cuanto se publique una nueva.")
 
@@ -572,11 +633,12 @@ def render_comunidad_sector(comunidad, sector, convs, generados):
     if sector in generados["sectores_nacionales"]:
         rel.append((f"{sector} en toda España", f"/subvenciones/sector/{sec_slug}/"))
 
-    body = "\n\n".join([
+    body = "\n\n".join(x for x in [
+        intro_box,
         secciones_convocatorias(convs, sector, comunidad, empty),
-        '    <h2 class="sec">Preguntas frecuentes</h2>\n' + faq_html(qas),
+        faqs_block,
         related_html(rel),
-    ])
+    ] if x)
     ld_blocks = [
         ld(breadcrumb_ld([
             ("Inicio", DOMAIN + "/"),
@@ -586,8 +648,9 @@ def render_comunidad_sector(comunidad, sector, convs, generados):
         ld(collection_ld(f"Subvenciones de {sector} en {comunidad} {ANYO}",
                          f"Convocatorias de subvenciones de {sector} abiertas en "
                          f"{comunidad}, actualizadas a diario desde la BDNS.", url, convs)),
-        ld(faq_ld(qas)),
     ]
+    if faqpage:
+        ld_blocks.append(ld(faqpage))
     bc = (f'<a href="/">Inicio</a><span class="sep">›</span>\n'
           f'      <a href="/subvenciones/{com_slug}/">{esc(comunidad)}</a>'
           f'<span class="sep">›</span>\n      <span>{esc(sector)}</span>')
@@ -602,6 +665,7 @@ def render_comunidad_sector(comunidad, sector, convs, generados):
         cta_p="Te avisamos por email en cuanto se publique una convocatoria nueva de esta categoría. Gratis y sin spam.",
         cta_href=f"/?ccaa={quote(comunidad)}&sector={quote(sector)}#suscribirse",
         body_sections=body,
+        robots="noindex, follow" if noindex else "index, follow",
     )
     write(SUBV_DIR / com_slug / sec_slug / "index.html", doc)
     return url
@@ -622,7 +686,8 @@ def render_sector_nacional(sector, convs, generados):
              "España</b> recogidas en la Base de Datos Nacional de Subvenciones (BDNS): "
              "estatales, autonómicas y locales. <b>Se actualiza a diario</b>: primero verás "
              "las convocatorias abiertas y, más abajo, las ya cerradas como referencia.")
-    qas = faqs_categoria(sector, "España")
+    abiertas = [c for c in convs if es_abierta(c)]
+    intro_box, faqs_block, faqpage, noindex = intro_faqs(sector, "toda España", abiertas)
     empty = (f"Ahora mismo no hay convocatorias de {sector} abiertas en España. "
              "Suscríbete arriba y te avisamos en cuanto se publique una nueva.")
 
@@ -635,18 +700,20 @@ def render_sector_nacional(sector, convs, generados):
             rel.append((f"{s2} en España", f"/subvenciones/sector/{slugify(s2)}/"))
     rel = rel[:11]
 
-    body = "\n\n".join([
+    body = "\n\n".join(x for x in [
+        intro_box,
         secciones_convocatorias(convs, sector, "España", empty),
-        '    <h2 class="sec">Preguntas frecuentes</h2>\n' + faq_html(qas),
+        faqs_block,
         related_html(rel),
-    ])
+    ] if x)
     ld_blocks = [
         ld(breadcrumb_ld([("Inicio", DOMAIN + "/"), (sector, url)])),
         ld(collection_ld(f"Subvenciones de {sector} en España {ANYO}",
                          f"Convocatorias de subvenciones de {sector} en España, "
                          "actualizadas a diario desde la BDNS.", url, convs)),
-        ld(faq_ld(qas)),
     ]
+    if faqpage:
+        ld_blocks.append(ld(faqpage))
     bc = (f'<a href="/">Inicio</a><span class="sep">›</span>\n'
           f'      <span>{esc(sector)}</span>')
     doc = page(
@@ -660,6 +727,7 @@ def render_sector_nacional(sector, convs, generados):
         cta_p="Te avisamos por email en cuanto se publique una convocatoria nueva de este sector. Gratis y sin spam.",
         cta_href=f"/?sector={quote(sector)}#suscribirse",
         body_sections=body,
+        robots="noindex, follow" if noindex else "index, follow",
     )
     write(SUBV_DIR / "sector" / sec_slug / "index.html", doc)
     return url
@@ -681,6 +749,8 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
              "Base de Datos Nacional de Subvenciones (BDNS), organizadas por sector. "
              "<b>Se actualiza a diario.</b> Elige un sector para ver sus convocatorias "
              "abiertas y cerradas.")
+    abiertas = [c for c in todas if es_abierta(c)]
+    intro_box, faqs_block, faqpage, noindex = intro_faqs(None, comunidad, abiertas)
 
     # Tarjetas-sector: primero los sectores con alguna convocatoria abierta y,
     # debajo, los que solo tienen cerradas. Dentro de cada grupo, orden alfabético.
@@ -716,7 +786,12 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
             rel.append((f"Ayudas en {c2}", f"/subvenciones/{slugify(c2)}/"))
     rel = rel[:8]
 
-    body = "\n".join(tarjetas) + "\n\n" + related_html(rel)
+    body = "\n\n".join(x for x in [
+        intro_box,
+        "\n".join(tarjetas),
+        faqs_block,
+        related_html(rel),
+    ] if x)
     collection = {
         "@context": "https://schema.org", "@type": "CollectionPage",
         "name": f"Subvenciones y ayudas en {comunidad} {ANYO}",
@@ -729,6 +804,8 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
         ld(breadcrumb_ld([("Inicio", DOMAIN + "/"), (comunidad, url)])),
         ld(collection),
     ]
+    if faqpage:
+        ld_blocks.append(ld(faqpage))
     bc = (f'<a href="/">Inicio</a><span class="sep">›</span>\n'
           f'      <span>{esc(comunidad)}</span>')
     doc = page(
@@ -742,6 +819,7 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
         cta_p="Te avisamos por email en cuanto se publique una convocatoria nueva en tu comunidad. Gratis y sin spam.",
         cta_href=f"/?ccaa={quote(comunidad)}#suscribirse",
         body_sections=body,
+        robots="noindex, follow" if noindex else "index, follow",
     )
     write(SUBV_DIR / com_slug / "index.html", doc)
     return url

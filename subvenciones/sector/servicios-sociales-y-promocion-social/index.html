@@ -121,6 +121,17 @@
     font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
   .footer-inner{padding:22px 0 30px}
   .footer-inner a{color:var(--sello);text-decoration:none}
+
+  /* Intro dinámica + FAQs de categoría (texto derivado de los datos de la categoría) */
+  .cat-intro{background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px;margin:22px 0 8px}
+  .cat-intro p{margin:0;font-size:17px}
+  .cat-intro .nota{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    color:var(--muted);margin:10px 0 0}
+  .faqs{margin:8px 0 0}
+  .faq-item{border-top:1px solid var(--line);padding:16px 0}
+  .faq-item .q{font-size:17px;font-weight:500;margin:0}
+  .faq-item .a{font-size:16px;line-height:1.6;color:var(--ink);margin:8px 0 0}
 </style>
 
 <script type="application/ld+json">
@@ -280,34 +291,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Quién puede solicitar subvenciones de Servicios Sociales y Promoción Social en España?",
+      "name": "¿Cuántas ayudas hay abiertas ahora para Servicios Sociales y Promoción Social en toda España?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha."
+        "text": "Actualmente hay 9 convocatorias abiertas dirigidas a autónomos y pymes del sector Servicios Sociales y Promoción Social en toda España. El listado se actualiza cada día con los datos de la BDNS."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Cada cuánto se publican nuevas ayudas de Servicios Sociales y Promoción Social en España?",
+      "name": "¿Cuál es la dotación total disponible?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas."
+        "text": "La dotación conjunta de los programas abiertos suma 1.640.500 €. Es el presupuesto total de cada convocatoria; la ayuda concreta por solicitante se fija en las bases oficiales de cada una."
       }
     },
     {
       "@type": "Question",
-      "name": "¿Dónde se presenta la solicitud?",
+      "name": "¿Cuál cierra antes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Es gratis recibir avisos de nuevas convocatorias?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Servicios Sociales y Promoción Social en España, y darte de baja cuando quieras."
+        "text": "La convocatoria con el plazo más próximo cierra en 8 días. Puedes activar una alerta por email para avisarte de nuevas ayudas de Servicios Sociales y Promoción Social en toda España antes de que cierren."
       }
     }
   ]
@@ -341,10 +344,15 @@
 
     <div class="stats"><div class="stat"><div class="n">17</div><div class="l">Convocatorias</div></div><div class="stat"><div class="n">9</div><div class="l">Abiertas ahora</div></div><div class="stat"><div class="n">3.083.500 €</div><div class="l">Importe acumulado</div></div></div>
 
-    <div class="cta-box">
+    <div class="cta-box" id="alertas">
       <h2>Recibe nuevas ayudas de Servicios Sociales y Promoción Social</h2>
       <p>Te avisamos por email en cuanto se publique una convocatoria nueva de este sector. Gratis y sin spam.</p>
       <a class="cta-btn" href="/?sector=Servicios%20Sociales%20y%20Promoci%C3%B3n%20Social#suscribirse">Avísame de nuevas ayudas →</a>
+    </div>
+
+    <div class="cat-intro">
+      <p>Ahora mismo hay <strong>9 subvenciones abiertas</strong> para autónomos y pymes del sector <strong>Servicios Sociales y Promoción Social</strong> en <strong>toda España</strong>, con una dotación conjunta de <strong>1.640.500 €</strong> repartida entre los distintos programas. La convocatoria más próxima a cerrar lo hace <strong>en 8 días</strong>.</p>
+      <p class="nota">La dotación es el total del programa, no la ayuda por solicitante. Datos de la BDNS, actualizados a diario.</p>
     </div>
 
     <h2 class="sec">Convocatorias abiertas</h2>
@@ -507,22 +515,20 @@
     </article>
 
     <h2 class="sec">Preguntas frecuentes</h2>
-    <details class="faq">
-      <summary>¿Quién puede solicitar subvenciones de Servicios Sociales y Promoción Social en España?</summary>
-      <p>Depende de cada convocatoria. Suelen poder solicitarlas pymes, autónomos y empresas, además de otras entidades, según las bases de cada ayuda. Este directorio prioriza convocatorias en concurrencia competitiva dirigidas a quienes desarrollan actividad económica. Cada convocatoria detalla sus beneficiarios concretos en las bases reguladoras, enlazadas en cada ficha.</p>
-    </details>
-    <details class="faq">
-      <summary>¿Cada cuánto se publican nuevas ayudas de Servicios Sociales y Promoción Social en España?</summary>
-      <p>Se publican a lo largo de todo el año, sin un calendario fijo. Ayudas Abiertas revisa la Base de Datos Nacional de Subvenciones (BDNS) a diario, por lo que esta página se actualiza automáticamente cada día con las convocatorias nuevas.</p>
-    </details>
-    <details class="faq">
-      <summary>¿Dónde se presenta la solicitud?</summary>
-      <p>Cada convocatoria se tramita ante el organismo que la convoca, normalmente a través de su sede electrónica. En cada ficha enlazamos a la convocatoria oficial en la BDNS y a sus bases reguladoras, donde se indica el procedimiento exacto.</p>
-    </details>
-    <details class="faq">
-      <summary>¿Es gratis recibir avisos de nuevas convocatorias?</summary>
-      <p>Sí. Ayudas Abiertas es un servicio gratuito. Puedes suscribirte con tu email para recibir un aviso cuando se publique una nueva subvención de Servicios Sociales y Promoción Social en España, y darte de baja cuando quieras.</p>
-    </details>
+    <div class="faqs">
+      <div class="faq-item">
+        <p class="q">¿Cuántas ayudas hay abiertas ahora para Servicios Sociales y Promoción Social en toda España?</p>
+        <p class="a">Actualmente hay 9 convocatorias abiertas dirigidas a autónomos y pymes del sector Servicios Sociales y Promoción Social en toda España. El listado se actualiza cada día con los datos de la BDNS.</p>
+      </div>
+      <div class="faq-item">
+        <p class="q">¿Cuál es la dotación total disponible?</p>
+        <p class="a">La dotación conjunta de los programas abiertos suma 1.640.500 €. Es el presupuesto total de cada convocatoria; la ayuda concreta por solicitante se fija en las bases oficiales de cada una.</p>
+      </div>
+      <div class="faq-item">
+        <p class="q">¿Cuál cierra antes?</p>
+        <p class="a">La convocatoria con el plazo más próximo cierra en 8 días. Puedes activar una alerta por email para avisarte de nuevas ayudas de Servicios Sociales y Promoción Social en toda España antes de que cierren.</p>
+      </div>
+    </div>
 
     <h2 class="sec">Otras categorías</h2>
     <p class="sec-note">Explora subvenciones relacionadas.</p>
