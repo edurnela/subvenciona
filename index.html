@@ -551,6 +551,26 @@ function daysLeft(c){
   return isNaN(d)?null:d;
 }
 
+// Slug de ficha — réplica EXACTA de slug_ficha/slugify de build_pages.py (validada
+// al 100% en el test de paridad). Debe seguir coincidiendo carácter por carácter para
+// que /ayudas/${slugFicha(c)}/ resuelva a una ficha real en disco.
+const COMB_RE = /[\u0300-\u036f]/g;   // marcas combinantes (acentos NFD); ñ→n
+function slugify(s){
+  s = String(s ?? "").toLowerCase().normalize("NFD").replace(COMB_RE, "");
+  s = s.replace(/[^a-z0-9 ]/g, " ");
+  return s.trim().replace(/\s+/g, "-");
+}
+function slugFicha(c){
+  let base = slugify(c.titulo || "");
+  if (base.length > 60){
+    base = base.slice(0, 60);
+    const i = base.lastIndexOf("-");
+    if (i !== -1) base = base.slice(0, i);
+  }
+  const codigo = String(c.codigo_bdns ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  return [base, codigo].filter(Boolean).join("-") || "ficha";
+}
+
 function buildFilters(){
   const regions=[...new Set(DATA.map(c=>c.region).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
   const sectors=[...new Set(DATA.map(c=>c.sector).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
@@ -754,7 +774,9 @@ function renderPage(){
       ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>dotación total del programa</small></div>`:''}
       <div class="card-foot">
         <span class="closes">${c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||'')}</span>
-        <a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver ficha →</a>
+        ${open
+          ? `<a class="go" href="/ayudas/${slugFicha(c)}/">Ver ficha →</a>`
+          : `<a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver oficial →</a>`}
       </div>
     </article>`;
   }).join('');

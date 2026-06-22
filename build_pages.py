@@ -357,7 +357,14 @@ def card(c):
     cls = "conv" if abierta else "conv cerrada"
     badge = ('<span class="badge abierta">Abierta</span>' if abierta
              else '<span class="badge cerrada">Cerrada</span>')
-    url = esc(c.get("url_oficial") or "#")
+    # Abierta → enlaza a la ficha interna (/ayudas/{slug}/, que existe). Cerrada → no
+    # tiene ficha generada, así que enlaza a la fuente oficial (evita un 404 interno).
+    if abierta:
+        titulo_link = f'<a href="/ayudas/{slug_ficha(c)}/">{esc(c.get("titulo") or "")}</a>'
+    else:
+        url = esc(c.get("url_oficial") or "#")
+        titulo_link = (f'<a href="{url}" rel="nofollow noopener" target="_blank">'
+                       f'{esc(c.get("titulo") or "")}</a>')
     meta = [f'<span><b>Órgano:</b> {esc(c.get("organo") or "—")}</span>']
     if c.get("importe"):
         meta.append(f'<span><b>Dotación:</b> {euros(c["importe"])}</span>')
@@ -372,7 +379,7 @@ def card(c):
         meta.append(extra)
     return f"""    <article class="{cls}">
       <div class="conv-top">
-        <h3><a href="{url}" rel="nofollow noopener" target="_blank">{esc(c.get("titulo") or "")}</a></h3>
+        <h3>{titulo_link}</h3>
         {badge}
       </div>
       <div class="conv-meta">
@@ -986,9 +993,9 @@ def main():
     for sec, cs in sorted(sectores_nac.items()):
         urls.append(render_sector_nacional(sec, cs, generados))
 
-    # FASE 1 — Fichas individuales por convocatoria ABIERTA del foco, en /ayudas/.
-    # Solo se generan las fichas; conectar los enlaces de las tarjetas y añadirlas al
-    # sitemap es una fase posterior. Regenera desde cero para no dejar fichas obsoletas.
+    # Fichas individuales por convocatoria ABIERTA del foco, en /ayudas/. Cada ficha
+    # generada se añade además al sitemap (mismo bucle → fichas y sitemap sincronizados).
+    # Regenera desde cero para no dejar fichas obsoletas.
     if AYUDAS_DIR.exists():
         shutil.rmtree(AYUDAS_DIR)
     fichas = sorted((c for c in convs if es_abierta(c)),
@@ -1000,7 +1007,8 @@ def main():
         if slug in slugs_vistos:        # unicidad garantizada por codigo_bdns; guard extra
             continue
         slugs_vistos.add(slug)
-        render_ficha(c)
+        ficha_url, _ = render_ficha(c)
+        urls.append(ficha_url)          # las fichas entran en el sitemap
         n_fichas += 1
 
     robots_existia = ROBOTS.exists()
