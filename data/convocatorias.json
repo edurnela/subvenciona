@@ -1,8 +1,28 @@
 {
-  "generado": "2026-06-22T18:31:57",
+  "generado": "2026-06-23T08:09:53",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 333,
+  "total": 334,
   "convocatorias": [
+    {
+      "id": 1116312,
+      "codigo_bdns": "914751",
+      "titulo": "Resolución de 22 de junio de 2026, por la que se aprueba la convocatoria de ayudas para servicios de asesoramiento y participación en regímenes de cedrtificación de explotaciones ganaderas de leche",
+      "organo": "Consejería de Medio Rural y Política Agraria",
+      "nivel_admin": "Autonomica",
+      "region": "Asturias",
+      "importe": 300000,
+      "fecha_inicio": "2026-06-22",
+      "fecha_fin": null,
+      "abierta": false,
+      "sector": "Agricultura, Pesca y Alimentación",
+      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "consejeria de medio rural y politica agraria|resolucion de 22 de junio de 2026 por la que se aprueba|",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/914751",
+      "bases_url": "https://sede.asturias.es/bopa/2025/06/06/2025-04641.pdf"
+    },
     {
       "id": 1116247,
       "codigo_bdns": "914686",
