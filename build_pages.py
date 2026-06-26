@@ -165,10 +165,15 @@ FICHA_CSS = """  .estado{display:inline-block;font-family:"Helvetica Neue",Arial
     font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
     color:var(--ok);background:#e3f0e8;padding:4px 11px;border-radius:20px;margin:0 0 14px}
   .estado.proxima{color:#8a6a1f;background:#f6ecd6}
+  .estado.cerrada{color:#8a5a4e;background:#efe8e6}
   .aviso-apertura{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;
     background:#f9f1dd;border:1px solid #e6d3a3;border-radius:6px;
     padding:13px 16px;margin:18px 0 0;color:#6f5413}
   .aviso-apertura b{color:#5a430f}
+  .aviso-cerrada{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;
+    background:#f1eae8;border:1px solid #ddc9c3;border-radius:6px;
+    padding:13px 16px;margin:18px 0 0;color:#6f4f47}
+  .aviso-cerrada b{color:#5a3a32}
   .org{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 6px}
   .vistazo{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 0}
   .vistazo .box{flex:1 1 180px;border:1px solid var(--line);border-radius:6px;
@@ -386,7 +391,6 @@ def card(c):
     estado = estado_convocatoria(c)
     abierta = estado == "abierta"
     proxima = estado == "proxima"
-    tiene_ficha = abierta or proxima            # abiertas y próximas generan ficha interna
     cls = "conv" if abierta else ("conv proxima" if proxima else "conv cerrada")
     if abierta:
         badge = '<span class="badge abierta">Abierta</span>'
@@ -396,14 +400,9 @@ def card(c):
                  else '<span class="badge proxima">Abre próximamente</span>')
     else:
         badge = '<span class="badge cerrada">Cerrada</span>'
-    # Con ficha (abierta/próxima) → enlaza a la ficha interna (/ayudas/{slug}/, que existe).
-    # Cerrada → no tiene ficha generada, así que enlaza a la fuente oficial (evita un 404 interno).
-    if tiene_ficha:
-        titulo_link = f'<a href="/ayudas/{slug_ficha(c)}/">{esc(c.get("titulo") or "")}</a>'
-    else:
-        url = esc(c.get("url_oficial") or "#")
-        titulo_link = (f'<a href="{url}" rel="nofollow noopener" target="_blank">'
-                       f'{esc(c.get("titulo") or "")}</a>')
+    # Los TRES estados generan ficha interna (mientras la convocatoria siga en el feed),
+    # así que toda tarjeta enlaza a /ayudas/{slug}/ (las cerradas llevan noindex en su ficha).
+    titulo_link = f'<a href="/ayudas/{slug_ficha(c)}/">{esc(c.get("titulo") or "")}</a>'
     meta = [f'<span><b>Órgano:</b> {esc(c.get("organo") or "—")}</span>']
     if c.get("importe"):
         meta.append(f'<span><b>Dotación:</b> {euros(c["importe"])}</span>')
@@ -861,8 +860,9 @@ def render_comunidad(comunidad, sectores, convs_por_sector, generados):
 
 
 def render_ficha(c):
-    """Genera /ayudas/{slug}/index.html para UNA convocatoria abierta del foco.
-    Documento autónomo (su propio <style>) con la estética del sitio."""
+    """Genera /ayudas/{slug}/index.html para UNA convocatoria del foco (abierta,
+    próxima o cerrada). Documento autónomo (su propio <style>) con la estética del
+    sitio. Las cerradas llevan noindex (accesibles por enlace, fuera del sitemap)."""
     slug = slug_ficha(c)
     url = f"{DOMAIN}/ayudas/{slug}/"
     titulo = c.get("titulo") or "Convocatoria"
@@ -872,13 +872,18 @@ def render_ficha(c):
     organo = c.get("organo") or "—"
     resumen = resumen_ficha(c)
     dr = dias_restantes(c)
-    est = estado_convocatoria(c)       # 'abierta' | 'proxima' (las cerradas no generan ficha)
+    est = estado_convocatoria(c)       # 'abierta' | 'proxima' | 'cerrada'
     es_proxima = est == "proxima"
+    es_cerrada = est == "cerrada"
 
-    # Badge de estado (las fichas son de abiertas o próximas)
+    # Badge de estado
     if es_proxima:
         ini_txt = fmt_fecha(c.get("fecha_inicio"))
         estado = (f"Abre el {ini_txt}" if ini_txt else "Abre próximamente")
+    elif es_cerrada:
+        fin_txt = fmt_fecha(c.get("fecha_fin"))
+        estado = (f"Cerrada · plazo finalizado el {fin_txt}" if fin_txt
+                  else "Cerrada · plazo finalizado")
     elif dr is None:
         estado = "Abierta · sin fecha de cierre publicada"
     elif dr <= 0:
@@ -895,7 +900,7 @@ def render_ficha(c):
         f'        <div class="box"><div class="k">{k}</div><div class="v">{v}</div></div>'
         for k, v in vistazo)
 
-    # Aviso destacado de apertura (solo próximas): el plazo aún no ha empezado.
+    # Aviso destacado: próximas (apertura futura) o cerradas (plazo finalizado).
     if es_proxima and c.get("fecha_inicio"):
         aviso_apertura = (f'    <p class="aviso-apertura">📅 El plazo de solicitud se abre el '
                           f'<b>{fmt_fecha(c["fecha_inicio"])}</b>. Aún no admite solicitudes; '
@@ -903,6 +908,13 @@ def render_ficha(c):
     elif es_proxima:
         aviso_apertura = ('    <p class="aviso-apertura">📅 El plazo de solicitud aún no ha '
                           'empezado. Prepara tu documentación con tiempo.</p>')
+    elif es_cerrada and c.get("fecha_fin"):
+        aviso_apertura = (f'    <p class="aviso-cerrada">🔒 El plazo de solicitud finalizó el '
+                          f'<b>{fmt_fecha(c["fecha_fin"])}</b>. Esta convocatoria ya no admite '
+                          f'solicitudes; se conserva como referencia y para consultar sus bases.</p>')
+    elif es_cerrada:
+        aviso_apertura = ('    <p class="aviso-cerrada">🔒 Esta convocatoria ya no admite '
+                          'solicitudes; se conserva como referencia y para consultar sus bases.</p>')
     else:
         aviso_apertura = ""
 
@@ -910,6 +922,8 @@ def render_ficha(c):
     cierre = fmt_fecha(c["fecha_fin"]) if c.get("fecha_fin") else "Sin fecha de cierre publicada"
     if es_proxima:
         dias_txt = "El plazo aún no ha empezado"
+    elif es_cerrada:
+        dias_txt = "Plazo finalizado"
     elif dr is None:
         dias_txt = "—"
     elif dr <= 0:
@@ -939,7 +953,7 @@ def render_ficha(c):
 
 <title>{esc(titulo_corto)} · Ayudas Abiertas</title>
 <meta name="description" content="{esc(resumen)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{'noindex, follow' if es_cerrada else 'index, follow'}">
 <link rel="canonical" href="{esc(url)}">
 
 <meta property="og:type" content="article">
@@ -972,7 +986,7 @@ def render_ficha(c):
     <p class="doc-kicker">{esc(sector)} · {esc(region)}</p>
     <h1>{esc(titulo)}</h1>
     <p class="org">{esc(organo)}</p>
-    <span class="estado{' proxima' if es_proxima else ''}">{esc(estado)}</span>
+    <span class="estado{' proxima' if es_proxima else (' cerrada' if es_cerrada else '')}">{esc(estado)}</span>
 {aviso_apertura}
     <div class="vistazo">
 {boxes}
@@ -1124,23 +1138,25 @@ def main():
     for sec, cs in sorted(sectores_nac.items()):
         urls.append(render_sector_nacional(sec, cs, generados))
 
-    # Fichas individuales por convocatoria ABIERTA o PRÓXIMA del foco, en /ayudas/. Cada
-    # ficha generada se añade además al sitemap (mismo bucle → fichas y sitemap sincronizados).
-    # Las cerradas no generan ficha (Fase 2). Regenera desde cero para no dejar fichas obsoletas.
+    # Fichas individuales por convocatoria del foco (LOS TRES estados), en /ayudas/.
+    # Regenera desde cero: solo se conservan fichas de convocatorias que siguen en el feed.
+    # Las CERRADAS se generan (evita el 404 de enlaces/emails antiguos) pero con noindex
+    # —dentro de render_ficha— y NO entran en el sitemap. Abiertas y próximas sí.
     if AYUDAS_DIR.exists():
         shutil.rmtree(AYUDAS_DIR)
-    fichas = sorted((c for c in convs if estado_convocatoria(c) in ("abierta", "proxima")),
-                    key=lambda c: c.get("importe") or 0, reverse=True)
+    fichas = sorted(convs, key=lambda c: c.get("importe") or 0, reverse=True)
     slugs_vistos = set()
-    n_fichas = 0
+    n_fichas = n_sitemap = 0
     for c in fichas:
         slug = slug_ficha(c)
         if slug in slugs_vistos:        # unicidad garantizada por codigo_bdns; guard extra
             continue
         slugs_vistos.add(slug)
         ficha_url, _ = render_ficha(c)
-        urls.append(ficha_url)          # las fichas entran en el sitemap
         n_fichas += 1
+        if estado_convocatoria(c) in ("abierta", "proxima"):
+            urls.append(ficha_url)      # solo abiertas/próximas entran en el sitemap (cerradas = noindex)
+            n_sitemap += 1
 
     robots_existia = ROBOTS.exists()
     escribe_sitemap(urls)
@@ -1150,7 +1166,7 @@ def main():
     print(f"[ok] {len(combos)} páginas comunidad×sector")
     print(f"[ok] {len(comunidades)} páginas madre de comunidad")
     print(f"[ok] {len(sectores_nac)} páginas de sector nacional")
-    print(f"[ok] {n_fichas} fichas en /ayudas/")
+    print(f"[ok] {n_fichas} fichas en /ayudas/ ({n_sitemap} indexables, {n_fichas - n_sitemap} cerradas noindex)")
     print(f"[ok] sitemap.xml con {len(urls)} URLs")
     print(f"[ok] robots.txt {'ya existía' if robots_existia else 'creado'}")
 

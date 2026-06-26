@@ -778,7 +778,7 @@ function renderPage(){
   let estPrev=null;
   grid.innerHTML=rows.map(c=>{
     const est=estadoConvocatoria(c), open=est==='abierta', proxima=est==='proxima';
-    const tieneFicha=open||proxima, cd=countdown(c), resumen=resumenClaro(c);
+    const cd=countdown(c), resumen=resumenClaro(c);   // los tres estados tienen ficha interna
     // Encabezado de sección al empezar la página o al cambiar de grupo (abierta→próxima→cerrada).
     let head='';
     if(est!==estPrev){
@@ -809,9 +809,7 @@ function renderPage(){
       ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>dotación total del programa</small></div>`:''}
       <div class="card-foot">
         <span class="closes">${proxima&&c.fecha_inicio?'Abre el '+fechaCorta(c.fecha_inicio):(c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||''))}</span>
-        ${tieneFicha
-          ? `<a class="go" href="/ayudas/${slugFicha(c)}/">Ver ficha →</a>`
-          : `<a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver oficial →</a>`}
+        <a class="go" href="/ayudas/${slugFicha(c)}/">Ver ficha →</a>
       </div>
     </article>`;
   }).join('');
