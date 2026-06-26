@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Subvenciones de Cultura en Canarias 2026 · Ayudas Abiertas</title>
+<meta name="description" content="Todas las subvenciones y ayudas de Cultura en Canarias en 2026. Convocatorias actualizadas a diario desde la BDNS. Recibe avisos por email cuando se publiquen nuevas.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://ayudasabiertas.com/subvenciones/canarias/cultura/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ayudas Abiertas">
+<meta property="og:title" content="Subvenciones de Cultura en Canarias 2026">
+<meta property="og:description" content="Convocatorias de Cultura en Canarias, actualizadas a diario desde la BDNS.">
+<meta property="og:url" content="https://ayudasabiertas.com/subvenciones/canarias/cultura/">
+
+<style>
+  :root{
+    --ink:#10221b; --paper:#f3efe4; --paper-2:#e9e3d2; --line:#cdc6b2;
+    --sello:#b4351f; --sello-soft:#d6643f; --gold:#9a7b18; --ok:#2f6b4f;
+    --muted:#5d6258; --card:#fbf9f2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  a{color:var(--sello)}
+
+  /* Cabecera de marca */
+  header.cat-head{border-bottom:2px solid var(--ink);background:var(--paper)}
+  .cat-head-inner{padding:22px 0 18px;display:flex;align-items:baseline;
+    justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .cat-brand{font-size:24px;font-weight:800;letter-spacing:-.01em;
+    text-decoration:none;color:var(--ink)}
+  .cat-brand .sello{color:var(--sello)}
+  .cat-nav{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px}
+  .cat-nav a{text-decoration:none;font-weight:600;margin-left:18px}
+
+  /* Migas de pan */
+  .breadcrumb{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);padding:16px 0 0}
+  .breadcrumb a{color:var(--muted);text-decoration:none}
+  .breadcrumb a:hover{text-decoration:underline}
+  .breadcrumb .sep{margin:0 7px;color:var(--line)}
+
+  main{padding:0 0 64px}
+  .doc-kicker{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--sello);
+    font-weight:700;margin:24px 0 8px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:0 0 14px;font-weight:800}
+  .intro{font-size:17px;color:var(--ink);max-width:62ch}
+  .intro b{color:var(--ink)}
+
+  /* Barra de stats */
+  .stats{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 8px;
+    padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat .n{font-size:26px;font-weight:800;color:var(--sello)}
+  .stat .l{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+  /* CTA de suscripción */
+  .cta-box{background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--sello);border-radius:3px;padding:20px 22px;margin:28px 0}
+  .cta-box h2{font-size:18px;margin:0 0 6px;font-weight:800}
+  .cta-box p{font-size:14.5px;color:var(--muted);margin:0 0 14px}
+  .cta-btn{display:inline-block;background:var(--sello);color:#fff;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:14px;
+    text-decoration:none;padding:11px 20px;border-radius:3px}
+  .cta-btn:hover{background:#9a2c18}
+
+  /* Secciones */
+  h2.sec{font-size:21px;margin:38px 0 4px;font-weight:800;
+    padding-top:20px;border-top:1px solid var(--line)}
+  .sec-note{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:0 0 16px}
+
+  /* Tarjeta de convocatoria */
+  .conv{border:1px solid var(--line);border-radius:6px;padding:16px 18px;
+    margin:0 0 14px;background:var(--card)}
+  .conv.cerrada{opacity:.66;background:transparent}
+  .conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .conv h3{font-size:16.5px;line-height:1.3;margin:0;font-weight:700}
+  .conv h3 a{color:var(--sello);text-decoration:none}
+  .conv h3 a:hover{text-decoration:underline}
+  .badge{flex-shrink:0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .badge.abierta{background:#e3f0e8;color:var(--ok)}
+  .badge.cerrada{background:#efe8e6;color:#8a5a4e}
+  .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
+  .conv-meta b{color:var(--ink);font-weight:600}
+  /* Destacado de "N abiertas" en los listados de sector (páginas madre) */
+  .conv-meta .abierta-n{background:#e3f0e8;color:var(--ok);font-weight:700;
+    padding:1px 9px;border-radius:20px}
+  /* Aclaración: el importe es la dotación total, no la ayuda por solicitante */
+  .nota-importe{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;
+    color:var(--muted);margin:18px 0 0;max-width:70ch;line-height:1.5}
+
+  /* FAQ */
+  details.faq{border-bottom:1px solid var(--line);padding:14px 0}
+  details.faq summary{font-size:16px;font-weight:700;cursor:pointer;
+    list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--sello);font-size:22px;
+    font-weight:400;margin-left:12px}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{font-size:15px;color:var(--muted);margin:12px 0 4px;max-width:64ch}
+
+  /* Enlaces internos a categorías relacionadas */
+  .related{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+  .related a{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    text-decoration:none;background:var(--paper-2);color:var(--ink);
+    padding:7px 13px;border-radius:20px;border:1px solid var(--line)}
+  .related a:hover{border-color:var(--sello);color:var(--sello)}
+
+  footer{border-top:2px solid var(--ink);background:var(--paper);
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--muted);margin-top:40px}
+  .footer-inner{padding:22px 0 30px}
+  .footer-inner a{color:var(--sello);text-decoration:none}
+
+  /* Intro dinámica + FAQs de categoría (texto derivado de los datos de la categoría) */
+  .cat-intro{background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px;margin:22px 0 8px}
+  .cat-intro p{margin:0;font-size:17px}
+  .cat-intro .nota{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;
+    color:var(--muted);margin:10px 0 0}
+  .faqs{margin:8px 0 0}
+  .faq-item{border-top:1px solid var(--line);padding:16px 0}
+  .faq-item .q{font-size:17px;font-weight:500;margin:0}
+  .faq-item .a{font-size:16px;line-height:1.6;color:var(--ink);margin:8px 0 0}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ayudas Abiertas",
+  "url": "https://ayudasabiertas.com/",
+  "description": "Subvenciones para autónomos y pymes en España"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://ayudasabiertas.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Canarias",
+      "item": "https://ayudasabiertas.com/subvenciones/canarias/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cultura",
+      "item": "https://ayudasabiertas.com/subvenciones/canarias/cultura/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Subvenciones de Cultura en Canarias 2026",
+  "description": "Convocatorias de subvenciones de Cultura abiertas en Canarias, actualizadas a diario desde la BDNS.",
+  "url": "https://ayudasabiertas.com/subvenciones/canarias/cultura/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Ayudas Abiertas",
+    "url": "https://ayudasabiertas.com/"
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Subvenciones destinadas  eventos audiovisuales de pequeño y mediano formato",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915626"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "SUBV PRODUCCION Y COPRODUCCION MINORITARIA DE LARGOMETRAJES Y SERIES DE TELEVISIÓN DE FICCIÓN, ANIMACIÓN O DOCUMENTALES",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915625"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "SUBVENCIONES DESTINADAS A LA CREACIÓN DE GUIONES DE OBRAS AUDIOVISUALES DE AUTORIA CANARIA",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915614"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Subvenciones  destinadas a proyectos culturales de gran formato",
+        "url": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915093"
+      }
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="cat-head">
+  <div class="wrap cat-head-inner">
+    <a href="/" class="cat-brand">Ayudas <span class="sello">Abiertas</span></a>
+    <nav class="cat-nav">
+      <a href="/">Directorio</a>
+      <a href="/#suscribirse">Recibir avisos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a><span class="sep">›</span>
+      <a href="/subvenciones/canarias/">Canarias</a><span class="sep">›</span>
+      <span>Cultura</span>
+    </nav>
+
+    <p class="doc-kicker">Cultura · Canarias</p>
+    <h1>Subvenciones de Cultura en Canarias</h1>
+
+    <p class="intro">Esta página reúne todas las <b>subvenciones y ayudas de Cultura en Canarias</b> recogidas en la Base de Datos Nacional de Subvenciones (BDNS). <b>Se actualiza a diario</b>: primero verás las convocatorias abiertas y, más abajo, las ya cerradas como referencia.</p>
+
+    <div class="stats"><div class="stat"><div class="n">4</div><div class="l">Convocatorias</div></div><div class="stat"><div class="n">0</div><div class="l">Abiertas ahora</div></div><div class="stat"><div class="n">4.615.000 €</div><div class="l">Importe acumulado</div></div></div>
+
+    <div class="cta-box" id="alertas">
+      <h2>Recibe nuevas ayudas de Cultura de Canarias</h2>
+      <p>Te avisamos por email en cuanto se publique una convocatoria nueva de esta categoría. Gratis y sin spam.</p>
+      <a class="cta-btn" href="/?ccaa=Canarias&amp;sector=Cultura#suscribirse">Avísame de nuevas ayudas →</a>
+    </div>
+
+    <div class="cat-intro"><p>Ahora mismo no hay subvenciones abiertas de Cultura en Canarias dirigidas a autónomos y pymes. Activa una <a href="#alertas">alerta</a> y te avisamos en cuanto se publique alguna.</p></div>
+
+    <h2 class="sec">Convocatorias abiertas</h2>
+    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>
+    <p class="sec-note" style="background:var(--card);border:1px dashed var(--line);border-radius:6px;padding:16px 18px">Ahora mismo no hay convocatorias de Cultura abiertas en Canarias. Suscríbete arriba y te avisamos en cuanto se publique una nueva.</p>
+    <h2 class="sec">Convocatorias cerradas</h2>
+    <p class="sec-note">Plazo finalizado. Se mantienen como referencia y para consultar las bases de cara a próximas ediciones.</p>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915625" rel="nofollow noopener" target="_blank">SUBV PRODUCCION Y COPRODUCCION MINORITARIA DE LARGOMETRAJES Y SERIES DE TELEVISIÓN DE FICCIÓN, ANIMACIÓN O DOCUMENTALES</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Universidades, Ciencia e Innovación y Cultura</span><span><b>Dotación:</b> 2.280.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915093" rel="nofollow noopener" target="_blank">Subvenciones  destinadas a proyectos culturales de gran formato</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Universidades, Ciencia e Innovación y Cultura</span><span><b>Dotación:</b> 2.060.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915626" rel="nofollow noopener" target="_blank">Subvenciones destinadas  eventos audiovisuales de pequeño y mediano formato</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Universidades, Ciencia e Innovación y Cultura</span><span><b>Dotación:</b> 150.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+    <article class="conv cerrada">
+      <div class="conv-top">
+        <h3><a href="https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/915614" rel="nofollow noopener" target="_blank">SUBVENCIONES DESTINADAS A LA CREACIÓN DE GUIONES DE OBRAS AUDIOVISUALES DE AUTORIA CANARIA</a></h3>
+        <span class="badge cerrada">Cerrada</span>
+      </div>
+      <div class="conv-meta">
+        <span><b>Órgano:</b> Consejería de Universidades, Ciencia e Innovación y Cultura</span><span><b>Dotación:</b> 125.000 €</span><span><b>Ámbito:</b> Autonomica</span>
+      </div>
+    </article>
+
+    <h2 class="sec">Otras categorías</h2>
+    <p class="sec-note">Explora subvenciones relacionadas.</p>
+    <div class="related">
+      <a href="/subvenciones/andalucia/cultura/">Cultura en Andalucía</a>
+      <a href="/subvenciones/cataluna/cultura/">Cultura en Cataluña</a>
+      <a href="/subvenciones/comunidad-valenciana/cultura/">Cultura en Comunidad Valenciana</a>
+      <a href="/subvenciones/canarias/agricultura-pesca-y-alimentacion/">Agricultura, Pesca y Alimentación en Canarias</a>
+      <a href="/subvenciones/canarias/">Todas las de Canarias</a>
+      <a href="/subvenciones/sector/cultura/">Cultura en toda España</a>
+    </div>
+
+    <p class="nota-importe">Los importes indican la dotación total de cada convocatoria, no la ayuda por solicitante (que depende de sus bases).</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>Ayudas Abiertas · Datos abiertos reutilizados de la BDNS (IGAE, Ministerio de Hacienda) ·
+      sitio independiente, España. <a href="/">Volver al directorio</a> ·
+      <a href="/privacidad.html">Privacidad</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
