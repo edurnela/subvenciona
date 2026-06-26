@@ -110,6 +110,13 @@
   .card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--ink);
     border-radius:3px;padding:0 18px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
   .card.is-open{border-top-color:var(--ok)}
+  .card.is-proxima{border-top-color:#c79a3a}
+  /* Encabezado de sección a todo el ancho de la rejilla (abiertas / próximas / cerradas) */
+  .grid-sec{grid-column:1/-1;margin:8px 0 2px}
+  .grid-sec:first-child{margin-top:0}
+  .grid-sec h2{font-size:21px;margin:0;color:var(--sello)}
+  .grid-sec p{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
+    color:var(--muted);margin:3px 0 0}
 
   /* ---- Countdown hero: lo más destacado de cada tarjeta ---- */
   .count-strip{display:flex;align-items:baseline;gap:8px;margin:0 -18px 2px;padding:11px 18px;
@@ -127,6 +134,7 @@
   .badge{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;letter-spacing:.08em;
     text-transform:uppercase;padding:4px 8px;border-radius:2px;white-space:nowrap}
   .badge.open{background:#e2efe7;color:var(--ok);border:1px solid #b9d8c7}
+  .badge.proxima{background:#f6ecd6;color:#8a6a1f;border:1px solid #e2cf9a}
   .badge.closed{background:#efe6e3;color:var(--sello);border:1px solid #e2c4bb}
   .org{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;letter-spacing:.04em;
     text-transform:uppercase;color:var(--muted)}
@@ -549,6 +557,14 @@ function daysLeft(c){
   const d=Math.ceil((new Date(String(c.fecha_fin).slice(0,10))-new Date(HOY))/864e5);
   return isNaN(d)?null:d;
 }
+// Tercer estado, réplica EXACTA de estado_convocatoria() de build_pages.py:
+// 'proxima' (apertura futura) | 'abierta' | 'cerrada'. Delega en isOpen() para el
+// corte abierta/cerrada, de modo que el conjunto de "abiertas" no cambia.
+function estadoConvocatoria(c){
+  const ini=c.fecha_inicio?String(c.fecha_inicio).slice(0,10):null;
+  if(ini && ini>HOY) return 'proxima';
+  return isOpen(c) ? 'abierta' : 'cerrada';
+}
 
 // Slug de ficha — réplica EXACTA de slug_ficha/slugify de build_pages.py (validada
 // al 100% en el test de paridad). Debe seguir coincidiendo carácter por carácter para
@@ -596,7 +612,10 @@ function apply(){
     return true;
   });
   rows = collapsaGrupos(rows);
+  const RANK={abierta:0, proxima:1, cerrada:2};   // orden de secciones en la home
   rows.sort((a,b)=>{
+    const ra=RANK[estadoConvocatoria(a)], rb=RANK[estadoConvocatoria(b)];
+    if(ra!==rb) return ra-rb;                      // primero abiertas, luego próximas, luego cerradas
     if(state.sort==='amount') return (b.importe||0)-(a.importe||0);
     if(state.sort==='recent') return String(b.codigo_bdns).localeCompare(String(a.codigo_bdns));
     const da=daysLeft(a), db=daysLeft(b);          // deadline: soonest first, nulls last
@@ -726,6 +745,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 function renderStats(generado){
   const rows=collapsaGrupos(DATA.filter(c=>isOpen(c) && (c.importe||0)>=state.minImporte));
   const total=rows.length;
+  const proximas=collapsaGrupos(DATA.filter(c=>estadoConvocatoria(c)==='proxima' && (c.importe||0)>=state.minImporte)).length;
   const cierran15=rows.filter(c=>{ const dl=daysLeft(c); return dl!=null && dl>=0 && dl<=15; }).length;
   const NO_CCAA=new Set(['Toda España','Varias comunidades']);
   const comunidades=new Set(rows.map(c=>c.region).filter(r=>r && !NO_CCAA.has(r))).size;
@@ -736,6 +756,7 @@ function renderStats(generado){
   const item=(n,l)=>`<div class="stat"><span class="stat-num">${n}</span><span class="stat-lbl">${esc(l)}</span></div>`;
   let html=`<div class="stat stat-hero"><span class="stat-num">${total}</span><span class="stat-lbl">convocatorias abiertas hoy</span></div>`;
   if(cierran15) html+=item(cierran15, cierran15===1?'cierra en 15 días':'cierran en 15 días');
+  if(proximas) html+=item(proximas, proximas===1?'abre próximamente':'abren próximamente');
   if(comunidades) html+=item(comunidades, comunidades===1?'comunidad cubierta':'comunidades cubiertas');
   for(const [s,n] of topSec){ if(n) html+=item(n, cap(s)); }
   document.getElementById('statsInner').innerHTML=html;
@@ -751,16 +772,31 @@ function renderPage(){
   if(state.page>pages) state.page=pages;                 // por seguridad
   const inicio=(state.page-1)*PER_PAGE;
   const rows=RESULTS.slice(inicio,inicio+PER_PAGE);      // solo la página actual
+  const SEC={abierta:{t:'Convocatorias abiertas',n:'Puedes presentar tu solicitud ahora mismo.'},
+             proxima:{t:'Abren próximamente',n:'El plazo aún no ha empezado. Te avisamos cuando se abra.'},
+             cerrada:{t:'Convocatorias cerradas',n:'Plazo finalizado. Se mantienen como referencia.'}};
+  let estPrev=null;
   grid.innerHTML=rows.map(c=>{
-    const open=isOpen(c), cd=countdown(c), resumen=resumenClaro(c);
-    return `<article class="card ${open?'is-open':''}">
+    const est=estadoConvocatoria(c), open=est==='abierta', proxima=est==='proxima';
+    const tieneFicha=open||proxima, cd=countdown(c), resumen=resumenClaro(c);
+    // Encabezado de sección al empezar la página o al cambiar de grupo (abierta→próxima→cerrada).
+    let head='';
+    if(est!==estPrev){
+      const s=SEC[est];
+      head=`<div class="grid-sec"><h2>${esc(s.t)}</h2><p>${esc(s.n)}</p></div>`;
+      estPrev=est;
+    }
+    const badge = open?'<span class="badge open">Abierta</span>'
+      : proxima?`<span class="badge proxima">${c.fecha_inicio?'Abre el '+fechaCorta(c.fecha_inicio):'Abre próximamente'}</span>`
+      : '<span class="badge closed">Cerrada</span>';
+    return head+`<article class="card ${open?'is-open':''} ${proxima?'is-proxima':''}">
       <div class="count-strip ${cd.cls}">
         <span class="num">${esc(cd.num)}</span>
         <span class="lbl">${esc(cd.lbl)}</span>
       </div>
       <div class="card-top">
         <span class="org">${esc(c.organo||'Administración pública')}</span>
-        <span class="badge ${open?'open':'closed'}">${open?'Abierta':'Cerrada'}</span>
+        ${badge}
       </div>
       <h3>${esc(c.titulo)}</h3>
       ${resumen?`<p class="resumen">${esc(resumen)}</p>`:''}
@@ -772,8 +808,8 @@ function renderPage(){
       </div>
       ${c.importe?`<div class="importe">${FMT.format(c.importe)} <small>dotación total del programa</small></div>`:''}
       <div class="card-foot">
-        <span class="closes">${c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||'')}</span>
-        ${open
+        <span class="closes">${proxima&&c.fecha_inicio?'Abre el '+fechaCorta(c.fecha_inicio):(c.fecha_fin&&open?'Cierra el '+fechaCorta(c.fecha_fin):'BDNS '+esc(c.codigo_bdns||''))}</span>
+        ${tieneFicha
           ? `<a class="go" href="/ayudas/${slugFicha(c)}/">Ver ficha →</a>`
           : `<a class="go" href="${c.url_oficial||'#'}" target="_blank" rel="noopener">Ver oficial →</a>`}
       </div>

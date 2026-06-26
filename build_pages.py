@@ -115,6 +115,7 @@ CSS = """  :root{
     font-weight:700;text-transform:uppercase;letter-spacing:.04em;
     padding:3px 9px;border-radius:20px;white-space:nowrap}
   .badge.abierta{background:#e3f0e8;color:var(--ok)}
+  .badge.proxima{background:#f6ecd6;color:#8a6a1f}
   .badge.cerrada{background:#efe8e6;color:#8a5a4e}
   .conv-meta{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;
     color:var(--muted);margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px}
@@ -163,6 +164,11 @@ CSS = """  :root{
 FICHA_CSS = """  .estado{display:inline-block;font-family:"Helvetica Neue",Arial,sans-serif;
     font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
     color:var(--ok);background:#e3f0e8;padding:4px 11px;border-radius:20px;margin:0 0 14px}
+  .estado.proxima{color:#8a6a1f;background:#f6ecd6}
+  .aviso-apertura{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;
+    background:#f9f1dd;border:1px solid #e6d3a3;border-radius:6px;
+    padding:13px 16px;margin:18px 0 0;color:#6f5413}
+  .aviso-apertura b{color:#5a430f}
   .org{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;color:var(--muted);margin:0 0 6px}
   .vistazo{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 0}
   .vistazo .box{flex:1 1 180px;border:1px solid var(--line);border-radius:6px;
@@ -239,6 +245,19 @@ def es_abierta(c):
     if fin:
         return fin >= hoy     # si hay fecha de cierre, manda ella
     return bool(c.get("abierta"))  # sin fecha_fin, nos fiamos del flag
+
+
+def estado_convocatoria(c):
+    """Tercer estado sobre es_abierta(): 'proxima' | 'abierta' | 'cerrada'.
+    - proxima: fecha_inicio futura (el plazo aún no ha empezado).
+    - abierta / cerrada: se delega EXACTAMENTE en es_abierta() para no cambiar el
+      conjunto de "abiertas" (una próxima ya daba es_abierta()==False; aquí solo
+      separamos esas no-abiertas en proxima vs cerrada). Réplica en JS: estadoConvocatoria()."""
+    hoy = date.today().isoformat()
+    ini = (str(c.get("fecha_inicio") or "")[:10]) or None
+    if ini and ini > hoy:
+        return "proxima"
+    return "abierta" if es_abierta(c) else "cerrada"
 
 
 # Token BDNS que identifica a autónomos y pymes. Una convocatoria es "del foco"
@@ -363,14 +382,23 @@ def faq_ld(qas):
 
 
 def card(c):
-    """Tarjeta de convocatoria (abierta o cerrada según c['abierta'])."""
-    abierta = es_abierta(c)
-    cls = "conv" if abierta else "conv cerrada"
-    badge = ('<span class="badge abierta">Abierta</span>' if abierta
-             else '<span class="badge cerrada">Cerrada</span>')
-    # Abierta → enlaza a la ficha interna (/ayudas/{slug}/, que existe). Cerrada → no
-    # tiene ficha generada, así que enlaza a la fuente oficial (evita un 404 interno).
+    """Tarjeta de convocatoria (abierta, próxima o cerrada según su estado)."""
+    estado = estado_convocatoria(c)
+    abierta = estado == "abierta"
+    proxima = estado == "proxima"
+    tiene_ficha = abierta or proxima            # abiertas y próximas generan ficha interna
+    cls = "conv" if abierta else ("conv proxima" if proxima else "conv cerrada")
     if abierta:
+        badge = '<span class="badge abierta">Abierta</span>'
+    elif proxima:
+        ini = fmt_fecha(c.get("fecha_inicio"))
+        badge = (f'<span class="badge proxima">Abre el {ini}</span>' if ini
+                 else '<span class="badge proxima">Abre próximamente</span>')
+    else:
+        badge = '<span class="badge cerrada">Cerrada</span>'
+    # Con ficha (abierta/próxima) → enlaza a la ficha interna (/ayudas/{slug}/, que existe).
+    # Cerrada → no tiene ficha generada, así que enlaza a la fuente oficial (evita un 404 interno).
+    if tiene_ficha:
         titulo_link = f'<a href="/ayudas/{slug_ficha(c)}/">{esc(c.get("titulo") or "")}</a>'
     else:
         url = esc(c.get("url_oficial") or "#")
@@ -379,7 +407,9 @@ def card(c):
     meta = [f'<span><b>Órgano:</b> {esc(c.get("organo") or "—")}</span>']
     if c.get("importe"):
         meta.append(f'<span><b>Dotación:</b> {euros(c["importe"])}</span>')
-    if abierta and c.get("fecha_fin"):
+    if proxima and c.get("fecha_inicio"):
+        meta.append(f'<span><b>Apertura:</b> {fmt_fecha(c["fecha_inicio"])}</span>')
+    elif abierta and c.get("fecha_fin"):
         meta.append(f'<span><b>Plazo:</b> hasta {fmt_fecha(c["fecha_fin"])}</span>')
     if c.get("nivel_admin"):
         meta.append(f'<span><b>Ámbito:</b> {esc(c["nivel_admin"])}</span>')
@@ -575,11 +605,11 @@ def intro_faqs(sector, ambito, abiertas):
 
 
 def secciones_convocatorias(convs, sector, ambito, empty_text):
-    """Bloque abiertas (protagonismo) + cerradas (relegadas)."""
-    abiertas = sorted([c for c in convs if es_abierta(c)],
-                      key=lambda c: c.get("importe") or 0, reverse=True)
-    cerradas = sorted([c for c in convs if not es_abierta(c)],
-                      key=lambda c: c.get("importe") or 0, reverse=True)
+    """Bloque abiertas (protagonismo) + próximas + cerradas (relegadas)."""
+    por_importe = lambda cs: sorted(cs, key=lambda c: c.get("importe") or 0, reverse=True)
+    abiertas = por_importe([c for c in convs if estado_convocatoria(c) == "abierta"])
+    proximas = por_importe([c for c in convs if estado_convocatoria(c) == "proxima"])
+    cerradas = por_importe([c for c in convs if estado_convocatoria(c) == "cerrada"])
     out = ['    <h2 class="sec">Convocatorias abiertas</h2>']
     if abiertas:
         out.append('    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>')
@@ -588,6 +618,11 @@ def secciones_convocatorias(convs, sector, ambito, empty_text):
         out.append('    <p class="sec-note">Puedes presentar tu solicitud ahora mismo.</p>')
         out.append('    <p class="sec-note" style="background:var(--card);border:1px dashed var(--line);'
                    'border-radius:6px;padding:16px 18px">' + esc(empty_text) + '</p>')
+    if proximas:
+        out.append('    <h2 class="sec">Abren próximamente</h2>')
+        out.append('    <p class="sec-note">El plazo aún no ha empezado. Prepara tu solicitud con '
+                   'tiempo: te avisamos cuando se abra.</p>')
+        out += [card(c) for c in proximas]
     if cerradas:
         out.append('    <h2 class="sec">Convocatorias cerradas</h2>')
         out.append('    <p class="sec-note">Plazo finalizado. Se mantienen como referencia y '
@@ -837,9 +872,14 @@ def render_ficha(c):
     organo = c.get("organo") or "—"
     resumen = resumen_ficha(c)
     dr = dias_restantes(c)
+    est = estado_convocatoria(c)       # 'abierta' | 'proxima' (las cerradas no generan ficha)
+    es_proxima = est == "proxima"
 
-    # Badge de estado (todas las fichas son abiertas)
-    if dr is None:
+    # Badge de estado (las fichas son de abiertas o próximas)
+    if es_proxima:
+        ini_txt = fmt_fecha(c.get("fecha_inicio"))
+        estado = (f"Abre el {ini_txt}" if ini_txt else "Abre próximamente")
+    elif dr is None:
         estado = "Abierta · sin fecha de cierre publicada"
     elif dr <= 0:
         estado = f"Abierta · cierra hoy ({fmt_fecha(c.get('fecha_fin'))})"
@@ -855,9 +895,22 @@ def render_ficha(c):
         f'        <div class="box"><div class="k">{k}</div><div class="v">{v}</div></div>'
         for k, v in vistazo)
 
+    # Aviso destacado de apertura (solo próximas): el plazo aún no ha empezado.
+    if es_proxima and c.get("fecha_inicio"):
+        aviso_apertura = (f'    <p class="aviso-apertura">📅 El plazo de solicitud se abre el '
+                          f'<b>{fmt_fecha(c["fecha_inicio"])}</b>. Aún no admite solicitudes; '
+                          f'prepara tu documentación con tiempo.</p>')
+    elif es_proxima:
+        aviso_apertura = ('    <p class="aviso-apertura">📅 El plazo de solicitud aún no ha '
+                          'empezado. Prepara tu documentación con tiempo.</p>')
+    else:
+        aviso_apertura = ""
+
     # Plazos
     cierre = fmt_fecha(c["fecha_fin"]) if c.get("fecha_fin") else "Sin fecha de cierre publicada"
-    if dr is None:
+    if es_proxima:
+        dias_txt = "El plazo aún no ha empezado"
+    elif dr is None:
         dias_txt = "—"
     elif dr <= 0:
         dias_txt = "Cierra hoy"
@@ -919,8 +972,8 @@ def render_ficha(c):
     <p class="doc-kicker">{esc(sector)} · {esc(region)}</p>
     <h1>{esc(titulo)}</h1>
     <p class="org">{esc(organo)}</p>
-    <span class="estado">{esc(estado)}</span>
-
+    <span class="estado{' proxima' if es_proxima else ''}">{esc(estado)}</span>
+{aviso_apertura}
     <div class="vistazo">
 {boxes}
     </div>
@@ -1071,12 +1124,12 @@ def main():
     for sec, cs in sorted(sectores_nac.items()):
         urls.append(render_sector_nacional(sec, cs, generados))
 
-    # Fichas individuales por convocatoria ABIERTA del foco, en /ayudas/. Cada ficha
-    # generada se añade además al sitemap (mismo bucle → fichas y sitemap sincronizados).
-    # Regenera desde cero para no dejar fichas obsoletas.
+    # Fichas individuales por convocatoria ABIERTA o PRÓXIMA del foco, en /ayudas/. Cada
+    # ficha generada se añade además al sitemap (mismo bucle → fichas y sitemap sincronizados).
+    # Las cerradas no generan ficha (Fase 2). Regenera desde cero para no dejar fichas obsoletas.
     if AYUDAS_DIR.exists():
         shutil.rmtree(AYUDAS_DIR)
-    fichas = sorted((c for c in convs if es_abierta(c)),
+    fichas = sorted((c for c in convs if estado_convocatoria(c) in ("abierta", "proxima")),
                     key=lambda c: c.get("importe") or 0, reverse=True)
     slugs_vistos = set()
     n_fichas = 0
