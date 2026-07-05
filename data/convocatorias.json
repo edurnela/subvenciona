@@ -1,7 +1,7 @@
 {
-  "generado": "2026-07-04T07:56:55",
+  "generado": "2026-07-05T08:07:12",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 374,
+  "total": 373,
   "convocatorias": [
     {
       "id": 1118808,
@@ -7484,26 +7484,6 @@
       "grupo": "fomento de san sebastian s a donostia sustapena|programa ekinn talent 2026 programa de ayudas para impu|",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911057",
       "bases_url": "www.fomentosansebastian.eus"
-    },
-    {
-      "id": 1112573,
-      "codigo_bdns": "911012",
-      "titulo": "CONVOCATORIA AYUDAS A LAS AGRUPACIONES DE DEFENSA SANITARIA GANADERAS RECONOCIDAS EN CANTABRIA PARA EL AÑO 2026",
-      "organo": "Consejería de Desarrollo Rural, Ganadería, Pesca y Alimentación",
-      "nivel_admin": "Autonomica",
-      "region": "Cantabria",
-      "importe": 180000,
-      "fecha_inicio": "2026-06-05",
-      "fecha_fin": null,
-      "abierta": false,
-      "sector": "Agricultura, Pesca y Alimentación",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "consejeria de desarrollo rural ganaderia pesca y alimentacion|convocatoria ayudas a las agrupaciones de defensa sanit|",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/911012",
-      "bases_url": "https://www.boe.es/eli/es/rd/2015/02/13/81"
     }
   ]
 }
