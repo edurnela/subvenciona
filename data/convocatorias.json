@@ -1,8 +1,28 @@
 {
-  "generado": "2026-07-18T07:10:55",
+  "generado": "2026-07-19T07:37:26",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 367,
+  "total": 368,
   "convocatorias": [
+    {
+      "id": 1121688,
+      "codigo_bdns": "920127",
+      "titulo": "Convocatoria de subvenciones para mejoras en eficiencia energética y la innovación en materia de procesos y de organización en el ámbito turístico de las Illes Balears",
+      "organo": "Dirección General de Turismo y Deportes",
+      "nivel_admin": "Autonomica",
+      "region": "Islas Baleares",
+      "importe": 5000000,
+      "fecha_inicio": "2026-06-08",
+      "fecha_fin": null,
+      "abierta": true,
+      "sector": "Comercio, Turismo y Pymes",
+      "beneficiarios": "Gran Empresa, Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "direccion general de turismo y deportes|convocatoria de subvenciones para mejoras en eficiencia|",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/920127",
+      "bases_url": "https://www.caib.es/eboibfront/es/2026/12277/715618/resolucion-del-consejero-de-turismo-cultura-y-depo"
+    },
     {
       "id": 1121665,
       "codigo_bdns": "920104",
