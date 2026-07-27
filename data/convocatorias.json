@@ -1,8 +1,28 @@
 {
-  "generado": "2026-07-26T07:45:54",
+  "generado": "2026-07-27T08:42:19",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 359,
+  "total": 360,
   "convocatorias": [
+    {
+      "id": 1123172,
+      "codigo_bdns": "921611",
+      "titulo": "Convocatoria Pyme Global 2026 Misión comercial a México, del 9 al 13 de noviembre, para empresas de la provincia de Santa Cruz de Tenerife",
+      "organo": "Cámara de Comercio de Tenerife",
+      "nivel_admin": "Otros",
+      "region": "Canarias",
+      "importe": 20998.75,
+      "fecha_inicio": "2026-07-26",
+      "fecha_fin": "2026-09-30",
+      "abierta": false,
+      "sector": "Otras actuaciones de carácter económico",
+      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "camara de comercio de tenerife|convocatoria pyme global 2026 mision comercial a mexico|2026-09-30",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/921611",
+      "bases_url": "www.camaratenerife.com"
+    },
     {
       "id": 1123103,
       "codigo_bdns": "921542",
