@@ -1,8 +1,28 @@
 {
-  "generado": "2026-08-02T07:41:51",
+  "generado": "2026-08-03T08:39:55",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 359,
+  "total": 360,
   "convocatorias": [
+    {
+      "id": 1124660,
+      "codigo_bdns": "923099",
+      "titulo": "Acuerdo de 2 de agosto de 2026 de la Alcaldía del Ayuntamiento de Rianxo, por el que se convocan ayudas a la implantación de nuevas empresas y comercios en el término municipal del Ayuntamiento de Rianxo",
+      "organo": "Concello de Rianxo",
+      "nivel_admin": "Local",
+      "region": "Galicia",
+      "importe": 10000,
+      "fecha_inicio": "2026-08-02",
+      "fecha_fin": "2026-11-30",
+      "abierta": false,
+      "sector": "Fomento del Empleo",
+      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "concello de rianxo|acuerdo de 2 de agosto de 2026 de la alcaldia del ayunt|2026-11-30",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/923099",
+      "bases_url": "Pendiente de publicación"
+    },
     {
       "id": 1124635,
       "codigo_bdns": "923074",
