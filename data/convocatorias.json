@@ -1,7 +1,7 @@
 {
-  "generado": "2026-08-22T05:38:28",
+  "generado": "2026-08-23T05:39:29",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 305,
+  "total": 304,
   "convocatorias": [
     {
       "id": 1127499,
@@ -6100,26 +6100,6 @@
       "grupo": "consejeria economia hacienda y empleo|financiacion estatal emap ay 1 prosp interm inserc merc|2026-08-03",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/919787",
       "bases_url": "https://www.bocm.es/boletin/CM_Orden_BOCM/2025/06/27/BOCM-20250627-20.PDF"
-    },
-    {
-      "id": 1121332,
-      "codigo_bdns": "919771",
-      "titulo": "GC CONVOCATORIA PARA LA CAMPAÑA DE ENTREGA DE PLANTONES DE VIÑA A TITULARES DE EXPLOTACIONES VITICOLAS DE LA ISLA DE GRAN CANARIA PARA EL AÑO 2026.",
-      "organo": "Cabildo Insular de Gran Canaria",
-      "nivel_admin": "Local",
-      "region": "Canarias",
-      "importe": 16830,
-      "fecha_inicio": "2026-07-21",
-      "fecha_fin": "2026-08-03",
-      "abierta": false,
-      "sector": "Agricultura, Pesca y Alimentación",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "cabildo insular de gran canaria|gc convocatoria para la campana de entrega de plantones|2026-08-03",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/919771",
-      "bases_url": "https://cabildogc.grancanaria.com/documents/10180/11297340/Ordenanza+General+de+Subvenciones+del+Cabildo+de+Gran+Canaria/33077d88-3822-4049-bca7-af8199d49ef4"
     }
   ]
 }
