@@ -1,7 +1,7 @@
 {
-  "generado": "2026-08-28T17:20:50",
+  "generado": "2026-08-29T11:39:38",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 305,
+  "total": 304,
   "convocatorias": [
     {
       "id": 1128508,
@@ -6096,26 +6096,6 @@
       "grupo": "ayuntamiento de benalmadena|premio mujer empresaria 2026|",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/920789",
       "bases_url": "https://www.benalmadena.es/contenido_transparencia.php?m=benalmadena-transparencia&s=subvenciones"
-    },
-    {
-      "id": 1122326,
-      "codigo_bdns": "920765",
-      "titulo": "Ayudas destinadas a apoyar la organización de eventos de estética y peluquería en la Comunitat Valenciana",
-      "organo": "Subsecretaría - Conselleria de Innovación, Industria, Comercio y Turismo",
-      "nivel_admin": "Autonomica",
-      "region": "Comunidad Valenciana",
-      "importe": 95000,
-      "fecha_inicio": "2026-10-01",
-      "fecha_fin": "2026-10-26",
-      "abierta": false,
-      "sector": "Comercio, Turismo y Pymes",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "subsecretaria conselleria de innovacion industria comercio y turismo|ayudas destinadas a apoyar la organizacion de eventos d|2026-10-26",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/920765",
-      "bases_url": "https://dogv.gva.es/es/inici/"
     }
   ]
 }
