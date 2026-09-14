@@ -1,7 +1,7 @@
 {
-  "generado": "2026-09-13T10:12:09",
+  "generado": "2026-09-14T10:31:48",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 309,
+  "total": 308,
   "convocatorias": [
     {
       "id": 1130645,
@@ -6183,26 +6183,6 @@
       "grupo": "ayuntamiento de mogan|subvenciones en concurrencia competitiva con destino a |",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/922869",
       "bases_url": "http://www.boplasplamas.net/nbop2/index.php"
-    },
-    {
-      "id": 1124384,
-      "codigo_bdns": "922823",
-      "titulo": "Ayudas a la conservación de los recursos genéticos agrícolas dirigidas a entidades de conservación, en el marco del Plan estratégico de la PAC 2023-2027 correspondientes a 2026",
-      "organo": "Departament D'agricultura, Ramaderia, Pesca I Alimentació",
-      "nivel_admin": "Autonomica",
-      "region": "Cataluña",
-      "importe": 300000,
-      "fecha_inicio": "2026-08-25",
-      "fecha_fin": null,
-      "abierta": false,
-      "sector": "Agricultura, Pesca y Alimentación",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "departament d agricultura ramaderia pesca i alimentacio|ayudas a la conservacion de los recursos geneticos agri|",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/922823",
-      "bases_url": "https://dogc.gencat.cat/es/document-del-dogc/index.html?documentId=988614"
     }
   ]
 }
