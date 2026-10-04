@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-03T10:24:13",
+  "generado": "2026-10-04T11:06:26",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
   "total": 278,
   "convocatorias": [
@@ -2055,7 +2055,7 @@
       "organo": "Dirección General de Conciliación y de Igualdad en el Ámbito Laboral",
       "nivel_admin": "Autonomica",
       "region": "Islas Baleares",
-      "importe": 420000,
+      "importe": 329141.21,
       "fecha_inicio": "2026-04-15",
       "fecha_fin": null,
       "abierta": false,
