@@ -1,7 +1,7 @@
 {
-  "generado": "2026-10-10T11:08:50",
+  "generado": "2026-10-11T11:25:48",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 274,
+  "total": 273,
   "convocatorias": [
     {
       "id": 1136281,
@@ -5474,26 +5474,6 @@
       "grupo": "departament d agricultura ramaderia pesca i alimentacio|ayudas a la mejora de los procesos de transformacion y |",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/928529",
       "bases_url": "https://dogc.gencat.cat/es/document-del-dogc/index.html?documentId=965426"
-    },
-    {
-      "id": 1130073,
-      "codigo_bdns": "928512",
-      "titulo": "Subvenciones de fomento de la Economía Social. Programa 3º Inversiones en Economía Social.",
-      "organo": "Consejería de Empresa, Empleo y Economía Social",
-      "nivel_admin": "Autonomica",
-      "region": "Murcia",
-      "importe": 1610000,
-      "fecha_inicio": "2026-09-09",
-      "fecha_fin": "2026-10-13",
-      "abierta": false,
-      "sector": "Fomento del Empleo",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "consejeria de empresa empleo y economia social|subvenciones de fomento de la economia social|2026-10-13",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/928512",
-      "bases_url": "https://www.borm.es/#/home/anuncio/14-06-2025/2797"
     }
   ]
 }
