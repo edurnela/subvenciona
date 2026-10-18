@@ -1,8 +1,28 @@
 {
-  "generado": "2026-10-17T09:12:22",
+  "generado": "2026-10-18T09:31:21",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 286,
+  "total": 287,
   "convocatorias": [
+    {
+      "id": 1137552,
+      "codigo_bdns": "935991",
+      "titulo": "AYUDAS DIRIGIDAS A INVERSIONES EN COMERCIO Y HOSTELERÍA EN EL MUNICIPIO DE CARIÑENA. ANUALIDAD 2026.",
+      "organo": "Ayuntamiento de Cariñena",
+      "nivel_admin": "Local",
+      "region": "Aragón",
+      "importe": 6000,
+      "fecha_inicio": "2026-10-17",
+      "fecha_fin": "2026-12-09",
+      "abierta": false,
+      "sector": "Comercio, Turismo y Pymes",
+      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "ayuntamiento de carinena|ayudas dirigidas a inversiones en comercio y hosteleria|2026-12-09",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935991",
+      "bases_url": "https://carinena.sedelectronica.es/transparency"
+    },
     {
       "id": 1137546,
       "codigo_bdns": "935985",
