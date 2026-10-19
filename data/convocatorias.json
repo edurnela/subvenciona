@@ -1,8 +1,28 @@
 {
-  "generado": "2026-10-18T09:31:21",
+  "generado": "2026-10-19T10:43:15",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
   "total": 287,
   "convocatorias": [
+    {
+      "id": 1137556,
+      "codigo_bdns": "935995",
+      "titulo": "Subvenciones municipales para la ayuda de fomento del empleo destinada a empresas de Ulldecona que contraten personas desempleadas y a nuevos autónomos empadronados en Ulldecona, anualidad 2026.",
+      "organo": "Ayuntamiento de Ulldecona",
+      "nivel_admin": "Local",
+      "region": "Cataluña",
+      "importe": 15000,
+      "fecha_inicio": "2026-10-18",
+      "fecha_fin": "2026-12-31",
+      "abierta": false,
+      "sector": "Fomento del Empleo",
+      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "ayuntamiento de ulldecona|subvenciones municipales para la ayuda de fomento del e|2026-12-31",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935995",
+      "bases_url": "https://www.diputaciodetarragona.cat/ebop/index.php?op=dwn&tipus=i&data=20190529&anyp=2019&num=04796&v=i"
+    },
     {
       "id": 1137552,
       "codigo_bdns": "935991",
@@ -5735,26 +5755,6 @@
       "grupo": "diputacion provincial de valladolid|acuerdo de la junta de gobierno local n 63 26 de 24 de |2026-09-30",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/929868",
       "bases_url": "https://www.diputaciondevalladolid.es/documents/10181/1090769/ORDENANZA+GENERAL+DE+SUBVENCIONES/d5d6fb94-fd7a-444b-bb18-6c50ffec90e0"
-    },
-    {
-      "id": 1131341,
-      "codigo_bdns": "929780",
-      "titulo": "Convocatoria para el año 2027, de las ayudas a la promoción de productos alimentarios de Cantabria - PYMES",
-      "organo": "Consejería de Desarrollo Rural, Ganadería, Pesca y Alimentación",
-      "nivel_admin": "Autonomica",
-      "region": "Cantabria",
-      "importe": 75000,
-      "fecha_inicio": "2026-09-16",
-      "fecha_fin": "2027-02-12",
-      "abierta": false,
-      "sector": "Agricultura, Pesca y Alimentación",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "consejeria de desarrollo rural ganaderia pesca y alimentacion|convocatoria para el ano 2027 de las ayudas a la promoc|2027-02-12",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/929780",
-      "bases_url": "https://boc.cantabria.es/boces/verAnuncioAction.do?idAnuBlob=388846"
     }
   ]
 }
