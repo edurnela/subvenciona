@@ -1,7 +1,7 @@
 {
-  "generado": "2026-11-08T11:55:07",
+  "generado": "2026-11-09T13:49:50",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 282,
+  "total": 280,
   "convocatorias": [
     {
       "id": 1142138,
@@ -5608,46 +5608,6 @@
       "grupo": "ayuntamiento de bigastro|aprobacion bases reguladoras de la concesion de bonos c|2026-12-31",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/934433",
       "bases_url": "www.bigastro.es"
-    },
-    {
-      "id": 1135986,
-      "codigo_bdns": "934425",
-      "titulo": "Resolución del 08 de octubre de 2026 por la que se convoca para 2026 la concesión de subvenciones del “Programa ICEX Next de iniciación y consolidación de la exportación” de ICEX España Exportación e Inversiones , E.P.E.",
-      "organo": "Icex España Exportación e Inversiones, Ep E.",
-      "nivel_admin": "Estado",
-      "region": "Toda España",
-      "importe": 3600000,
-      "fecha_inicio": "2026-10-08",
-      "fecha_fin": "2026-10-30",
-      "abierta": false,
-      "sector": "Comercio, Turismo y Pymes",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "icex espana exportacion e inversiones ep e|resolucion del 08 de octubre de 2026 por la que se conv|2026-10-30",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/934425",
-      "bases_url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2019-15504"
-    },
-    {
-      "id": 1135984,
-      "codigo_bdns": "934423",
-      "titulo": "Acuerdo por el cual se aprueban las Bases de la convocatoria de ayudas para el desarrollo rural de la isla de Menorca por el periodo\n2023-2027, vinculadas a proyectos relacionados con los ámbitos agrario y/o ambiental y enmarcados en la EDLP (2ª CONV)",
-      "organo": "Fondo de Garantía Agraria y Pesquera de las Islas Baleares (fogaiba)",
-      "nivel_admin": "Autonomica",
-      "region": "Islas Baleares",
-      "importe": 3,
-      "fecha_inicio": "2026-10-08",
-      "fecha_fin": null,
-      "abierta": false,
-      "sector": "Agricultura, Pesca y Alimentación",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "fondo de garantia agraria y pesquera de las islas baleares fogaiba|acuerdo por el cual se aprueban las bases de la convoca|",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/934423",
-      "bases_url": "https://www.caib.es/eboibfront/eli/esib/ o/2023/04/05/10/dof/spa/html"
     }
   ]
 }
