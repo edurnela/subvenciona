@@ -1,7 +1,7 @@
 {
-  "generado": "2026-11-14T12:07:19",
+  "generado": "2026-11-15T12:42:31",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 276,
+  "total": 274,
   "convocatorias": [
     {
       "id": 1143695,
@@ -5487,46 +5487,6 @@
       "grupo": "ayuntamiento de carinena|ayudas dirigidas a inversiones en comercio y hosteleria|2026-12-09",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935991",
       "bases_url": "https://carinena.sedelectronica.es/transparency"
-    },
-    {
-      "id": 1137546,
-      "codigo_bdns": "935985",
-      "titulo": "Visita Profesional a la feria Food Ingredients Frankfurt 2026",
-      "organo": "Cámara de Comercio de Cáceres",
-      "nivel_admin": "Otros",
-      "region": "Extremadura",
-      "importe": 12370.76,
-      "fecha_inicio": "2026-10-23",
-      "fecha_fin": "2026-11-06",
-      "abierta": false,
-      "sector": "Otras actuaciones de carácter económico",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "camara de comercio de caceres|visita profesional a la feria food ingredients frankfur|2026-11-06",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935985",
-      "bases_url": "https://camaracaceres.com/"
-    },
-    {
-      "id": 1137540,
-      "codigo_bdns": "935979",
-      "titulo": "Visita profesional a la feria FOOD ÁFRICA 2026 en El Cairo (Egipto)",
-      "organo": "Cámara de Comercio de Cáceres",
-      "nivel_admin": "Otros",
-      "region": "Extremadura",
-      "importe": 22883,
-      "fecha_inicio": "2026-10-23",
-      "fecha_fin": "2026-11-20",
-      "abierta": false,
-      "sector": "Otras actuaciones de carácter económico",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "camara de comercio de caceres|visita profesional a la feria food africa 2026 en el ca|2026-11-20",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935979",
-      "bases_url": "https://camaracaceres.com/"
     }
   ]
 }
