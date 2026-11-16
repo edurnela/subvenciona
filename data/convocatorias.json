@@ -1,7 +1,7 @@
 {
-  "generado": "2026-11-15T12:42:31",
+  "generado": "2026-11-16T13:33:42",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 274,
+  "total": 272,
   "convocatorias": [
     {
       "id": 1143695,
@@ -5447,46 +5447,6 @@
       "grupo": "ayuntamiento de barcelona|convocatoria 2026 del|2026-03-31",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/936010",
       "bases_url": "http://bop.diba.cat/anuncio/3739130/aprovacio-de-la-modificacio-de-les-bases-del-programa-de-subvencions-per-a-l-enfortiment-de-l-economia-social-i-solidaria-i-per-a-la-intercooperacio-en-l-estrategia"
-    },
-    {
-      "id": 1137556,
-      "codigo_bdns": "935995",
-      "titulo": "Subvenciones municipales para la ayuda de fomento del empleo destinada a empresas de Ulldecona que contraten personas desempleadas y a nuevos autónomos empadronados en Ulldecona, anualidad 2026.",
-      "organo": "Ayuntamiento de Ulldecona",
-      "nivel_admin": "Local",
-      "region": "Cataluña",
-      "importe": 15000,
-      "fecha_inicio": "2026-10-18",
-      "fecha_fin": "2026-12-31",
-      "abierta": false,
-      "sector": "Fomento del Empleo",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "ayuntamiento de ulldecona|subvenciones municipales para la ayuda de fomento del e|2026-12-31",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935995",
-      "bases_url": "https://www.diputaciodetarragona.cat/ebop/index.php?op=dwn&tipus=i&data=20190529&anyp=2019&num=04796&v=i"
-    },
-    {
-      "id": 1137552,
-      "codigo_bdns": "935991",
-      "titulo": "AYUDAS DIRIGIDAS A INVERSIONES EN COMERCIO Y HOSTELERÍA EN EL MUNICIPIO DE CARIÑENA. ANUALIDAD 2026.",
-      "organo": "Ayuntamiento de Cariñena",
-      "nivel_admin": "Local",
-      "region": "Aragón",
-      "importe": 6000,
-      "fecha_inicio": "2026-10-17",
-      "fecha_fin": "2026-12-09",
-      "abierta": false,
-      "sector": "Comercio, Turismo y Pymes",
-      "beneficiarios": "Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "ayuntamiento de carinena|ayudas dirigidas a inversiones en comercio y hosteleria|2026-12-09",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/935991",
-      "bases_url": "https://carinena.sedelectronica.es/transparency"
     }
   ]
 }
