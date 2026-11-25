@@ -1,8 +1,48 @@
 {
-  "generado": "2026-11-24T15:44:17",
+  "generado": "2026-11-25T15:29:25",
   "fuente": "BDNS — Base de Datos Nacional de Subvenciones (IGAE, Ministerio de Hacienda)",
-  "total": 281,
+  "total": 282,
   "convocatorias": [
+    {
+      "id": 1146098,
+      "codigo_bdns": "944537",
+      "titulo": "Convocatoria para la financiación de conferencias en Másteres Universitarios Oficiales de la Universidad de Castilla-La Mancha durante el año 2027",
+      "organo": "Universidad de Castilla-la Mancha",
+      "nivel_admin": "Otros",
+      "region": "Castilla-La Mancha",
+      "importe": 25000,
+      "fecha_inicio": "2026-11-13",
+      "fecha_fin": "2027-05-20",
+      "abierta": false,
+      "sector": "Educación",
+      "beneficiarios": "Personas Físicas Que No Desarrollan Actividad Económica, Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "universidad de castilla la mancha|convocatoria para la financiacion de conferencias en ma|2027-05-20",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/944537",
+      "bases_url": "https://www.uclm.es/global/promotores/organos-de-gobierno/vicerrectorado-de-docencia/carpeta-de-convocatorias/conferenciantes2027"
+    },
+    {
+      "id": 1146097,
+      "codigo_bdns": "944536",
+      "titulo": "CONVOCATORIA REGULADORAS DE LA CONCESIÓN  DE LOS PREMIOS ¿CONCURSO DE FOTOGRAFÍA: LAS TRES MIRADAS TAURINAS¿",
+      "organo": "Patronato Provincial de Turismo y Tauromaquia",
+      "nivel_admin": "Local",
+      "region": "Extremadura",
+      "importe": 13500,
+      "fecha_inicio": "2026-11-24",
+      "fecha_fin": null,
+      "abierta": false,
+      "sector": "Otras actuaciones de carácter económico",
+      "beneficiarios": "Personas Físicas Que No Desarrollan Actividad Económica, Pyme y Personas Físicas Que Desarrollan Actividad Económica",
+      "tipo_convocatoria": "Concurrencia competitiva - canónica",
+      "competitiva": true,
+      "para_empresas": true,
+      "grupo": "patronato provincial de turismo y tauromaquia|convocatoria reguladoras de la concesion de los premios|",
+      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/944536",
+      "bases_url": "https://sede.dip-badajoz.es/portal/entidades.do?ent_id=18&idioma=1"
+    },
     {
       "id": 1146080,
       "codigo_bdns": "944519",
@@ -5607,26 +5647,6 @@
       "grupo": "agencia vasca de desarrollo empresarial|esa bic euskadi|2026-11-27",
       "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/938342",
       "bases_url": "https://www.euskadi.eus/web01-bopv/es/p43aBOPVWebWar/VerParalelo.do?cd2026004492"
-    },
-    {
-      "id": 1139892,
-      "codigo_bdns": "938331",
-      "titulo": "XVII PREMIOS DE PERIODISMO “CIUDAD DE MÁLAGA”",
-      "organo": "Ayuntamiento de Málaga",
-      "nivel_admin": "Local",
-      "region": "Andalucía",
-      "importe": 11000,
-      "fecha_inicio": "2026-10-27",
-      "fecha_fin": null,
-      "abierta": false,
-      "sector": "Cultura",
-      "beneficiarios": "Personas Físicas Que No Desarrollan Actividad Económica, Pyme y Personas Físicas Que Desarrollan Actividad Económica",
-      "tipo_convocatoria": "Concurrencia competitiva - canónica",
-      "competitiva": true,
-      "para_empresas": true,
-      "grupo": "ayuntamiento de malaga|xvii premios de periodismo ciudad de malaga|",
-      "url_oficial": "https://www.infosubvenciones.es/bdnstrans/GE/es/convocatoria/938331",
-      "bases_url": "www.infosubvenciones.es"
     }
   ]
 }
